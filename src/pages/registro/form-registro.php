@@ -1,13 +1,15 @@
 <?php
 if (count($errores) != 0) {
-    echo "<p class='errores'>";
+    echo "<ul class='errores'>";
     echo "Hay errores en el formulario:<br>";
     foreach ($errores as $error) {
+        echo "<li>";
         echo $error;
-        echo "<br>";
+        echo "</li>";
     }
-    echo "</p>";
+    echo "</ul>";
 }
+
 ?>
 <form action="" method="post" enctype="multipart/form-data">
     Nombre completo<sup>*</sup>

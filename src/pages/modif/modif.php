@@ -8,25 +8,16 @@ require("../../../libs/config.php");
 
 
 
-cabecera("Modificaciones", "../../styles.css" );
-$errores=[];
+cabecera("Modificaciones", "../../styles.css");
+$errores = [];
 
 
 echo "<h1>Modificacion perfil</h1>";
 echo "<main class='container'>";
-print_r($_FILES);
-
-//Inicializo los valores para la validacion del select
-
-$idiomas = array(
-    "castellano",
-    "ingles",
-    "valenciano",
-);
 
 //Comprobamos si se ha pulsado el submit
 
-if (!isset($_REQUEST["bEvnviar"])) {
+if (!isset($_REQUEST["enviar"])) {
     include("form-modif.php");
 } else {
     //Sanitizacion
@@ -34,11 +25,10 @@ if (!isset($_REQUEST["bEvnviar"])) {
     $newpassword = recoge("pass");
     $idioma = recoge("idioma");
 
-
     //Validacion
-    cTexto($newpassword, "contrasenya", $erroresTexto, 15, 6, false);
-    cTexto($comentario, "descripcion", $erroresTexto, 120, 10);
-    cSelect($idioma, "idioma", $erroresTexto, $idiomas);
+    cTexto($newpassword, "contrasenya", $errores, 15, 6, false);
+    cTexto($comentario, "descripcion", $errores, 120, 10);
+    cSelect($idioma, "idioma", $errores, $idiomas);
 
 
     //Sino ha habido errores en el resto de campos comprobamos el fichero
@@ -48,7 +38,7 @@ if (!isset($_REQUEST["bEvnviar"])) {
         $rutaFoto = cFile("foto", $errores, $extensionesValidas, "../../$rutaImagenes", $maxFichero, false);
 
         /*
-         Sino ha habido error en la subida del fichero redireccionamos a valid.php pasando por GET (URL) los datos recogidos
+         Sino ha habido error en la subida del fichero redireccionamos a valid.php
          Si ha habido error volveremos a mostrar el formulario
          */
         if (empty($errores)) {
@@ -70,13 +60,11 @@ if (!isset($_REQUEST["bEvnviar"])) {
 
                 fclose($archivo);
 
-                    //Escribimos datos en fichero
-                    $archivo = fopen("../../$rutaArchivos" . DIRECTORY_SEPARATOR . "datosUsuarios.txt", "a");
-                    fwrite($archivo, $nombre . "|" . $correo . "|" . $datos[2] . "|" . $fechaNacimiento . "|" . $datos[4] . "|" . $datos[5] . "|" . $datos[6] . "|" . PHP_EOL);
-
-                }
-                fclose($archivo);
-
+                //Escribimos datos en fichero
+                $archivo = fopen("../../$rutaArchivos" . DIRECTORY_SEPARATOR . "datosUsuarios.txt", "a");
+                fwrite($archivo, $nombre . "|" . $correo . "|" . $datos[2] . "|" . $fechaNacimiento . "|" . $datos[4] . "|" . $datos[5] . "|" . $datos[6] . "|" . PHP_EOL);
+            }
+            fclose($archivo);
 
             //Redirigimos a valid.php
             header("location:modif_valid.php");

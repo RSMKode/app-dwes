@@ -8,7 +8,6 @@ $errores = [];
 
 echo "<h1>Registro</h1>";
 echo "<main class='container'>";
-print_r($_FILES);
 
 if (!isset($_REQUEST['enviar'])) {
     // Incluimos formulario vacio
@@ -22,13 +21,12 @@ if (!isset($_REQUEST['enviar'])) {
     $idioma = recoge("idioma");
     $comentario = recoge("comentario");
 
-
     //Validamos los campos que no son ficheros
     cTexto($nombre, "nombre", $errores, 40, 1);
     cCorreo($correo, "correo", $errores);
     cPass($pass, "pass", $errores, 30, 4);
     cFecha($fechaNacimiento, "fechaNacimiento", $errores, FORMATOS_FECHA[1]);
-    cTexto($idioma, "idioma", $errores, 20, 0);
+    cSelect($idioma, "idioma", $errores, $idiomas, 0);
     cTexto($comentario, "comentario", $errores, 300, 0);
 
     //Sino ha habido errores en el resto de campos comprobamos el fichero
@@ -38,7 +36,7 @@ if (!isset($_REQUEST['enviar'])) {
         $rutaFoto = cFile("foto", $errores, $extensionesValidas, "../../$rutaImagenes", $maxFichero, false);
 
         /*
-         Si no ha habido error en la subida del fichero redireccionamos a valid.php pasando por GET (URL) los datos recogidos
+         Si no ha habido error en la subida del fichero redireccionamos a valid.php
          Si ha habido error volveremos a mostrar el formulario
          */
         if (empty($errores)) {

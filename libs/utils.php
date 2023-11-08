@@ -285,6 +285,19 @@ function cRadio(string $text, string $campo, array &$errores, array $valores, bo
     return false;
 }
 
+//Funcion de validacion de Select
+function cSelect(string $text, string $campo, array &$errores, array $valores, bool $requerido = TRUE): bool
+{
+    if (!$requerido && $text == "") {
+        return true;
+    }
+    if (in_array($text, $valores)) {
+        return true;
+    }
+    $errores[$campo] = "Error en el campo $campo";
+    return false;
+}
+
 /**
  * Funcion cCheck
  *
@@ -389,16 +402,4 @@ function cFile(string $nombre, array &$errores, array $extensionesValidas, strin
             }
         }
     }
-}
-
-function cSelect (string $text, string $campo, array &$errores, array $valores, bool $requerido=TRUE):bool
-{
-    if (in_array($text, $valores)){
-        return true;
-    }
-    if (!$requerido && $text==""){
-        return true;
-    }
-    $errores[$campo] = "Error en el campo $campo";
-    return false;
 }

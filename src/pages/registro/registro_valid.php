@@ -12,6 +12,7 @@ $archivo = fopen("../../$rutaArchivos" . DIRECTORY_SEPARATOR . "datosUsuarios.tx
 while (!feof($archivo)) {
     $linea = str_replace("\n", "", fgets($archivo));
 
+
     if ($linea != "") {
         $datos = explode("|", $linea);
 
@@ -23,6 +24,8 @@ while (!feof($archivo)) {
         $idioma = $datos[5];
         $comentario = $datos[6];
 
+        echo "<article class='usuario'>";
+
         echo "<h1>$nombre</h1>";
         echo "<p>Correo: $correo</p>";
         echo "<p>Pass: $pass</p>";
@@ -30,7 +33,7 @@ while (!feof($archivo)) {
         if ($rutaFoto != "") echo "<img src='$rutaFoto' alt='Imagen de $nombre'>";
         if ($idioma != "") echo "<p>Idioma preferente: $idioma</p>";
         if ($comentario != "") echo "<p>Comentario:<br>$comentario</p>";
-        echo "<hr>";
+        echo "</article>";
     }
 }
 fclose($archivo);
