@@ -332,7 +332,7 @@ function cCheck(array $arr, string $campo, array &$errores, array $valores, bool
 function cFile(string $nombre, array &$errores, array $extensionesValidas, string $directorio, int  $max_file_size,  bool $required = TRUE)
 {
     // Caso especial que el campo de file no es requerido y no se intenta subir ningun archivo
-    if ((!$required) && $_FILES[$nombre]['error'] === 4 || is_null($_FILES[$nombre]))
+    if ((!$required) && $_FILES[$nombre]['error'] === 4)
         return "";
     // En cualquier otro caso se comprueban los errores del servidor 
     if ($_FILES[$nombre]['error'] != 0) {

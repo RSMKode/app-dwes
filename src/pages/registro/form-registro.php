@@ -9,7 +9,7 @@ if (count($errores) != 0) {
     echo "</p>";
 }
 ?>
-<form action="" method="post">
+<form action="" method="post" enctype="multipart/form-data">
     Nombre completo<sup>*</sup>
     <br>
     <input type="text" name="nombre" value="<?= isset($nombre) ? $nombre : ""; ?>" placeholder="Introduce aquí tu nombre">
