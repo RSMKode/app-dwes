@@ -2,7 +2,7 @@
 
 /**
  * Librería con funciones generales y de validación
- * @author Roger Sancho
+ * @author Roger, Jonathan
  * 
  */
 
@@ -193,6 +193,49 @@ function cTexto(string $text, string $campo, array &$errores, int $max = 30, int
     return false;
 }
 
+function cPass(string $text, string $campo, array &$errores, int $max = 30, int $min = 4, bool $espacios = TRUE, bool $case = TRUE)
+{
+    $case = ($case === TRUE) ? "i" : "";
+    $espacios = ($espacios === TRUE) ? " " : "";
+    if ((preg_match("/^[a-zñ0-9-_$espacios]{" . $min . "," . $max . "}$/u$case", sinTildes($text)))) {
+        return true;
+    }
+    $errores[$campo] = "Error en el campo $campo";
+    return false;
+}
+
+function cFecha(string $fecha, string $campo, array &$errores, string $formato)
+{
+    $fechaArray = explode("-", $fecha);
+
+    if ($formato === FORMATOS_FECHA[0]) {
+        $d = $fechaArray[0];
+        $m = $fechaArray[1];
+        $y = $fechaArray[2];
+    } else if ($formato === FORMATOS_FECHA[1]) {
+        $d = $fechaArray[2];
+        $m = $fechaArray[1];
+        $y = $fechaArray[0];
+    }
+
+    if (checkdate($m, $d, $y)) return true;
+
+    $errores[$campo] = "Error en el campo $campo";
+    return false;
+}
+
+function cCorreo(string $text, string $campo, array &$errores)
+{
+
+    $regexCorreo = "/^[a-zñÑ][a-z0-9_\.]{2,}@[a-zñÑ\.]{3,}[\.][a-zñÑ]{2,}$/ui";
+
+    if ((preg_match($regexCorreo, sinTildes($text)))) {
+        return true;
+    }
+    $errores[$campo] = "Error en el campo $campo, por favor, introduce un correo con este formato correo@dominio.com";
+    return false;
+}
+
 /**
  * Funcion cNum
  *
@@ -289,8 +332,8 @@ function cCheck(array $arr, string $campo, array &$errores, array $valores, bool
 function cFile(string $nombre, array &$errores, array $extensionesValidas, string $directorio, int  $max_file_size,  bool $required = TRUE)
 {
     // Caso especial que el campo de file no es requerido y no se intenta subir ningun archivo
-    if ((!$required) && $_FILES[$nombre]['error'] === 4)
-        return true;
+    if ((!$required) && $_FILES[$nombre]['error'] === 4 || is_null($_FILES[$nombre]))
+        return "";
     // En cualquier otro caso se comprueban los errores del servidor 
     if ($_FILES[$nombre]['error'] != 0) {
         $errores[$nombre] = "Error al subir el archivo " . $nombre . ". Prueba de nuevo";

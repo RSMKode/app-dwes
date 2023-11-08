@@ -3,14 +3,14 @@
 /****
  * Librería donde incluimos aquellos datos (constantes, variables) 
  * que utilizaremos en todo el proyecto/ejercicio
- * @author Heike Bonilla
+ * @author Roger, Jonathan
  * 
  */
 
 /**
  * Donde almacenaremos las imágenes que nos suben los usuarios
  */
-$rutaImagenes = "imagenes";
+$rutaImagenes = "images";
 
 //Ruta donde almacenaremos los archivos
 $rutaArchivos = "archivos";
@@ -21,4 +21,10 @@ $extensionesValidas = ["jpeg", "gif", "jpg", "png", "webp"];
 /**
  * Tamaño máximo del fichero subido. En bytes
  */
-$maxFichero = 300000;
+$maxFichero = 2000000;
+
+//Fecha máxima para la fecha de nacimiento
+$fechaHoy = date("Y-m-d", time());
+
+//Formatos de fecha válidos
+const FORMATOS_FECHA = ["dd-mm-aaaa", "aaaa-mm-dd"];
