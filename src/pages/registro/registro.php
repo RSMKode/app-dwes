@@ -38,7 +38,7 @@ if (!isset($_REQUEST['enviar'])) {
         $rutaFoto = cFile("foto", $errores, $extensionesValidas, "../../$rutaImagenes", $maxFichero, false);
 
         /*
-         Sino ha habido error en la subida del fichero redireccionamos a valid.php pasando por GET (URL) los datos recogidos
+         Si no ha habido error en la subida del fichero redireccionamos a valid.php pasando por GET (URL) los datos recogidos
          Si ha habido error volveremos a mostrar el formulario
          */
         if (empty($errores)) {
