@@ -390,3 +390,15 @@ function cFile(string $nombre, array &$errores, array $extensionesValidas, strin
         }
     }
 }
+
+function cSelect (string $text, string $campo, array &$errores, array $valores, bool $requerido=TRUE):bool
+{
+    if (in_array($text, $valores)){
+        return true;
+    }
+    if (!$requerido && $text==""){
+        return true;
+    }
+    $errores[$campo] = "Error en el campo $campo";
+    return false;
+}
