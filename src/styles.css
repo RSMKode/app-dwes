@@ -10,19 +10,42 @@ body {
   height: 100dvh;
   width: 100dvw;
   display: flex;
+  flex-direction: column;
   flex-wrap: wrap;
-  place-content: center;
+  justify-content: center;
+  align-content: center;
+  justify-items: center;
+  align-items: center;
+  gap: 1rem;
+
+  background-color: rgb(44, 44, 56);
+  color-scheme: dark;
+  color: white;
 }
 
+h1 {
+  color: white;
+}
 .container {
   display: flex;
+  flex-direction: column;
   flex-wrap: wrap;
   place-content: center;
-  border: 1rem solid maroon;
-  width: 30rem;
-  height: 30rem;
+  border: 0.5rem solid white;
+  border-radius: 1rem;
+  box-shadow: 5px 5px 15px black;
+  padding: 1rem;
+  max-height: 80dvh;
 }
 
 ul {
   list-style: none;
+}
+
+.errores {
+  color: red;
+}
+
+sup {
+  color: red;
 }
