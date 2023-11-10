@@ -28,12 +28,12 @@ if (isset($_SESSION["correo"])) {
     $comentario = recoge("comentario");
 
     //Validamos los campos que no son ficheros
-    cTexto($nombre, "nombre", $errores, 40, 1);
-    cCorreo($correo, "correo", $errores);
-    cPass($pass, "pass", $errores, 30, 4);
+    cTexto($nombre, "nombre", $errores, "texto",40, 1);
+    cTexto($correo, "correo", $errores, "correo");
+    cTexto($pass, "pass", $errores, "pass", 30, 4);
     cFecha($fechaNacimiento, "fechaNacimiento", $errores, FORMATOS_FECHA[1]);
     cSelect($idioma, "idioma", $errores, $idiomas, 0);
-    cTexto($comentario, "comentario", $errores, 300, 0);
+    cTexto($comentario, "comentario", $errores, "texto",300, 0);
 
     //Sino ha habido errores en el resto de campos comprobamos el fichero
     if (empty($errores)) {
