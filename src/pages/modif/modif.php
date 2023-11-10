@@ -11,6 +11,7 @@ require("../../../libs/config.php");
 cabecera("Modificaciones", "../../styles.css");
 $errores = [];
 
+$usuarioTemp = ["peter@google.com", "12345"];
 
 echo "<h1>Modificacion perfil</h1>";
 echo "<main class='container'>";

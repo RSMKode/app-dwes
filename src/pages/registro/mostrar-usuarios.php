@@ -16,9 +16,9 @@ while (!feof($archivo)) {
     if ($linea != "") {
         $datos = explode("|", $linea);
 
-        $nombre = $datos[0];
-        $correo = $datos[1];
-        $pass = $datos[2];
+        $correo = $datos[0];
+        $pass = $datos[1];
+        $nombre = $datos[2];
         $fechaNacimiento = $datos[3];
         $rutaFoto = $datos[4];
         $idioma = $datos[5];
