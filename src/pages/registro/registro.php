@@ -3,13 +3,19 @@ require("../../../libs/utils.php");
 //De config.php leeremos $extensionesValidas, $rutaImagenes, $maxFichero.
 require("../../../libs/config.php");
 
+session_start();
+
 cabecera("Registro", "../../styles.css");
 $errores = [];
 
 echo "<h1>Registro</h1>";
 echo "<main class='container'>";
 
-if (!isset($_REQUEST['enviar'])) {
+if (isset($_SESSION["correo"])) {
+    // Si ya se ha iniciado sesión, redirigimos a la página principal
+    echo "<p>Ya has iniciado sesión.</p>";
+    echo "<a clas='accent' href='../perfil/perfil-usuario.php'>Ir al perfil de usuario</a>";
+} else if (!isset($_REQUEST['enviar'])) {
     // Incluimos formulario vacio
     require("form-registro.php");
 } else {
@@ -43,11 +49,19 @@ if (!isset($_REQUEST['enviar'])) {
 
             //Escribimos datos en fichero
             $archivo = fopen("../../$rutaArchivos" . DIRECTORY_SEPARATOR . "datosUsuarios.txt", "a");
-            fwrite($archivo, $nombre . "|" . $correo . "|" . $pass . "|" . $fechaNacimiento . "|" . $rutaFoto . "|" . $idioma . "|" . $comentario . "|" . PHP_EOL);
+            fwrite($archivo, $correo . "|" . $pass . "|" . $nombre . "|" . $fechaNacimiento . "|" . $rutaFoto . "|" . $idioma . "|" . $comentario . "|" . PHP_EOL);
             fclose($archivo);
 
+            $_SESSION["correo"] = $correo;
+            $_SESSION["pass"] = $pass;
+            $_SESSION["nombre"] = $nombre;
+            $_SESSION["fechaNacimiento"] = $fechaNacimiento;
+            $_SESSION["rutaFoto"] = $rutaFoto;
+            $_SESSION["idioma"] = $idioma;
+            $_SESSION["comentario"] = $comentario;
+
             //Redirigimos a valid.php
-            header("location:registro_valid.php");
+            header("location:../inicio/inicio.php");
         } else {
             require("form-registro.php");
         }

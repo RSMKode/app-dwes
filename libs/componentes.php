@@ -15,3 +15,17 @@ function pintaRadio(array $valores, string $name)
         echo '<input type="radio" name="' . $name . '" value="' . $valor . '">' . $valor . '<br>';
     };
 };
+
+function botonCerrarSesion($rutaLocation)
+{
+    echo "
+        <form action='' method='post'>
+        <input type='submit' name='cerrarSesion' value='Cerrar Sesión'>
+        </form>
+        ";
+
+    if (isset($_POST['cerrarSesion'])) {
+        session_destroy();
+        header("location:$rutaLocation");
+    }
+}
