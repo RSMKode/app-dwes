@@ -24,12 +24,12 @@ if (isset($_SESSION["correo"])) {
     $pass = recoge("pass");
 
     //Validamos los campos que no son ficheros
-    cTexto($correo, "correo", $errores, "texto");
-    cTexto($pass, "pass", $errores, "texto", 30, 4);
+    cTexto($correo, "correo", $errores, "correo");
+    cTexto($pass, "pass", $errores, "pass", 30, 4);
 
     if (empty($errores)) {
 
-        $archivo = fopen("../../$rutaArchivos" . DIRECTORY_SEPARATOR . "datosUsuarios.txt", "r");
+        $archivo = fopen(".." . DIRECTORY_SEPARATOR . ".." . DIRECTORY_SEPARATOR . $rutaArchivos . DIRECTORY_SEPARATOR . "datosUsuarios.txt", "r");
         while (!feof($archivo)) {
             $linea = str_replace("\n", "", fgets($archivo));
 

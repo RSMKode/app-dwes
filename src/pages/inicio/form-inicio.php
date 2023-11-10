@@ -13,12 +13,12 @@ if (count($errores) != 0) {
 ?>
 <form action="" method="post" enctype="multipart/form-data">
 
-    Dirección de correo electrónico<sup>*</sup>
+    Dirección de correo electrónico
     <br>
     <input type="text" name="correo" value="<?= isset($correo) ? $correo : ""; ?>" placeholder="ejemplo@google.com">
     <br>
 
-    Contraseña<sup>*</sup>
+    Contraseña
     <br>
     <input type="password" name="pass" value="<?= isset($pass) ? $pass : ""; ?>" placeholder="********">
     <br>

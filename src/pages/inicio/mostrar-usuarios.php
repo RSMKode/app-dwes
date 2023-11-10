@@ -6,9 +6,9 @@ require("../../../libs/config.php");
 cabecera("Registro completado", "../../styles.css");
 
 echo "<h1>Registro Completado</h1>";
-echo "<main class='container'>";
+echo "<main class='container listaUsers'>";
 
-$archivo = fopen("../../$rutaArchivos" . DIRECTORY_SEPARATOR . "datosUsuarios.txt", "r");
+$archivo = fopen(".." . DIRECTORY_SEPARATOR . ".." . DIRECTORY_SEPARATOR . $rutaArchivos . DIRECTORY_SEPARATOR . "datosUsuarios.txt", "r");
 while (!feof($archivo)) {
     $linea = str_replace("\n", "", fgets($archivo));
 
@@ -37,6 +37,8 @@ while (!feof($archivo)) {
     }
 }
 fclose($archivo);
+
+echo "<a class='accent' href='../index.php'>Volver al inicio</a>";
 
 echo "</main>";
 
