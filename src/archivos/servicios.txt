@@ -1,0 +1,2 @@
+Marramiau|Categoria 1|Entrenamos gatos|Si|10|Mi casa|Mañanas||Guau|Categoria 1|Entrenamos perros|No||Mi casa 2|Tardes||
+Guau|Categoria 1|Entrenamos perros|||Mi casa 2|Mañanas||

@@ -28,18 +28,18 @@ if (isset($_SESSION["correo"])) {
     $comentario = recoge("comentario");
 
     //Validamos los campos que no son ficheros
-    cTexto($nombre, "nombre", $errores, "texto",40, 1);
+    cTexto($nombre, "nombre", $errores, "texto", 40, 1);
     cTexto($correo, "correo", $errores, "correo");
     cTexto($pass, "pass", $errores, "pass", 30, 4);
     cFecha($fechaNacimiento, "fechaNacimiento", $errores, FORMATOS_FECHA[1]);
     cSelect($idioma, "idioma", $errores, $idiomas, 0);
-    cTexto($comentario, "comentario", $errores, "texto",300, 0);
+    cTexto($comentario, "comentario", $errores, "comentario", 300, 0);
 
     //Sino ha habido errores en el resto de campos comprobamos el fichero
     if (empty($errores)) {
 
         //En este caso la subida de la foto no es obligatoria
-        $rutaFoto = cFile("foto", $errores, $extensionesValidas, "../../$rutaImagenes", $maxFichero, false);
+        $rutaFoto = cFile("foto", $errores, $extensionesValidas, "../../$rutaImagenes/users", $maxFichero, false);
 
         /*
          Si no ha habido error en la subida del fichero redireccionamos a valid.php
@@ -48,7 +48,7 @@ if (isset($_SESSION["correo"])) {
         if (empty($errores)) {
 
             //Escribimos datos en fichero
-            $archivo = fopen("../../$rutaArchivos" . DIRECTORY_SEPARATOR . "datosUsuarios.txt", "a");
+            $archivo = fopen(".." . DIRECTORY_SEPARATOR . ".." . DIRECTORY_SEPARATOR . $rutaArchivos . DIRECTORY_SEPARATOR . "datosUsuarios.txt", "a");
             fwrite($archivo, $correo . "|" . $pass . "|" . $nombre . "|" . $fechaNacimiento . "|" . $rutaFoto . "|" . $idioma . "|" . $comentario . "|" . PHP_EOL);
             fclose($archivo);
 

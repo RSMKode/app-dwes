@@ -130,10 +130,10 @@ function compCaseEsp(string $cadena1, string $cadena2): int
  * @param string $var
  * @return string
  */
-function recoge(string $var): string
+function recoge(string $campo): string
 {
-    if (isset($_REQUEST[$var]) && (!is_array($_REQUEST[$var]))) {
-        $tmp = sinEspacios($_REQUEST[$var]);
+    if (isset($_REQUEST[$campo]) && (!is_array($_REQUEST[$campo]))) {
+        $tmp = sinEspacios($_REQUEST[$campo]);
         $tmp = strip_tags($tmp);
     } else
         $tmp = "";
@@ -150,11 +150,11 @@ function recoge(string $var): string
  * @return array
  */
 
-function recogeArray(string $var): array
+function recogeArray(string $campo): array
 {
     $array = [];
-    if (isset($_REQUEST[$var]) && (is_array($_REQUEST[$var]))) {
-        foreach ($_REQUEST[$var] as $valor)
+    if (isset($_REQUEST[$campo]) && (is_array($_REQUEST[$campo]))) {
+        foreach ($_REQUEST[$campo] as $valor)
             $array[] = strip_tags(sinEspacios($valor));
     }
 
@@ -175,6 +175,7 @@ function recogeArray(string $var): array
  * @param string $text
  * @param string $campo
  * @param array $errores
+ * @param string $tipo
  * @param integer $min
  * @param integer $max
  * @param bool $espacios
@@ -182,16 +183,40 @@ function recogeArray(string $var): array
  * @return bool
  *
  */
-/*function cTexto(string $text, string $campo, array &$errores, int $max = 30, int $min = 1, bool $espacios = TRUE, bool $case = TRUE)
+function cTexto(string $text, string $campo, array &$errores, string $tipo, int $max = 30, int $min = 1, bool $espacios = TRUE, bool $case = TRUE)
 {
     $case = ($case === TRUE) ? "i" : "";
     $espacios = ($espacios === TRUE) ? " " : "";
-    if ((preg_match("/^[a-zñ$espacios]{" . $min . "," . $max . "}$/u$case", sinTildes($text)))) {
+    switch ($tipo) {
+        case "nombre":
+            $regexp = "/^[a-zñÑ$espacios]{" . $min . "," . $max . "}$/u$case";
+            break;
+
+        case "correo":
+            $regexp = "/^[a-zñÑ][a-z0-9_\.]{2,}@[a-zñÑ\.]{3,}[\.][a-zñÑ]{2,}$/ui";
+            break;
+
+        case "pass":
+            $regexp = "/^[a-zñÑ0-9-_@$espacios]{" . $min . "," . $max . "}$/u$case";
+            break;
+
+        case "comentario":
+            $regexp = "/^[a-zñÑ0-9-\.,;$espacios]{" . $min . "," . $max . "}$/u$case";
+            break;
+
+        case "ubi":
+            //$regexp = "/^[A-Za-z0-9\s,.ºª\/-]+,\s*(\d{1,3}(?:\s*[A-Za-z])?)(?:,\s*[Pp]iso\s*\d{1,2}(?:\s*[A-Za-z])?)?(?:,\s*[Pp]uerta\s*\d{1,3}(?:\s*[A-Za-z])?)?,\s*\d{5}$/$espacios]{" . $min . "," . $max . "}$/u$case";
+            $regexp = "/^[a-zñÑ0-9-\.,;$espacios]{" . $min . "," . $max . "}$/u$case";
+            break;
+    }
+
+    if ((preg_match($regexp, sinTildes($text)))) {
         return true;
     }
+
     $errores[$campo] = "Error en el campo $campo";
     return false;
-}*/
+}
 
 /*function cPass(string $text, string $campo, array &$errores, int $max = 30, int $min = 4, bool $espacios = TRUE, bool $case = TRUE)
 {
@@ -201,6 +226,19 @@ function recogeArray(string $var): array
         return true;
     }
     $errores[$campo] = "Error en el campo $campo";
+    return false;
+}
+*/
+
+/*function cCorreo(string $text, string $campo, array &$errores)
+{
+
+    $regexCorreo = "/^[a-zñÑ][a-z0-9_\.]{2,}@[a-zñÑ\.]{3,}[\.][a-zñÑ]{2,}$/ui";
+
+    if ((preg_match($regexCorreo, sinTildes($text)))) {
+        return true;
+    }
+    $errores[$campo] = "Error en el campo $campo, por favor, introduce un correo con este formato correo@dominio.com";
     return false;
 }
 */
@@ -225,18 +263,6 @@ function cFecha(string $fecha, string $campo, array &$errores, string $formato)
     return false;
 }
 
-/*function cCorreo(string $text, string $campo, array &$errores)
-{
-
-    $regexCorreo = "/^[a-zñÑ][a-z0-9_\.]{2,}@[a-zñÑ\.]{3,}[\.][a-zñÑ]{2,}$/ui";
-
-    if ((preg_match($regexCorreo, sinTildes($text)))) {
-        return true;
-    }
-    $errores[$campo] = "Error en el campo $campo, por favor, introduce un correo con este formato correo@dominio.com";
-    return false;
-}
-*/
 
 /**
  * Funcion cNum
@@ -404,50 +430,4 @@ function cFile(string $nombre, array &$errores, array $extensionesValidas, strin
             }
         }
     }
-}
-
-function cTexto(string $text, string $campo, array &$errores, string $tipo, int $max = 30, int $min = 4, bool $espacios = TRUE, bool $case = TRUE){
-    switch ($tipo){
-        case "texto":
-
-            $case = ($case === TRUE) ? "i" : "";
-            $espacios = ($espacios === TRUE) ? " " : "";
-            if ((preg_match("/^[a-zñ$espacios]{" . $min . "," . $max . "}$/u$case", sinTildes($text)))) {
-                return true;
-            }
-            $errores[$campo] = "Error en el campo $campo";
-            return false;
-
-        case "correo":
-            $regexCorreo = "/^[a-zñÑ][a-z0-9_\.]{2,}@[a-zñÑ\.]{3,}[\.][a-zñÑ]{2,}$/ui";
-
-            if ((preg_match($regexCorreo, sinTildes($text)))) {
-                return true;
-            }
-            $errores[$campo] = "Error en el campo $campo, por favor, introduce un correo con este formato correo@dominio.com";
-            return false;
-
-        case "pass":
-            $case = ($case === TRUE) ? "i" : "";
-            $espacios = ($espacios === TRUE) ? " " : "";
-            if ((preg_match("/^[a-zñ0-9-_$espacios]{" . $min . "," . $max . "}$/u$case", sinTildes($text)))) {
-                return true;
-            }
-            $errores[$campo] = "Error en el campo $campo";
-            return false;
-
-        case "ubi":
-            $case = ($case === TRUE) ? "i" : "";
-            $espacios = ($espacios === TRUE) ? " " : "";
-            if ((preg_match("/^[A-Za-z0-9\s,.ºª\/-]+,\s*(\d{1,3}(?:\s*[A-Za-z])?)(?:,\s*[Pp]iso\s*\d{1,2}(?:\s*[A-Za-z])?)?(?:,\s*[Pp]uerta\s*\d{1,3}(?:\s*[A-Za-z])?)?,\s*\d{5}$/
-$espacios]{" . $min . "," . $max . "}$/u$case", sinTildes($text)))) {
-                return true;
-            }
-            $errores[$campo] = "Error en el campo $campo";
-            return false;
-
-
-    }
-
-
 }
