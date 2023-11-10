@@ -14,7 +14,7 @@ echo "<main class='container'>";
 if (isset($_SESSION["correo"])) {
     // Si ya se ha iniciado sesión, redirigimos a la página principal
     echo "<p>Ya has iniciado sesión.</p>";
-    echo "<a clas='accent' href='../perfil/perfil-usuario.php'>Ir al perfil de usuario</a>";
+    echo "<a class='accent' href='../perfil/perfil-usuario.php'>Ir al perfil de usuario</a>";
 } else if (!isset($_REQUEST['enviar'])) {
     // Incluimos formulario vacio
     require("form-inicio.php");
@@ -24,8 +24,8 @@ if (isset($_SESSION["correo"])) {
     $pass = recoge("pass");
 
     //Validamos los campos que no son ficheros
-    cCorreo($correo, "correo", $errores);
-    cPass($pass, "pass", $errores, 30, 4);
+    cTexto($correo, "correo", $errores, "texto");
+    cTexto($pass, "pass", $errores, "texto", 30, 4);
 
     if (empty($errores)) {
 

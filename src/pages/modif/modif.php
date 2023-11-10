@@ -27,8 +27,8 @@ if (!isset($_REQUEST["enviar"])) {
     $idioma = recoge("idioma");
 
     //Validacion
-    cTexto($newpassword, "contrasenya", $errores, 15, 6, false);
-    cTexto($comentario, "descripcion", $errores, 120, 10);
+    cTexto($newpassword, "contrasenya", $errores, "texto",15, 6, false);
+    cTexto($comentario, "descripcion", $errores, "texto",120, 10);
     cSelect($idioma, "idioma", $errores, $idiomas);
 
 

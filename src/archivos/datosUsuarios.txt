@@ -2,3 +2,4 @@ peter@google.com|12345|Pedro|2023-11-08|../../images\Logo_github.png|castellano|
 sandra@google.com|7908790870987|Sandra|2023-11-08|../../images\Logo_github.png|castellano||gonzalo@hotmail.es|98765|Gonzaol|2000-01-10||castellano|Soy gonzalo|
 gonzalo@hotmail.es|98765|Gonzalo|2000-01-10||castellano|Soy gonzalo|
 willy@gmail.com|1111|Willy|2023-11-10||castellano||
+juan@ejemplo.com|juan|juan|1997-07-20|../../images\berserk-marca-del-sacrificio.jpg|castellano|Este formulario es genial|
