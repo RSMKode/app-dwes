@@ -1,6 +1,9 @@
 <?php
+//Libreria de componentes
+require("../../../libs/componentes.php");
+// Libreria de funciones de validación
 require("../../../libs/utils.php");
-//De config.php leeremos $extensionesValidas, $rutaImagenes, $maxFichero.
+//De config.php leeremos las variables comunes
 require("../../../libs/config.php");
 
 session_start();
@@ -69,5 +72,6 @@ if (isset($_SESSION["correo"])) {
         require("form-registro.php");
     }
 }
+echo "<p><a class='accent' href='../index.php'>Volver al inicio</a></p>";
 echo "</main>";
 pie();

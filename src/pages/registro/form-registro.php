@@ -1,4 +1,5 @@
 <?php
+
 if (count($errores) != 0) {
     echo "<ul class='errores'>";
     echo "Hay errores en el formulario:<br>";
@@ -39,11 +40,9 @@ if (count($errores) != 0) {
 
     Idioma preferente
     <br>
-    <select name="idioma">
-        <option value="castellano">Castellano</option>
-        <option value="ingles">Inglés</option>
-        <option value="valenciano">Valenciano</option>
-    </select>
+    <?=
+    pintaSelect($idiomas, "idioma")
+    ?>
     <br>
     Comentario
     <br>

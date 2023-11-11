@@ -1,12 +1,10 @@
 <?php
-
-
+//Libreria de componentes
+require("../../../libs/componentes.php");
 // Libreria de funciones de validación
 require("../../../libs/utils.php");
-//De config.php leeremos $extensionesValidas, $rutaImagenes, $maxFichero.
+//De config.php leeremos las variables comunes
 require("../../../libs/config.php");
-
-
 
 cabecera("Modificaciones", "../../styles.css");
 $errores = [];
@@ -27,8 +25,8 @@ if (!isset($_REQUEST["enviar"])) {
     $idioma = recoge("idioma");
 
     //Validacion
-    cTexto($newpassword, "contrasenya", $errores, "texto",15, 6, false);
-    cTexto($comentario, "descripcion", $errores, "texto",120, 10);
+    cTexto($newpassword, "contrasenya", $errores, "texto", 15, 6, false);
+    cTexto($comentario, "descripcion", $errores, "texto", 120, 10);
     cSelect($idioma, "idioma", $errores, $idiomas);
 
 

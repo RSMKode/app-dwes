@@ -1,5 +1,10 @@
 <?php
+//Libreria de componentes
+require("../../libs/componentes.php");
+// Libreria de funciones de validación
 require("../../libs/utils.php");
+//De config.php leeremos las variables comunes
+require("../../libs/config.php");
 
 cabecera("App DWES", "../styles.css");
 ?>
