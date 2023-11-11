@@ -7,6 +7,15 @@
  * 
  */
 
+//Constante que define la ruta del proyecto
+//COMENTAR LA QUE NO SE QUIERA UTILIZAR
+//Ruta Jonathan 
+// const ROOT = "http://localhost/app-dwes/";
+//Ruta Roger
+const ROOT = "http://localhost/app-dwes/";
+
+$inactivityTime = 60 * 30;
+
 /**
  * Donde almacenaremos las imágenes que nos suben los usuarios
  */
@@ -33,8 +42,10 @@ $fechaHoy = date("Y-m-d", time());
 
 
 //Valores para la validacion del select
-$idiomas = array(
-    "castellano",
-    "ingles",
-    "valenciano",
-);
+$idiomas = ["Indiferente", "Castellano", "Ingles", "Valenciano",];
+
+$categorias = ["Categoria 1", "Categoria 2", "Categoria 3",];
+
+$disponibilidades = ["Mañanas", "Tardes", "Noches", "Completa", "Fines de semana"];
+
+$pagos = ["Si", "No",];

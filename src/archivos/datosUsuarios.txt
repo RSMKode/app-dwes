@@ -3,3 +3,4 @@ sandra@google.com|7908790870987|Sandra|2023-11-08|../../images/users\Logo_github
 gonzalo@hotmail.es|98765|Gonzalo|2000-01-10||castellano|Soy gonzalo|
 willy@gmail.com|1111|Willy|2023-11-10||castellano||
 juan@ejemplo.com|juan|juan|1997-07-20|../../images/users\berserk-marca-del-sacrificio.jpg|castellano|Este formulario es genial|
+miau@gmail.com|2222|Miau|2023-11-11||Indiferente|Soy miau|

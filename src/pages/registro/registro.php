@@ -1,9 +1,13 @@
 <?php
+//Libreria de componentes
+require("../../../libs/componentes.php");
+// Libreria de funciones de validación
 require("../../../libs/utils.php");
-//De config.php leeremos $extensionesValidas, $rutaImagenes, $maxFichero.
+//De config.php leeremos las variables comunes
 require("../../../libs/config.php");
 
 session_start();
+cInactividad($inactivityTime);
 
 cabecera("Registro", "../../styles.css");
 $errores = [];
@@ -28,7 +32,7 @@ if (isset($_SESSION["correo"])) {
     $comentario = recoge("comentario");
 
     //Validamos los campos que no son ficheros
-    cTexto($nombre, "nombre", $errores, "texto", 40, 1);
+    cTexto($nombre, "nombre", $errores, "nombre", 40, 1);
     cTexto($correo, "correo", $errores, "correo");
     cTexto($pass, "pass", $errores, "pass", 30, 4);
     cFecha($fechaNacimiento, "fechaNacimiento", $errores, FORMATOS_FECHA[1]);
@@ -59,6 +63,7 @@ if (isset($_SESSION["correo"])) {
             $_SESSION["rutaFoto"] = $rutaFoto;
             $_SESSION["idioma"] = $idioma;
             $_SESSION["comentario"] = $comentario;
+            $_SESSION["momentoLogin"] = time();
 
             //Redirigimos a valid.php
             header("location:../inicio/inicio.php");
@@ -69,5 +74,6 @@ if (isset($_SESSION["correo"])) {
         require("form-registro.php");
     }
 }
+echo "<p><a class='accent' href='../index.php'>Volver al inicio</a></p>";
 echo "</main>";
 pie();

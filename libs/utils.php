@@ -6,40 +6,6 @@
  * 
  */
 
-//Crea la cabecera del html con el título indicado
-function cabecera(string $titulo = NULL, string $archivo_css = NULL)
-{
-    $titulo = (is_null($titulo))
-        ? basename(__FILE__)
-        : $titulo;
-    $cabecera_css = (is_null($archivo_css))
-        ? ''
-        : '<link rel="stylesheet" type="text/css" href="' . $archivo_css . '">';
-
-    $cabecera = '
-            <!DOCTYPE html>
-            <html lang="es">
-                <head>
-                    <meta charset="UTF-8">
-                    <meta name="viewport" content="width=device-width, initial scale=1.0">
-                    ' . $cabecera_css . '
-                    <title>' . $titulo . '</title>
-                </head>
-                <body>
-        ';
-    echo $cabecera;
-}
-
-
-// Crea el cierre del html
-function pie()
-{
-    echo '        
-                </body>
-            </html>
-        ';
-}
-
 /**
  * funcion sinTildes
  *
@@ -428,6 +394,16 @@ function cFile(string $nombre, array &$errores, array $extensionesValidas, strin
                 $errores["imagen"] = "Ha habido un error al subir el fichero";
                 return false;
             }
+        }
+    }
+}
+
+function cInactividad(int $seconds = 60): void
+{
+    if (isset($_SESSION["momentoLogin"])) {
+
+        if (time() > $_SESSION["momentoLogin"] + $seconds) {
+            header("Location:" . ROOT . "src/pages/perfil/cerrar-sesion.php");
         }
     }
 }

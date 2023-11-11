@@ -1,28 +1,25 @@
 <?php
+
+//Libreria de componentes
+require("../../../libs/componentes.php");
 // Libreria de funciones de validación
 require("../../../libs/utils.php");
-//De config.php leeremos $extensionesValidas, $rutaImagenes, $maxFichero.
+//De config.php leeremos las variables comunes
 require("../../../libs/config.php");
 
+session_start();
+cInactividad($inactivityTime);
 
 cabecera("Altas de Servicios", "../../styles.css");
 $errores = [];
 
-
 echo "<h1>Alta de servicio</h1>";
 echo "<main class='container'>";
 
-
-$categorias = ["Categoria 1", "Categoria 2", "Categoria 3",];
-
-$disponibilidades = ["Mañanas", "Tardes", "Noches", "Completa", "Fines de Semana"];
-
-$pagos = ["Si", "No",];
-
-if (!isset($_REQUEST["enviar"])) {
+if (!isset($_REQUEST["enviar"]) && isset($_SESSION["correo"])) {
     // Incluimos formulario vacio
     include("form-servicios.php");
-} else {
+} else if (isset($_SESSION["correo"])) {
     $titulo = recoge("titulo");
     $categoria = recoge("categoria");
     $comentario = recoge("comentario");
@@ -44,7 +41,7 @@ if (!isset($_REQUEST["enviar"])) {
     if (empty($errores)) {
 
         //En este caso la subida de la foto no es o<bligatoria
-        $rutaFoto = cFile("foto", $errores, $extensionesValidas, "../../$rutaImagenes", $maxFichero, false);
+        $rutaFoto = cFile("fotoServicio", $errores, $extensionesValidas, "../../$rutaImagenes", $maxFichero, false);
 
         /*
         Sino ha habido error en la subida del fichero redireccionamos a valid.php pasando por GET (URL) los datos recogidos
@@ -65,9 +62,12 @@ if (!isset($_REQUEST["enviar"])) {
     } else {
         require("form-servicios.php");
     }
+} else {
+    echo '<p>Para dar de alta un servicio tienes que haber iniciado sesión</p>';
+    echo "<p><a href='../inicio/inicio.php'>Ir a inicio de sesión</a></p>";
 }
 
-echo "<a class='accent' href='../index.php'>Volver al inicio</a>";
+echo "<p><a class='accent' href='../index.php'>Volver al inicio</a></p>";
 
 echo "</main>";
 pie();

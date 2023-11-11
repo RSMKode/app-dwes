@@ -1,5 +1,10 @@
 <?php
+//Libreria de componentes
+require("../../libs/componentes.php");
+// Libreria de funciones de validación
 require("../../libs/utils.php");
+//De config.php leeremos las variables comunes
+require("../../libs/config.php");
 
 cabecera("App DWES", "../styles.css");
 ?>
@@ -13,6 +18,7 @@ cabecera("App DWES", "../styles.css");
         <br>
         <li><a href="./servicios/mostrar-servicios.php">Mostrar servicios</a></li>
         <li><a href="./servicios/servicios-alta.php">Dar de alta un servicio</a></li>
+        <br>
     </ul>
 </main>
 
