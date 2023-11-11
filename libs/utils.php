@@ -397,3 +397,13 @@ function cFile(string $nombre, array &$errores, array $extensionesValidas, strin
         }
     }
 }
+
+function cInactividad(int $seconds = 60): void
+{
+    if (isset($_SESSION["momentoLogin"])) {
+
+        if (time() > $_SESSION["momentoLogin"] + $seconds) {
+            header("Location:" . ROOT . "src/pages/perfil/cerrar-sesion.php");
+        }
+    }
+}

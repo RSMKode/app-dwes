@@ -8,10 +8,10 @@ require("../../../libs/utils.php");
 require("../../../libs/config.php");
 
 session_start();
+cInactividad($inactivityTime);
 
 cabecera("Altas de Servicios", "../../styles.css");
 $errores = [];
-
 
 echo "<h1>Alta de servicio</h1>";
 echo "<main class='container'>";

@@ -7,6 +7,7 @@ require("../../../libs/utils.php");
 require("../../../libs/config.php");
 
 session_start();
+cInactividad($inactivityTime);
 
 cabecera("Usuarios", "../../styles.css");
 echo "<h1>Usuarios</h1>";
@@ -46,7 +47,7 @@ if (isset($_SESSION["correo"])) {
     fclose($archivo);
 } else {
     echo "<main class='container'>";
-    echo '<p>Para ver los usuarios tienes que haber iniciado sesión</p>';
+    echo '<p>Para ver los usuarios tienes que iniciar sesión</p>';
     echo "<p><a href='../inicio/inicio.php'>Ir a inicio de sesión</a></p>";
 }
 echo "<p><a class='accent' href='../index.php'>Volver al inicio</a></p>";

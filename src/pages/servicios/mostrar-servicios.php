@@ -8,6 +8,7 @@ require("../../../libs/utils.php");
 require("../../../libs/config.php");
 
 session_start();
+cInactividad($inactivityTime);
 
 cabecera("Servicios", "../../styles.css");
 echo "<h1>Servicios</h1>";
@@ -48,7 +49,7 @@ if (isset($_SESSION["correo"])) {
     fclose($archivo);
 } else {
     echo "<main class='container'>";
-    echo '<p>Para ver los servicios disponibles más en detalle tienes que haber iniciado sesión</p>';
+    echo '<p>Para ver los servicios disponibles más en detalle tienes que iniciar sesión</p>';
     echo "<p><a href='../inicio/inicio.php'>Ir a inicio de sesión</a></p>";
 }
 echo "<p><a class='accent' href='../index.php'>Volver al inicio</a></p>";

@@ -7,6 +7,7 @@ require("../../../libs/utils.php");
 require("../../../libs/config.php");
 
 session_start();
+cInactividad($inactivityTime);
 
 cabecera("Registro", "../../styles.css");
 $errores = [];

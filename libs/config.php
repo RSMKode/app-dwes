@@ -7,8 +7,14 @@
  * 
  */
 
-// Constante que define la ruta del proyecto
+//Constante que define la ruta del proyecto
+//COMENTAR LA QUE NO SE QUIERA UTILIZAR
+//Ruta Jonathan 
+// const ROOT = "http://localhost/app-dwes/";
+//Ruta Roger
 const ROOT = "http://localhost/app-dwes/";
+
+$inactivityTime = 60 * 30;
 
 /**
  * Donde almacenaremos las imágenes que nos suben los usuarios
