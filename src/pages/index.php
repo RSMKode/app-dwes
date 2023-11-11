@@ -18,6 +18,8 @@ cabecera("App DWES", "../styles.css");
         <br>
         <li><a href="./servicios/mostrar-servicios.php">Mostrar servicios</a></li>
         <li><a href="./servicios/servicios-alta.php">Dar de alta un servicio</a></li>
+        <br>
+        <li><a href="<?= ROOT ?>/src/pages/inicio/inicio.php">PRUEBA RUTA ABSOLUTA</a></li>
     </ul>
 </main>
 

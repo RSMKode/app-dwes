@@ -7,6 +7,9 @@
  * 
  */
 
+// Constante que define la ruta del proyecto
+const ROOT = "http://localhost/app-dwes/";
+
 /**
  * Donde almacenaremos las imágenes que nos suben los usuarios
  */
