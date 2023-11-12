@@ -23,7 +23,7 @@ if (isset($_SESSION["momentoLogin"])) {
 }
 session_destroy();
 
-echo '<a href="' . ROOT . '/src/pages/index.php">Ir al inicio</a>';
+echo '<a href="' . ROOT . 'src/pages/index.php">Ir al inicio</a>';
 
 echo '<main>';
 

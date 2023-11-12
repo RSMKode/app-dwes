@@ -12,7 +12,7 @@
 //Ruta Jonathan 
 // const ROOT = "http://localhost/app-dwes/";
 //Ruta Roger
-const ROOT = "http://localhost/app-dwes/";
+const ROOT = "http://localhost/dwes/app-dwes-roger-jonathan/";
 
 $inactivityTime = 60 * 30;
 
