@@ -51,7 +51,7 @@ if (isset($_SESSION["correo"])) {
     if (empty($errores)) {
 
         //En este caso la subida de la foto no es obligatoria
-        $rutaFoto = cFile("foto", $errores, $extensionesValidas, "../../$rutaImagenes/users", $maxFichero, false);
+        $rutaFoto = cFile("foto", $errores, $extensionesValidas, ROOT . "src" . DIRECTORY_SEPARATOR . $rutaImagenes . DIRECTORY_SEPARATOR . "users", $maxFichero, false);
 
         /*
          Si no ha habido error en la subida del fichero redireccionamos a valid.php

@@ -40,7 +40,7 @@ if (isset($_SESSION["correo"])) {
             $idioma = $datos[5];
             $comentario = $datos[6];
 
-            echo "<article class='usuario'>";
+            echo "<article class='card'>";
 
             echo "<h1>$nombre</h1>";
             echo "<p>Correo: $correo</p>";

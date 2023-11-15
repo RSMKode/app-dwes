@@ -40,7 +40,7 @@ if (isset($_SESSION["correo"])) {
             $disponibilidad = $datos[6];
             $rutaFoto = $datos[7];
 
-            echo "<article class='usuario'>";
+            echo "<article class='card'>";
 
             echo "<h1>$titulo</h1>";
             echo "<p>Categoria: $categoria</p>";

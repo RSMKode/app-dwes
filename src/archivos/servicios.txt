@@ -1,2 +1,3 @@
 Marramiau|Categoria 1|Entrenamos gatos|Si|10|Mi casa|Mañanas||Guau|Categoria 1|Entrenamos perros|No||Mi casa 2|Tardes||
 Guau|Categoria 1|Entrenamos perros|||Mi casa 2|Mañanas||
+Musihacks|Categoria 1|Clases de música|Si|25|C/ Altea 28|Mañanas|\app-dwes-roger-jonathan\src\images\services\Logo_instagram.png|

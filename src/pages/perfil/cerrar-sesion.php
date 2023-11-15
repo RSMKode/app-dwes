@@ -14,6 +14,7 @@ cColor();
 $esquemaColor = $_COOKIE['esquemaColor'];
 
 cabecera("Sesión cerrada", $rutaEstilos, $esquemaColor);
+require(ROOT . "libs/componentes/encabezado.php");
 
 echo '<main class="container">';
 if (isset($_SESSION["momentoLogin"])) {
@@ -28,7 +29,7 @@ if (isset($_SESSION["momentoLogin"])) {
         echo "Se ha cerrado su sesión, IP diferente.";
     }
 } else {
-    header("Location:ROOT/src/pages/inicio/inicio.php");
+    header("Location:" . ROOT . "/src/pages/inicio/inicio.php");
 }
 session_unset();
 session_destroy();
