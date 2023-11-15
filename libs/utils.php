@@ -172,7 +172,7 @@ function cTexto(string $text, string $campo, array &$errores, string $tipo, int 
 
         case "ubi":
             //$regexp = "/^[A-Za-z0-9\s,.ºª\/-]+,\s*(\d{1,3}(?:\s*[A-Za-z])?)(?:,\s*[Pp]iso\s*\d{1,2}(?:\s*[A-Za-z])?)?(?:,\s*[Pp]uerta\s*\d{1,3}(?:\s*[A-Za-z])?)?,\s*\d{5}$/$espacios]{" . $min . "," . $max . "}$/u$case";
-            $regexp = "/^[a-zñÑ0-9-\.,;$espacios]{" . $min . "," . $max . "}$/u$case";
+            $regexp = "/^[a-zñÑ0-9-\/\.,;$espacios]{" . $min . "," . $max . "}$/u$case";
             break;
     }
 

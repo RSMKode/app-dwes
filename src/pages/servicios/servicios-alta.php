@@ -48,7 +48,7 @@ if (!isset($_REQUEST["enviar"]) && isset($_SESSION["correo"])) {
     if (empty($errores)) {
 
         //En este caso la subida de la foto no es o<bligatoria
-        $rutaFoto = cFile("fotoServicio", $errores, $extensionesValidas, "../../$rutaImagenes", $maxFichero, false);
+        $rutaFoto = cFile("fotoServicio", $errores, $extensionesValidas, ROOT . "src" . DIRECTORY_SEPARATOR . $rutaImagenes . DIRECTORY_SEPARATOR . "services", $maxFichero, false);
 
         /*
         Sino ha habido error en la subida del fichero redireccionamos a valid.php pasando por GET (URL) los datos recogidos
