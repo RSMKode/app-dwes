@@ -223,11 +223,22 @@ function cFecha(string $fecha, string $campo, array &$errores, string $formato)
         $y = $fechaArray[0];
     }
 
-    if (checkdate($m, $d, $y)) return true;
+    $fechaNacSegundos = strtotime($fecha);
+    $edadEnSegundos = time() - $fechaNacSegundos;
+    $mayoriaEdad = 60 * 60 * 24 * 365 * 18;
 
-    $errores[$campo] = "Error en el campo $campo";
+    if ($edadEnSegundos >= $mayoriaEdad) {
+        if (checkdate($m, $d, $y)) {
+            return true;
+        } else {
+            $errores[$campo] = "Error en el campo $campo";
+        };
+    } else {
+        $errores[$campo] = "No puedes registrarte, eres menor de 18 años";
+    }
     return false;
 }
+
 
 
 /**
@@ -398,12 +409,48 @@ function cFile(string $nombre, array &$errores, array $extensionesValidas, strin
     }
 }
 
-function cInactividad(int $seconds = 60): void
+function cInactividad(int $segundos = 60 * 30): void
 {
     if (isset($_SESSION["momentoLogin"])) {
 
-        if (time() > $_SESSION["momentoLogin"] + $seconds) {
+        if (time() > $_SESSION["momentoLogin"] + $segundos) {
+            header("Location:" . ROOT . "src/pages/perfil/cerrar-sesion.php");
+        } else {
+            $_SESSION["momentoLogin"] = time();
+        }
+    }
+}
+
+function regenerarSesion(int $segundos = 60 * 5)
+{
+    if (isset($_SESSION["momentoLogin"])) {
+        if (time() > $_SESSION["momentoLogin"] + $segundos) {
+            session_regenerate_id(true);
+        }
+    }
+}
+
+function cIP()
+{
+    if (isset($_SESSION["ip"])) {
+
+        if ($_SESSION["ip"] != $_SERVER["REMOTE_ADDR"]) {
             header("Location:" . ROOT . "src/pages/perfil/cerrar-sesion.php");
         }
+    }
+}
+
+function cColor()
+{
+    if (!isset($_COOKIE['esquemaColor'])) {
+        setcookie('esquemaColor', TEMAS[1], path: "/");
+        header('Refresh:0');
+        return;
+    } else {
+        if (isset($_POST['nuevoEsquemaColor'])) {
+            setcookie('esquemaColor', $_POST['nuevoEsquemaColor'], path: "/");
+            header('Refresh:0');
+        }
+        return;
     }
 }

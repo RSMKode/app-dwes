@@ -1,7 +1,7 @@
 <?php
 
 //Crea la cabecera del html con el título indicado
-function cabecera(string $titulo = NULL, string $archivo_css = NULL)
+function cabecera(string $titulo = NULL, string $archivo_css = NULL, string $esquemaColor = "Oscuro")
 {
     $titulo = (is_null($titulo))
         ? basename(__FILE__)
@@ -12,7 +12,7 @@ function cabecera(string $titulo = NULL, string $archivo_css = NULL)
 
     $cabecera = '
             <!DOCTYPE html>
-            <html lang="es">
+            <html data-theme="' . $esquemaColor . '" lang="es">
                 <head>
                     <meta charset="UTF-8">
                     <meta name="viewport" content="width=device-width, initial scale=1.0">
@@ -59,16 +59,11 @@ function pintaSelect(array $valores, string $name)
     echo "</select>";
 };
 
-// function botonCerrarSesion($rutaLocation)
-// {
-//     echo "
-//         <form action='' method='post'>
-//         <input type='submit' name='cerrarSesion' value='Cerrar Sesión'>
-//         </form>
-//         ";
-
-//     if (isset($_POST['cerrarSesion'])) {
-//         session_destroy();
-//         header("location:$rutaLocation");
-//     }
-// }
+function pintaEnlace(string $url, string $texto, bool $enParrafo = true)
+{
+    if ($enParrafo) {
+        return '<p><a href="' . $url . '">' . $texto . '</a></p>';
+    } else {
+        return '<a href="' . $url . '">' . $texto . '</a>';
+    }
+}

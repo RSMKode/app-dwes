@@ -1,23 +1,30 @@
 <?php
-
+//Variables y constantes comunes
+require("/app-dwes-roger-jonathan/libs/config.php");
+//Libreria de funciones de validación
+require(ROOT . "libs/utils.php");
 //Libreria de componentes
-require("../../../libs/componentes.php");
-// Libreria de funciones de validación
-require("../../../libs/utils.php");
-//De config.php leeremos las variables comunes
-require("../../../libs/config.php");
+require(ROOT . "libs/componentes.php");
 
 session_start();
+//Se comprueba inactividad, que sea la misma ip de inicio de sesión, y se regenera el id si han pasado 5 minutos
 cInactividad($inactivityTime);
+cIP();
+regenerarSesion();
+//Comprobamos el color de la página
+cColor();
+$esquemaColor = $_COOKIE['esquemaColor'];
 
-cabecera("Servicios", "../../styles.css");
+cabecera("Servicios", $rutaEstilos, $esquemaColor);
+require(ROOT . "libs/componentes/encabezado.php");
+
 echo "<h1>Servicios</h1>";
 
 if (isset($_SESSION["correo"])) {
 
     echo "<main class='container listaHorizontal'>";
 
-    $archivo = fopen(".." . DIRECTORY_SEPARATOR . ".." . DIRECTORY_SEPARATOR . $rutaArchivos . DIRECTORY_SEPARATOR . "servicios.txt", "r");
+    $archivo = fopen(ROOT . "src" . DIRECTORY_SEPARATOR . $rutaArchivos . DIRECTORY_SEPARATOR . "servicios.txt", "r");
     while (!feof($archivo)) {
         $linea = str_replace("\n", "", fgets($archivo));
 
@@ -50,9 +57,9 @@ if (isset($_SESSION["correo"])) {
 } else {
     echo "<main class='container'>";
     echo '<p>Para ver los servicios disponibles más en detalle tienes que iniciar sesión</p>';
-    echo "<p><a href='../inicio/inicio.php'>Ir a inicio de sesión</a></p>";
+    echo "<p><a href='" . ROOT . "src/pages/inicio/inicio.php'>Ir a inicio de sesión</a></p>";
 }
-echo "<p><a class='accent' href='../index.php'>Volver al inicio</a></p>";
+echo "<p><a class='accent' href='" . ROOT . "src/pages/index.php'>Volver al inicio</a></p>";
 
 echo "</main>";
 
