@@ -8,13 +8,14 @@
  */
 
 //Constante que define la ruta del proyecto
-//COMENTAR LA QUE NO SE QUIERA UTILIZAR
-//Ruta Jonathan 
-// const ROOT = "http://localhost/app-dwes/";
-//Ruta Roger
-const ROOT = "http://localhost/app-dwes/";
+const ROOT = DIRECTORY_SEPARATOR . "app-dwes-roger-jonathan" . DIRECTORY_SEPARATOR;
 
-$inactivityTime = 60 * 30;
+//Ruta de los estilos del proyecto
+$rutaEstilos = ROOT . "src/styles.css";
+
+const TEMAS = ['Oscuro', 'Claro'];
+
+$inactivityTime = 60 * 20;
 
 /**
  * Donde almacenaremos las imágenes que nos suben los usuarios
@@ -40,11 +41,10 @@ const FORMATOS_FECHA = ["dd-mm-aaaa", "aaaa-mm-dd"];
 //Fecha máxima para la fecha de nacimiento
 $fechaHoy = date("Y-m-d", time());
 
-
 //Valores para la validacion del select
 $idiomas = ["Indiferente", "Castellano", "Ingles", "Valenciano",];
 
-$categorias = ["Categoria 1", "Categoria 2", "Categoria 3",];
+$categorias = ["Categoria 1", "Categoria 2", "Categoria 3"];
 
 $disponibilidades = ["Mañanas", "Tardes", "Noches", "Completa", "Fines de semana"];
 

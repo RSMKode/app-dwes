@@ -1,10 +1,10 @@
 <?php
 //Libreria de componentes
-require("../../../libs/componentes.php");
+require("/app-dwes-roger-jonathan/libs/componentes.php");
 // Libreria de funciones de validación
-require("../../../libs/utils.php");
+require("/app-dwes-roger-jonathan/libs/utils.php");
 //De config.php leeremos las variables comunes
-require("../../../libs/config.php");
+require("/app-dwes-roger-jonathan/libs/config.php");
 
 cabecera("Modificaciones", "../../styles.css");
 $errores = [];

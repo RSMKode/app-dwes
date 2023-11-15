@@ -1,16 +1,23 @@
 <?php
-
+//Variables y constantes comunes
+require("/app-dwes-roger-jonathan/libs/config.php");
+//Libreria de funciones de validación
+require(ROOT . "libs/utils.php");
 //Libreria de componentes
-require("../../../libs/componentes.php");
-// Libreria de funciones de validación
-require("../../../libs/utils.php");
-//De config.php leeremos las variables comunes
-require("../../../libs/config.php");
+require(ROOT . "libs/componentes.php");
 
 session_start();
+//Se comprueba inactividad, que sea la misma ip de inicio de sesión, y se regenera el id si han pasado 5 minutos
 cInactividad($inactivityTime);
+cIP();
+regenerarSesion();
+//Comprobamos el color de la página
+cColor();
+$esquemaColor = $_COOKIE['esquemaColor'];
 
-cabecera("Altas de Servicios", "../../styles.css");
+cabecera("Altas de Servicios", $rutaEstilos, $esquemaColor);
+require(ROOT . "libs/componentes/encabezado.php");
+
 $errores = [];
 
 echo "<h1>Alta de servicio</h1>";
@@ -50,7 +57,7 @@ if (!isset($_REQUEST["enviar"]) && isset($_SESSION["correo"])) {
         if (empty($errores)) {
 
             //Escribimos datos en fichero
-            $archivo = fopen("../../$rutaArchivos" . DIRECTORY_SEPARATOR . "servicios.txt", "a");
+            $archivo = fopen(ROOT . "src" . DIRECTORY_SEPARATOR . "$rutaArchivos" . DIRECTORY_SEPARATOR . "servicios.txt", "a");
             fwrite($archivo, $titulo . "|" . $categoria . "|" . $comentario . "|" . $pago . "|" . $precio . "|" . $ubicacion . "|" . $disponibilidad . "|" . $rutaFoto . "|" . PHP_EOL);
             fclose($archivo);
 
@@ -64,10 +71,10 @@ if (!isset($_REQUEST["enviar"]) && isset($_SESSION["correo"])) {
     }
 } else {
     echo '<p>Para dar de alta un servicio tienes que haber iniciado sesión</p>';
-    echo "<p><a href='../inicio/inicio.php'>Ir a inicio de sesión</a></p>";
+    echo "<p><a href='" . ROOT . "src/pages/inicio/inicio.php'>Ir a inicio de sesión</a></p>";
 }
 
-echo "<p><a class='accent' href='../index.php'>Volver al inicio</a></p>";
+echo "<p><a class='accent' href='" . ROOT . "src/pages/index.php'>Volver al inicio</a></p>";
 
 echo "</main>";
 pie();

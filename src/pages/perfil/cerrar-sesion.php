@@ -1,14 +1,19 @@
 <?php
+//Variables y constantes comunes
+require("/app-dwes-roger-jonathan/libs/config.php");
+//Libreria de funciones de validación
+require(ROOT . "libs/utils.php");
 //Libreria de componentes
-require("../../../libs/componentes.php");
-// Libreria de funciones de validación
-require("../../../libs/utils.php");
-//De config.php leeremos las variables comunes
-require("../../../libs/config.php");
+require(ROOT . "libs/componentes.php");
 
 session_start();
 
-cabecera("Sesión cerrada", "../../styles.css");
+
+//Comprobamos el color de la página
+cColor();
+$esquemaColor = $_COOKIE['esquemaColor'];
+
+cabecera("Sesión cerrada", $rutaEstilos, $esquemaColor);
 
 echo '<main class="container">';
 if (isset($_SESSION["momentoLogin"])) {
@@ -18,12 +23,17 @@ if (isset($_SESSION["momentoLogin"])) {
     } else {
         echo "Se ha cerrado su sesión";
     }
+} else if (isset($_SESSION["ip"])) {
+    if ($_SESSION['ip'] != $_SERVER['REMOTE_ADDR']) {
+        echo "Se ha cerrado su sesión, IP diferente.";
+    }
 } else {
-    header("Location:" . ROOT . "src/pages/inicio/inicio.php");
+    header("Location:ROOT/src/pages/inicio/inicio.php");
 }
+session_unset();
 session_destroy();
 
-echo '<a href="' . ROOT . '/src/pages/index.php">Ir al inicio</a>';
+echo pintaEnlace(ROOT . "src/pages/index.php", "Ir al inicio");
 
 echo '<main>';
 

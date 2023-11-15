@@ -1,3 +1,20 @@
+:root[data-theme="Claro"] {
+  --theme: light;
+  --text: #000000;
+  --background: #dcdbdb;
+  --primary: #d5c4c4;
+  --secondary: #f33f3f;
+  --accent: #f33f3f;
+}
+:root[data-theme="Oscuro"] {
+  --theme: dark;
+  --text: #ffffff;
+  --background: rgb(44, 44, 56);
+  --primary: rgb(30, 30, 30);
+  --secondary: #fff;
+  --accent: #cf1c1c;
+}
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -5,6 +22,7 @@
 }
 
 body {
+  position: relative;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
     Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   min-height: 100dvh;
@@ -17,19 +35,56 @@ body {
   justify-items: center;
   align-items: center;
   gap: 1rem;
-  background-color: rgb(44, 44, 56);
-  color-scheme: dark;
-  color: white;
+  background-color: var(--background);
+  color-scheme: var(--theme);
+  color: var(--text);
 }
 
-h1 {
-  color: white;
+.encabezado {
+  display: flex;
+  position: absolute;
+  top: 0;
+  width: 100dvw;
+  padding: 1rem;
+  background-color: var(--primary);
+  border-bottom: 0.5rem solid var(--accent);
+  align-content: center;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 5px 5px 15px black;
+  color: var(--accent);
+}
+
+.encabezado ul {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  list-style: none;
+}
+
+.encabezado a {
+  font-weight: 500;
+  text-decoration: none;
+  transition: 300ms ease;
+}
+
+.encabezado a:hover {
+  font-weight: 500;
+  color: var(--text);
+  text-shadow: 0px 0px 5px var(--accent);
+  text-decoration: underline;
+  transition: 300ms ease;
+}
+
+body > h1 {
+  transition: 300ms ease;
+  color: var(--text);
   place-self: center;
 }
 
 a,
 sup {
-  color: red;
+  color: var(--accent);
 }
 
 .nav {
@@ -42,7 +97,7 @@ sup {
   gap: 1rem;
   place-content: center;
   place-items: center;
-  border: 0.5rem solid white;
+  border: 0.5rem solid var(--secondary);
   border-radius: 1rem;
   box-shadow: 5px 5px 15px black;
   padding: 1rem;
@@ -74,11 +129,11 @@ img {
 }
 
 .accent {
-  color: red;
+  color: var(--accent);
 }
 
 .errores {
-  color: red;
+  color: var(--accent);
   max-width: 20rem;
 }
 
