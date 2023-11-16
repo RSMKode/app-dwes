@@ -4,4 +4,4 @@ gonzalo@hotmail.es|98765|Gonzalo|2000-01-10||castellano|Soy gonzalo|
 willy@gmail.com|1111|Willy|2023-11-10||castellano||
 juan@ejemplo.com|juan|juan|1997-07-20|../../images/users\berserk-marca-del-sacrificio.jpg|castellano|Este formulario es genial|
 miau@gmail.com|2222|Miau|2023-11-11||Indiferente|Soy miau|
-alex@hotmail.es|alex123|Alejandro|1999-12-28||Indiferente|Hola soy Alex|
+alex@hotmail.es|alex123|Alejandro|2000-11-16|..\..\images\users\Logo_x.png|Ingles|Hola soy Alex|

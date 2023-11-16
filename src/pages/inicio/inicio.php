@@ -1,10 +1,10 @@
 <?php
 //Variables y constantes comunes
-require("/app-dwes-roger-jonathan/libs/config.php");
+require($_SERVER["DOCUMENT_ROOT"] . "/app-dwes-roger-jonathan/libs/config.php");
 //Libreria de funciones de validación
-require(ROOT . "libs/utils.php");
+require($_SERVER["DOCUMENT_ROOT"] . APP_ROOT . "libs/utils.php");
 //Libreria de componentes
-require(ROOT . "libs/componentes.php");
+require($_SERVER["DOCUMENT_ROOT"] . APP_ROOT . "libs/componentes.php");
 
 session_start();
 //Se comprueba inactividad, que sea la misma ip de inicio de sesión, y se regenera el id si han pasado 5 minutos
@@ -16,7 +16,7 @@ cColor();
 $esquemaColor = $_COOKIE['esquemaColor'];
 
 cabecera("Registro", $rutaEstilos, $esquemaColor);
-require(ROOT . "libs/componentes/encabezado.php");
+require($_SERVER["DOCUMENT_ROOT"] . APP_ROOT . "libs/componentes/encabezado.php");
 
 $errores = [];
 
@@ -26,7 +26,7 @@ echo "<main class='container'>";
 if (isset($_SESSION["correo"])) {
     // Si ya se ha iniciado sesión, redirigimos a la página principal
     echo "<p>Ya has iniciado sesión.</p>";
-    echo "<a class='accent' href='" . ROOT . "src/pages/perfil/perfil-usuario.php'>Ir al perfil de usuario</a>";
+    echo pintaEnlace(APP_ROOT . "src/pages/perfil/perfil-usuario.php", "Ir al perfil de usuario");
 } else if (!isset($_REQUEST['enviar'])) {
     // Incluimos formulario vacio
     require("form-inicio.php");
@@ -41,7 +41,7 @@ if (isset($_SESSION["correo"])) {
 
     if (empty($errores)) {
 
-        $archivo = fopen(ROOT . "src" . DIRECTORY_SEPARATOR . $rutaArchivos . DIRECTORY_SEPARATOR . "datosUsuarios.txt", "r");
+        $archivo = fopen($_SERVER["DOCUMENT_ROOT"] . APP_ROOT . "src" . DIRECTORY_SEPARATOR . $rutaArchivos . DIRECTORY_SEPARATOR . "datosUsuarios.txt", "r");
         while (!feof($archivo)) {
             $linea = str_replace("\n", "", fgets($archivo));
 
@@ -79,7 +79,7 @@ if (isset($_SESSION["correo"])) {
 
         //Si no se encuentra el usuario en el archivo guardamos un log del fallo de inicio de sesión
         $horaActual = date("d-m-Y H:i:s");
-        $archivo = fopen(ROOT . DIRECTORY_SEPARATOR . "src" . DIRECTORY_SEPARATOR . $rutaArchivos . DIRECTORY_SEPARATOR . "logLogin.txt", "a");
+        $archivo = fopen($_SERVER["DOCUMENT_ROOT"] . APP_ROOT . DIRECTORY_SEPARATOR . "src" . DIRECTORY_SEPARATOR . $rutaArchivos . DIRECTORY_SEPARATOR . "logLogin.txt", "a");
         fwrite($archivo, $correo . "|" . $pass . "|" . $horaActual . "|" . PHP_EOL);
         fclose($archivo);
 
@@ -89,7 +89,7 @@ if (isset($_SESSION["correo"])) {
         require("form-inicio.php");
     }
 }
-echo pintaEnlace(ROOT . "src/pages/index.php", "Volver al inicio");
+echo pintaEnlace(APP_ROOT . "src/pages/index.php", "Volver al inicio");
 
 echo "</main>";
 pie();

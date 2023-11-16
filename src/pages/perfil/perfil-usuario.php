@@ -1,10 +1,10 @@
 <?php
 //Variables y constantes comunes
-require("/app-dwes-roger-jonathan/libs/config.php");
+require($_SERVER["DOCUMENT_ROOT"] . "/app-dwes-roger-jonathan/libs/config.php");
 //Libreria de funciones de validación
-require(ROOT . "libs/utils.php");
+require($_SERVER["DOCUMENT_ROOT"] . APP_ROOT . "libs/utils.php");
 //Libreria de componentes
-require(ROOT . "libs/componentes.php");
+require($_SERVER["DOCUMENT_ROOT"] . APP_ROOT . "libs/componentes.php");
 
 session_start();
 //Se comprueba inactividad, que sea la misma ip de inicio de sesión, y se regenera el id si han pasado 5 minutos
@@ -16,7 +16,7 @@ cColor();
 $esquemaColor = $_COOKIE['esquemaColor'];
 
 cabecera("Perfil Usuario", $rutaEstilos, $esquemaColor);
-require(ROOT . "libs/componentes/encabezado.php");
+require($_SERVER["DOCUMENT_ROOT"] . APP_ROOT . "libs/componentes/encabezado.php");
 
 echo "<h1>Perfil Usuario</h1>";
 
@@ -44,13 +44,13 @@ if (isset($_SESSION["correo"])) {
 
     echo "</article>";
 
-    echo pintaEnlace(ROOT . "src/pages/perfil/cerrar-sesion.php", "Cerrar sesión");
+    echo pintaEnlace(APP_ROOT . "src/pages/perfil/cerrar-sesion.php", "Cerrar sesión");
 } else {
     echo "<p>No se ha iniciado sesión</p>";
 
-    echo pintaEnlace(ROOT . "src/pages/inicio/inicio.php", "Volver a inicio de sesión");
+    echo pintaEnlace(APP_ROOT . "src/pages/inicio/inicio.php", "Volver a inicio de sesión");
 }
-echo pintaEnlace(ROOT . "src/pages/index.php", "Volver al inicio");
+echo pintaEnlace(APP_ROOT . "src/pages/index.php", "Volver al inicio");
 
 echo "</main>";
 

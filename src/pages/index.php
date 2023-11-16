@@ -1,10 +1,10 @@
 <?php
 //Variables y constantes comunes
-require("/app-dwes-roger-jonathan/libs/config.php");
+require($_SERVER["DOCUMENT_ROOT"] . "/app-dwes-roger-jonathan/libs/config.php");
 //Libreria de funciones de validación
-require(ROOT . "libs/utils.php");
+require($_SERVER["DOCUMENT_ROOT"] . APP_ROOT . "libs/utils.php");
 //Libreria de componentes
-require(ROOT . "libs/componentes.php");
+require($_SERVER["DOCUMENT_ROOT"] . APP_ROOT . "libs/componentes.php");
 
 session_start();
 //Se comprueba inactividad, que sea la misma ip de inicio de sesión, y se regenera el id si han pasado 5 minutos
@@ -16,7 +16,7 @@ cColor();
 $esquemaColor = $_COOKIE['esquemaColor'];
 
 cabecera("App DWES", $rutaEstilos, $esquemaColor);
-require(ROOT . "libs/componentes/encabezado.php");
+require($_SERVER["DOCUMENT_ROOT"] . APP_ROOT . "libs/componentes/encabezado.php");
 ?>
 <h1>App DWES</h1>
 <main class="container">
@@ -33,5 +33,6 @@ require(ROOT . "libs/componentes/encabezado.php");
 </main>
 
 <?php
+echo $rutaEstilos;
 pie();
 ?>

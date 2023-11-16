@@ -7,11 +7,15 @@
  * 
  */
 
-//Constante que define la ruta del proyecto
-const ROOT = DIRECTORY_SEPARATOR . "app-dwes-roger-jonathan" . DIRECTORY_SEPARATOR;
+/**
+ * Constante que define la ruta del proyecto
+ */
+const APP_ROOT = "/app-dwes-roger-jonathan/";
 
-//Ruta de los estilos del proyecto
-$rutaEstilos = ROOT . "src/styles.css";
+/**
+ * Ruta de los estilos del proyecto
+ */
+$rutaEstilos = APP_ROOT . "src/styles.css";
 
 const TEMAS = ['Oscuro', 'Claro'];
 
