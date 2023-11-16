@@ -2,7 +2,7 @@
 
 /**
  * Librería con funciones generales y de validación
- * @author Roger, Jonathan
+ * @author Roger, Jonathan, Heike Bonilla
  * 
  */
 
@@ -133,8 +133,9 @@ function recogeArray(string $campo): array
 /**
  * Funcion cTexto
  *
- * Valida una cadena de texto con respecto a una RegEx. Reporta error en un array.
- * Le pasamos cadena, nombre de campo y array de errores y 
+ * Valida una cadena de texto con respecto a una RegEx.
+ * Reporta error en un array.
+ * Le pasamos cadena, nombre de campo, array de errores, tipo y 
  * de manera voluntaria mínimo y máximo de caracteres (si = sería campo no requerido) , 
  * si permitimos o no espacios en nuestra cadena y si la cadena es o no sensible a mayúsculas
  * 
@@ -209,6 +210,19 @@ function cTexto(string $text, string $campo, array &$errores, string $tipo, int 
 }
 */
 
+/**
+ * Funcion cFecha
+ *
+ * Valida una fecha en función de 2 formatos posibles definidos en config.
+ * Además comprueba si el usuario es mayor de edad
+ * 
+ * @param string $text
+ * @param string $campo
+ * @param array $errores
+ * @param string $formato
+ * @return bool
+ *
+ */
 function cFecha(string $fecha, string $campo, array &$errores, string $formato)
 {
     $fechaArray = explode("-", $fecha);
@@ -317,7 +331,6 @@ function cSelect(string $text, string $campo, array &$errores, array $valores, b
  * 
  * @return boolean
  */
-
 function cCheck(array $arr, string $campo, array &$errores, array $valores, bool $requerido = TRUE)
 {
 
@@ -409,6 +422,15 @@ function cFile(string $nombre, array &$errores, array $extensionesValidas, strin
     }
 }
 
+/**
+ * Funcion cInactividad
+ * 
+ * Comprueba la inactividad de un usuario que ha iniciado sesión
+ *
+ * @param int $segundos
+ * 
+ * @return void
+ */
 function cInactividad(int $segundos = 60 * 30): void
 {
     if (isset($_SESSION["momentoLogin"])) {
@@ -421,7 +443,16 @@ function cInactividad(int $segundos = 60 * 30): void
     }
 }
 
-function regenerarSesion(int $segundos = 60 * 5)
+/**
+ * Funcion regenerarSesion
+ * 
+ * Regenera el id de sesión
+ *
+ * @param int $segundos
+ * 
+ * @return void
+ */
+function regenerarSesion(int $segundos = 60 * 5): void
 {
     if (isset($_SESSION["momentoLogin"])) {
         if (time() > $_SESSION["momentoLogin"] + $segundos) {
@@ -430,6 +461,13 @@ function regenerarSesion(int $segundos = 60 * 5)
     }
 }
 
+/**
+ * Funcion cIP
+ * 
+ * Comprueba que la ip actual sea la misma que la del inicio de sesión
+ * 
+ * @return void
+ */
 function cIP()
 {
     if (isset($_SESSION["ip"])) {
@@ -440,6 +478,15 @@ function cIP()
     }
 }
 
+/**
+ * Funcion cColor
+ * 
+ * Comprueba el color de la página preferente por el usuario.
+ * Si no existe la cookie, la crea con el color predeterminado.
+ * Si existe y se detecta un nuevo esquema de color, se cambia el valor de la cookie.
+ * 
+ * @return void
+ */
 function cColor()
 {
     if (!isset($_COOKIE['esquemaColor'])) {

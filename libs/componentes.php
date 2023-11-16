@@ -1,6 +1,15 @@
 <?php
 
-//Crea la cabecera del html con el título indicado
+/**
+ * Crea la cabecera del html con el título indicado, el archivo de css correspondiente
+ * y el esquema de color de la página.
+ * 
+ * @param string $titulo
+ * @param string $archivo_css
+ * @param string $esquemaColor
+ * 
+ * @return void
+ */
 function cabecera(string $titulo = NULL, string $archivo_css = NULL, string $esquemaColor = "Oscuro")
 {
     $titulo = (is_null($titulo))
@@ -24,7 +33,9 @@ function cabecera(string $titulo = NULL, string $archivo_css = NULL, string $esq
     echo $cabecera;
 }
 
-// Crea el cierre del html
+/**
+ * Crea el cierre del html
+ */
 function pie()
 {
     echo '        
@@ -33,8 +44,14 @@ function pie()
         ';
 }
 
-// Función para pintar un checkbox con los valores que nos pasan por un array
+/**
+ * Función para pintar un checkbox con los valores que nos pasan por un array
 
+ * @param array $valores
+ * @param string $name
+ * 
+ * @return void
+ */
 function pintaCheck(array $valores, string $name)
 {
     foreach ($valores as $key => $valor) {
@@ -42,6 +59,14 @@ function pintaCheck(array $valores, string $name)
     };
 };
 
+/**
+ * Función para pintar un radio button con los valores que nos pasan por un array
+
+ * @param array $valores
+ * @param string $name
+ * 
+ * @return void
+ */
 function pintaRadio(array $valores, string $name)
 {
     foreach ($valores as $key => $valor) {
@@ -49,6 +74,14 @@ function pintaRadio(array $valores, string $name)
     };
 };
 
+/**
+ * Función para pintar un select con los valores que nos pasan por un array
+
+ * @param array $valores
+ * @param string $name
+ * 
+ * @return void
+ */
 function pintaSelect(array $valores, string $name)
 {
     echo "<select name='$name'>";
@@ -59,6 +92,15 @@ function pintaSelect(array $valores, string $name)
     echo "</select>";
 };
 
+/**
+ * Función para pintar un enlace con la url y el texto que envuelve el anchor
+
+ * @param string $url
+ * @param string $texto
+ * @param bool $enParrafo
+ * 
+ * @return void
+ */
 function pintaEnlace(string $url, string $texto, bool $enParrafo = true)
 {
     if ($enParrafo) {

@@ -70,6 +70,7 @@ if (!isset($_REQUEST["enviar"]) && isset($_SESSION["correo"])) {
         require("form-servicios.php");
     }
 } else {
+    //Si no se ha iniciado sesión se crea un enlace para iniciar sesión
     echo '<p>Para dar de alta un servicio tienes que haber iniciado sesión</p>';
     echo pintaEnlace(APP_ROOT . "src/pages/inicio/inicio.php", "Ir a inicio de sesión");
 }

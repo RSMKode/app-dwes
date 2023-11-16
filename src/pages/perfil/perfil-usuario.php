@@ -36,7 +36,7 @@ if (isset($_SESSION["correo"])) {
 
     echo "<h1>$nombre</h1>";
     echo "<p>Correo: $correo</p>";
-    echo "<p>Pass: $pass</p>";
+    echo "<p>Contraseña: ********</p>";
     echo "<p>Fecha de nacimiento: $fechaNacimiento</p>";
     if ($rutaFoto != "") echo "<img src='$rutaFoto' alt='Imagen de $nombre'>";
     if ($idioma != "") echo "<p>Idioma preferente: $idioma</p>";

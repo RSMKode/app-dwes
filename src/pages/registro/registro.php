@@ -24,7 +24,7 @@ echo "<h1>Registro</h1>";
 echo "<main class='container'>";
 
 if (isset($_SESSION["correo"])) {
-    // Si ya se ha iniciado sesión, redirigimos a la página principal
+    // Si ya se ha iniciado sesión, creamos enlace a la página principal
     echo "<p>Ya has iniciado sesión.</p>";
     echo pintaEnlace(APP_ROOT . "src/pages/perfil/perfil-usuario.php", "Ir al perfil de usuario");
 } else if (!isset($_REQUEST['enviar'])) {

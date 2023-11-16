@@ -56,6 +56,7 @@ if (isset($_SESSION["correo"])) {
     fclose($archivo);
 } else {
     echo "<main class='container'>";
+    //Si no se ha iniciado sesión se crea un enlace para iniciar sesión
     echo '<p>Para ver los servicios disponibles más en detalle tienes que iniciar sesión</p>';
     echo pintaEnlace(APP_ROOT . "src/pages/inicio/inicio.php", "Ir a inicio de sesión");
 }

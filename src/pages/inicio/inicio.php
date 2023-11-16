@@ -24,18 +24,18 @@ echo "<h1>Iniciar Sesión</h1>";
 echo "<main class='container'>";
 
 if (isset($_SESSION["correo"])) {
-    // Si ya se ha iniciado sesión, redirigimos a la página principal
+    // Si ya se ha iniciado sesión, creamos enlace a la página principal
     echo "<p>Ya has iniciado sesión.</p>";
     echo pintaEnlace(APP_ROOT . "src/pages/perfil/perfil-usuario.php", "Ir al perfil de usuario");
 } else if (!isset($_REQUEST['enviar'])) {
-    // Incluimos formulario vacio
+    // Incluimos formulario de inicio de sesión
     require("form-inicio.php");
 } else {
     //Sanitizamos
     $correo = recoge("correo");
     $pass = recoge("pass");
 
-    //Validamos los campos que no son ficheros
+    //Validamos los campos de correo y fecha
     cTexto($correo, "correo", $errores, "correo");
     cTexto($pass, "pass", $errores, "pass", 30, 4);
 

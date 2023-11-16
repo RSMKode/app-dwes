@@ -17,8 +17,14 @@ const APP_ROOT = "/app-dwes-roger-jonathan/";
  */
 $rutaEstilos = APP_ROOT . "src/styles.css";
 
+/**
+ * Colores de tema de la página
+ */
 const TEMAS = ['Oscuro', 'Claro'];
 
+/**
+ * Tiempo de inactividad del usuario en segundos
+ */
 $inactivityTime = 60 * 20;
 
 /**
@@ -26,7 +32,9 @@ $inactivityTime = 60 * 20;
  */
 $rutaImagenes = "images";
 
-//Ruta donde almacenaremos los archivos
+/**
+ * Ruta donde almacenaremos los archivos de texto
+ */
 $rutaArchivos = "archivos";
 
 /**
@@ -39,17 +47,32 @@ $extensionesValidas = ["jpeg", "gif", "jpg", "png", "webp"];
  */
 $maxFichero = 2000000;
 
-//Formatos de fecha válidos
+/**
+ * Formatos de fecha válidos
+ */
 const FORMATOS_FECHA = ["dd-mm-aaaa", "aaaa-mm-dd"];
 
-//Fecha máxima para la fecha de nacimiento
+/**
+ * Fecha máxima para la fecha de nacimiento
+ */
 $fechaHoy = date("Y-m-d", time());
 
-//Valores para la validacion del select
+/**
+ * Valores de idiomas disponibles para los usuarios
+ */
 $idiomas = ["Indiferente", "Castellano", "Ingles", "Valenciano",];
 
+/**
+ * Categorias disponibles en los servicios
+ */
 $categorias = ["Categoria 1", "Categoria 2", "Categoria 3"];
 
+/**
+ * Disponibilidades horarias para los servicios
+ */
 $disponibilidades = ["Mañanas", "Tardes", "Noches", "Completa", "Fines de semana"];
 
+/**
+ * Valores para opción de pago en los servicios
+ */
 $pagos = ["Si", "No",];

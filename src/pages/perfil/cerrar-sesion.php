@@ -8,7 +8,6 @@ require($_SERVER["DOCUMENT_ROOT"] . APP_ROOT . "libs/componentes.php");
 
 session_start();
 
-
 //Comprobamos el color de la página
 cColor();
 $esquemaColor = $_COOKIE['esquemaColor'];
@@ -16,6 +15,7 @@ $esquemaColor = $_COOKIE['esquemaColor'];
 cabecera("Sesión cerrada", $rutaEstilos, $esquemaColor);
 require($_SERVER["DOCUMENT_ROOT"] . APP_ROOT . "libs/componentes/encabezado.php");
 
+//Se comprueba por que se ha cerrado la sesión y se comunica al usuario
 echo '<main class="container">';
 if (isset($_SESSION["momentoLogin"])) {
 
