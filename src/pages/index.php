@@ -33,6 +33,5 @@ require($_SERVER["DOCUMENT_ROOT"] . APP_ROOT . "libs/componentes/encabezado.php"
 </main>
 
 <?php
-echo $rutaEstilos;
 pie();
 ?>
