@@ -8,6 +8,9 @@ require($_SERVER["DOCUMENT_ROOT"] . APP_ROOT . "libs/componentes.php");
 
 session_start();
 //Se comprueba inactividad, que sea la misma ip de inicio de sesión, y se regenera el id si han pasado 5 minutos
+/*
+    Las comrobaciones de seguridad sólo se hacen en la zona segura
+*/
 cInactividad($inactivityTime);
 cIP();
 regenerarSesion();
