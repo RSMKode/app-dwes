@@ -436,7 +436,7 @@ function cInactividad(int $segundos = 60 * 30): void
     if (isset($_SESSION["momentoLogin"])) {
 
         if (time() > $_SESSION["momentoLogin"] + $segundos) {
-            header("Location:" . $_SERVER["HTTP_HOST"] . APP_ROOT . "src/pages/perfil/cerrar-sesion.php");
+            header("Location:" . APP_ROOT . "src/pages/perfil/cerrar-sesion.php");
         } else {
             $_SESSION["momentoLogin"] = time();
         }
@@ -473,7 +473,7 @@ function cIP()
     if (isset($_SESSION["ip"])) {
 
         if ($_SESSION["ip"] != $_SERVER["REMOTE_ADDR"]) {
-            header("Location:" . $_SERVER["HTTP_HOST"] . APP_ROOT . "src/pages/perfil/cerrar-sesion.php");
+            header("Location:" . APP_ROOT . "src/pages/perfil/cerrar-sesion.php");
         }
     }
 }
