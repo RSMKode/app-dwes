@@ -8,6 +8,10 @@ require($_SERVER["DOCUMENT_ROOT"] . APP_ROOT . "libs/componentes.php");
 
 session_start();
 //Se comprueba inactividad, que sea la misma ip de inicio de sesión, y se regenera el id si han pasado 5 minutos
+/*
+    Hasta que no se ha logueado el usuario no comprobamos IP, ni regeneramos ID ni cerramos por inactividad
+    En el login se guardan los datos iniciales y a partir de ese momento se van comprobando en las páginas privadas
+*/
 cInactividad($inactivityTime);
 cIP();
 regenerarSesion();
@@ -40,7 +44,11 @@ if (isset($_SESSION["correo"])) {
     cTexto($pass, "pass", $errores, "pass", 30, 4);
 
     if (empty($errores)) {
-
+/*
+    El código de la comprobación del usuario y la contraseña mejor en una función, hace el código más claro y fácil de modificar.
+    Ademas la función se podría reutilizar.
+    La función devolverá los datos del fichero en caso de que usuario y contraseña ssean correctos y false en caso contrario
+*/
         $archivo = fopen($_SERVER["DOCUMENT_ROOT"] . APP_ROOT . "src" . DIRECTORY_SEPARATOR . $rutaArchivos . DIRECTORY_SEPARATOR . "datosUsuarios.txt", "r");
         while (!feof($archivo)) {
             $linea = str_replace("\n", "", fgets($archivo));
