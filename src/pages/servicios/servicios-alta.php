@@ -22,7 +22,14 @@ $errores = [];
 
 echo "<h1>Alta de servicio</h1>";
 echo "<main class='container'>";
-
+/*
+Para impedir que un usuario no logueado pueda dar de alta un servicio lo mejor es hacerlo de la siguiente manera.
+if(!isset($_SESSION["correo"]){
+    header("location:......
+    Lo enviamos a la página de inicio o a login
+    Esto lo haremos siempre que estemos en una página privada
+    }
+*/
 if (!isset($_REQUEST["enviar"]) && isset($_SESSION["correo"])) {
     // Incluimos formulario vacio
     include("form-servicios.php");
@@ -70,6 +77,12 @@ if (!isset($_REQUEST["enviar"]) && isset($_SESSION["correo"])) {
         require("form-servicios.php");
     }
 } else {
+/*
+    Poniendo lo que os he comentado al inicio esto no es necesario porque lo habremos llevado a login.
+    Si queremos mostrarle un mensaje en login podemos llevarlo por $_SESSION
+
+*/
+    
     //Si no se ha iniciado sesión se crea un enlace para iniciar sesión
     echo '<p>Para dar de alta un servicio tienes que haber iniciado sesión</p>';
     echo pintaEnlace(APP_ROOT . "src/pages/inicio/inicio.php", "Ir a inicio de sesión");
