@@ -13,6 +13,9 @@ cIP();
 regenerarSesion();
 //Comprobamos el color de la página
 cColor();
+/*
+Las cookies hay que sanitizarlas. Al estar en el navegador son inseguras
+*/
 $esquemaColor = $_COOKIE['esquemaColor'];
 
 cabecera("Registro", $rutaEstilos, $esquemaColor);
@@ -22,6 +25,9 @@ $errores = [];
 
 echo "<h1>Registro</h1>";
 echo "<main class='container'>";
+/*
+Si ya se ha iniciado lo mejor es redirigir a otra página o en este caso mostrar el mensaje en el formulario con $errores
+*/
 
 if (isset($_SESSION["correo"])) {
     // Si ya se ha iniciado sesión, creamos enlace a la página principal
