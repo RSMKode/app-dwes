@@ -25,7 +25,7 @@ const TEMAS = ['Oscuro', 'Claro'];
 /**
  * Tiempo de inactividad del usuario en segundos
  */
-$inactivityTime = 20;
+$inactivityTime = 60 * 20;
 
 /**
  * Donde almacenaremos las imágenes que nos suben los usuarios
