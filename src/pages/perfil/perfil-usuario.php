@@ -21,7 +21,9 @@ require($_SERVER["DOCUMENT_ROOT"] . APP_ROOT . "libs/componentes/encabezado.php"
 echo "<h1>Perfil Usuario</h1>";
 
 echo "<main class='container'>";
-
+/*
+Lo mismo que os he comentado en alta de registro para impedir que esto lo vea un usuario no logueado
+*/
 if (isset($_SESSION["correo"])) {
 
     $correo = $_SESSION["correo"];
