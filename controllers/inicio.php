@@ -20,7 +20,7 @@ cColor();
 $esquemaColor = $_COOKIE['esquemaColor'];
 
 cabecera("Registro", $rutaEstilos, $esquemaColor);
-require($_SERVER["DOCUMENT_ROOT"] . APP_ROOT . "libs/componentes/encabezado.php");
+require($_SERVER["DOCUMENT_ROOT"] . APP_ROOT . "templates/encabezado.php");
 
 $errores = [];
 
@@ -30,10 +30,10 @@ echo "<main class='container'>";
 if (isset($_SESSION["correo"])) {
     // Si ya se ha iniciado sesión, creamos enlace a la página principal
     echo "<p>Ya has iniciado sesión.</p>";
-    echo pintaEnlace(APP_ROOT . "src/pages/perfil/perfil-usuario.php", "Ir al perfil de usuario");
+    echo pintaEnlace(APP_ROOT . "/controllers/perfil-usuario.php", "Ir al perfil de usuario");
 } else if (!isset($_REQUEST['enviar'])) {
     // Incluimos formulario de inicio de sesión
-    require("form-inicio.php");
+    require($_SERVER["DOCUMENT_ROOT"] . APP_ROOT . "templates/form-inicio.php");
 } else {
     //Sanitizamos
     $correo = recoge("correo");
@@ -44,7 +44,7 @@ if (isset($_SESSION["correo"])) {
     cTexto($pass, "pass", $errores, "pass", 30, 4);
 
     if (empty($errores)) {
-/*
+        /*
     El código de la comprobación del usuario y la contraseña mejor en una función, hace el código más claro y fácil de modificar.
     Ademas la función se podría reutilizar.
     La función devolverá los datos del fichero en caso de que usuario y contraseña ssean correctos y false en caso contrario
@@ -79,7 +79,7 @@ if (isset($_SESSION["correo"])) {
                     $_SESSION["comentario"] = $comentario;
                     $_SESSION["momentoLogin"] = time();
                     $_SESSION["ip"] = $_SERVER['REMOTE_ADDR'];
-                    header("location:../perfil/perfil-usuario.php");
+                    header("location:../perfil-usuario.php");
                 }
             }
         }
@@ -94,10 +94,10 @@ if (isset($_SESSION["correo"])) {
         echo "<h2>Datos incorrectos</h2>";
         echo pintaEnlace("./inicio.php", "Volver a intentar");
     } else {
-        require("form-inicio.php");
+        require($_SERVER["DOCUMENT_ROOT"] . APP_ROOT . "templates/form-inicio.php");
     }
 }
-echo pintaEnlace(APP_ROOT . "src/pages/index.php", "Volver al inicio");
+echo pintaEnlace(APP_ROOT . "index.php", "Volver al inicio");
 
 echo "</main>";
 pie();

@@ -15,7 +15,7 @@ const APP_ROOT = "/app-dwes-roger-jonathan/";
 /**
  * Ruta de los estilos del proyecto
  */
-$rutaEstilos = APP_ROOT . "src/styles.css";
+$rutaEstilos = APP_ROOT . "templates/styles.css";
 
 /**
  * Colores de tema de la página

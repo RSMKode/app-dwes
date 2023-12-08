@@ -16,7 +16,7 @@ cColor();
 $esquemaColor = $_COOKIE['esquemaColor'];
 
 cabecera("Servicios", $rutaEstilos, $esquemaColor);
-require($_SERVER["DOCUMENT_ROOT"] . APP_ROOT . "libs/componentes/encabezado.php");
+require($_SERVER["DOCUMENT_ROOT"] . APP_ROOT . "templates/encabezado.php");
 
 echo "<h1>Servicios</h1>";
 
@@ -58,9 +58,9 @@ if (isset($_SESSION["correo"])) {
     echo "<main class='container'>";
     //Si no se ha iniciado sesión se crea un enlace para iniciar sesión
     echo '<p>Para ver los servicios disponibles más en detalle tienes que iniciar sesión</p>';
-    echo pintaEnlace(APP_ROOT . "src/pages/inicio/inicio.php", "Ir a inicio de sesión");
+    echo pintaEnlace(APP_ROOT . "controllers/inicio.php", "Ir a inicio de sesión");
 }
-echo pintaEnlace(APP_ROOT . "src/pages/index.php", "Volver al inicio");
+echo pintaEnlace(APP_ROOT . "index.php", "Volver al inicio");
 
 echo "</main>";
 
