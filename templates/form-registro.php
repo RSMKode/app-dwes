@@ -52,4 +52,4 @@ if (count($errores) != 0) {
     <input type="submit" name="enviar" value="Enviar">
     <input type="reset" name="borrar" value="Borrar">
 </form>
-<a class="accent" href="../inicio/inicio.php">Si ya estás registrado, pulsa aqúi</a>
+<a class="accent" href="../controllers/inicio.php">Si ya estás registrado, pulsa aqúi</a>

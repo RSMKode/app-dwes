@@ -82,12 +82,13 @@ function pintaRadio(array $valores, string $name)
  * 
  * @return void
  */
-function pintaSelect(array $valores, string $name)
+function pintaSelect(array $valores, string $name, bool $esAsociativo = false)
 {
     echo "<select name='$name'>";
 
     foreach ($valores as $key => $valor) {
-        echo '<option value="' . $valor . '">' . $valor . '<br>';
+        if (!$esAsociativo) $key = $valor;
+        echo '<option value="' . $key . '">' . $valor . '<br>';
     };
     echo "</select>";
 };

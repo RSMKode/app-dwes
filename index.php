@@ -19,18 +19,28 @@ cColor();
 $esquemaColor = $_COOKIE['esquemaColor'];
 
 cabecera("App DWES", $rutaEstilos, $esquemaColor);
-require($_SERVER["DOCUMENT_ROOT"] . APP_ROOT . "libs/componentes/encabezado.php");
+require($_SERVER["DOCUMENT_ROOT"] . APP_ROOT . "templates/encabezado.php");
 ?>
 <h1>App DWES</h1>
 <main class="container">
     <ul class="nav">
-        <li><a href="./registro/registro.php">Registrarse</a></li>
-        <li><a href="./inicio/inicio.php">Iniciar sesión</a></li>
+        <li>
+            <a href="controllers/registro.php">Registrarse</a>
+        </li>
+        <li>
+            <a href="controllers/inicio.php">Iniciar sesión</a>
+        </li>
         <br>
-        <li><a href="./inicio/mostrar-usuarios.php">Mostrar usuarios</a></li>
+        <li>
+            <a href="controllers/mostrar-usuarios.php">Mostrar usuarios</a>
+        </li>
         <br>
-        <li><a href="./servicios/mostrar-servicios.php">Mostrar servicios</a></li>
-        <li><a href="./servicios/servicios-alta.php">Dar de alta un servicio</a></li>
+        <li>
+            <a href="controllers/servicios-lista.php">Mostrar servicios</a>
+        </li>
+        <li>
+            <a href="controllers/servicios-alta.php">Dar de alta un servicio</a>
+        </li>
         <br>
     </ul>
 </main>

@@ -16,7 +16,7 @@ cColor();
 $esquemaColor = $_COOKIE['esquemaColor'];
 
 cabecera("Altas de Servicios", $rutaEstilos, $esquemaColor);
-require($_SERVER["DOCUMENT_ROOT"] . APP_ROOT . "libs/componentes/encabezado.php");
+require($_SERVER["DOCUMENT_ROOT"] . APP_ROOT . "templates/encabezado.php");
 
 $errores = [];
 
@@ -32,7 +32,7 @@ if(!isset($_SESSION["correo"]){
 */
 if (!isset($_REQUEST["enviar"]) && isset($_SESSION["correo"])) {
     // Incluimos formulario vacio
-    include("form-servicios.php");
+    require($_SERVER["DOCUMENT_ROOT"] . APP_ROOT . "templates/form-servicios.php");
 } else if (isset($_SESSION["correo"])) {
     $titulo = recoge("titulo");
     $categoria = recoge("categoria");
@@ -55,10 +55,10 @@ if (!isset($_REQUEST["enviar"]) && isset($_SESSION["correo"])) {
     if (empty($errores)) {
 
         //En este caso la subida de la foto no es o<bligatoria
-        $rutaFoto = cFile("fotoServicio", $errores, $extensionesValidas, ".." . DIRECTORY_SEPARATOR . ".." . DIRECTORY_SEPARATOR . $rutaImagenes . DIRECTORY_SEPARATOR . "services", $maxFichero, false);
+        $rutaFoto = cFile("fotoServicio", $errores, $extensionesValidas, ".." . DIRECTORY_SEPARATOR . "src" . DIRECTORY_SEPARATOR . $rutaImagenes . DIRECTORY_SEPARATOR . "services", $maxFichero, false);
 
         /*
-        Sino ha habido error en la subida del fichero redireccionamos a valid.php pasando por GET (URL) los datos recogidos
+        Sino ha habido error en la subida del fichero redireccionamos a servicios-lista.php
         Si ha habido error volveremos a mostrar el formulario
         */
         if (empty($errores)) {
@@ -69,26 +69,26 @@ if (!isset($_REQUEST["enviar"]) && isset($_SESSION["correo"])) {
             fclose($archivo);
 
             //Redirigimos a valid.php
-            header("location:mostrar-servicios.php");
+            header("location:servicios-lista.php");
         } else {
-            require("form-servicios.php");
+            require($_SERVER["DOCUMENT_ROOT"] . APP_ROOT . "templates/form-servicios.php");
         }
     } else {
-        require("form-servicios.php");
+        require($_SERVER["DOCUMENT_ROOT"] . APP_ROOT . "templates/form-servicios.php");
     }
 } else {
-/*
+    /*
     Poniendo lo que os he comentado al inicio esto no es necesario porque lo habremos llevado a login.
     Si queremos mostrarle un mensaje en login podemos llevarlo por $_SESSION
 
 */
-    
+
     //Si no se ha iniciado sesión se crea un enlace para iniciar sesión
     echo '<p>Para dar de alta un servicio tienes que haber iniciado sesión</p>';
-    echo pintaEnlace(APP_ROOT . "src/pages/inicio/inicio.php", "Ir a inicio de sesión");
+    echo pintaEnlace(APP_ROOT . "controllers/inicio.php", "Ir a inicio de sesión");
 }
 
-echo pintaEnlace(APP_ROOT . "src/pages/index.php", "Volver al inicio");
+echo pintaEnlace(APP_ROOT . "index.php", "Volver al inicio");
 
 echo "</main>";
 pie();

@@ -26,4 +26,4 @@ if (count($errores) != 0) {
     <input type="submit" name="enviar" value="Enviar">
     <input type="reset" name="borrar" value="Borrar">
 </form>
-<a class="accent" href="../registro/registro.php">Si no estás registrado, pulsa aqúi</a>
+<a class="accent" href="../controllers/registro.php">Si no estás registrado, pulsa aqúi</a>

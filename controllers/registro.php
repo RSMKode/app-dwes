@@ -19,7 +19,7 @@ Las cookies hay que sanitizarlas. Al estar en el navegador son inseguras
 $esquemaColor = $_COOKIE['esquemaColor'];
 
 cabecera("Registro", $rutaEstilos, $esquemaColor);
-require($_SERVER["DOCUMENT_ROOT"] . APP_ROOT . "libs/componentes/encabezado.php");
+require($_SERVER["DOCUMENT_ROOT"] . APP_ROOT . "templates/encabezado.php");
 
 $errores = [];
 
@@ -32,10 +32,10 @@ Si ya se ha iniciado lo mejor es redirigir a otra página o en este caso mostrar
 if (isset($_SESSION["correo"])) {
     // Si ya se ha iniciado sesión, creamos enlace a la página principal
     echo "<p>Ya has iniciado sesión.</p>";
-    echo pintaEnlace(APP_ROOT . "src/pages/perfil/perfil-usuario.php", "Ir al perfil de usuario");
+    echo pintaEnlace(APP_ROOT . "controllers/perfil-usuario.php", "Ir al perfil de usuario");
 } else if (!isset($_REQUEST['enviar'])) {
     // Incluimos formulario vacio
-    require("form-registro.php");
+    require($_SERVER["DOCUMENT_ROOT"] . APP_ROOT . "templates/form-registro.php");
 } else {
     //Sanitizamos
     $nombre = recoge("nombre");
@@ -57,10 +57,10 @@ if (isset($_SESSION["correo"])) {
     if (empty($errores)) {
 
         //En este caso la subida de la foto no es obligatoria
-        $rutaFoto = cFile("foto", $errores, $extensionesValidas, ".." . DIRECTORY_SEPARATOR . ".." . DIRECTORY_SEPARATOR . $rutaImagenes . DIRECTORY_SEPARATOR . "users", $maxFichero, false);
+        $rutaFoto = cFile("foto", $errores, $extensionesValidas, ".." . DIRECTORY_SEPARATOR . "src" . DIRECTORY_SEPARATOR . $rutaImagenes . DIRECTORY_SEPARATOR . "users", $maxFichero, false);
 
         /*
-         Si no ha habido error en la subida del fichero redireccionamos a valid.php
+        Sino ha habido error en la subida del fichero redireccionamos a perfil-usuario.php
          Si ha habido error volveremos a mostrar el formulario
          */
         if (empty($errores)) {
@@ -80,14 +80,14 @@ if (isset($_SESSION["correo"])) {
             $_SESSION["momentoLogin"] = time();
 
             //Redirigimos a valid.php
-            header("location:../inicio/inicio.php");
+            header("location:./inicio.php");
         } else {
-            require("form-registro.php");
+            require($_SERVER["DOCUMENT_ROOT"] . APP_ROOT . "templates/form-registro.php");
         }
     } else {
-        require("form-registro.php");
+        require($_SERVER["DOCUMENT_ROOT"] . APP_ROOT . "templates/form-registro.php");
     }
 }
-echo pintaEnlace(APP_ROOT . "src/pages/index.php", "Volver al inicio");
+echo pintaEnlace(APP_ROOT . "index.php", "Volver al inicio");
 echo "</main>";
 pie();
