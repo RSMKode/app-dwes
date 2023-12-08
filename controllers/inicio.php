@@ -79,7 +79,7 @@ if (isset($_SESSION["correo"])) {
                     $_SESSION["comentario"] = $comentario;
                     $_SESSION["momentoLogin"] = time();
                     $_SESSION["ip"] = $_SERVER['REMOTE_ADDR'];
-                    header("location:../perfil-usuario.php");
+                    header("location:./perfil-usuario.php");
                 }
             }
         }

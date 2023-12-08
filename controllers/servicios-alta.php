@@ -32,7 +32,7 @@ if(!isset($_SESSION["correo"]){
 */
 if (!isset($_REQUEST["enviar"]) && isset($_SESSION["correo"])) {
     // Incluimos formulario vacio
-    include("form-servicios.php");
+    require($_SERVER["DOCUMENT_ROOT"] . APP_ROOT . "templates/form-servicios.php");
 } else if (isset($_SESSION["correo"])) {
     $titulo = recoge("titulo");
     $categoria = recoge("categoria");
@@ -58,7 +58,7 @@ if (!isset($_REQUEST["enviar"]) && isset($_SESSION["correo"])) {
         $rutaFoto = cFile("fotoServicio", $errores, $extensionesValidas, ".." . DIRECTORY_SEPARATOR . "src" . DIRECTORY_SEPARATOR . $rutaImagenes . DIRECTORY_SEPARATOR . "services", $maxFichero, false);
 
         /*
-        Sino ha habido error en la subida del fichero redireccionamos a valid.php pasando por GET (URL) los datos recogidos
+        Sino ha habido error en la subida del fichero redireccionamos a servicios-lista.php
         Si ha habido error volveremos a mostrar el formulario
         */
         if (empty($errores)) {

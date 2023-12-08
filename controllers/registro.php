@@ -60,7 +60,7 @@ if (isset($_SESSION["correo"])) {
         $rutaFoto = cFile("foto", $errores, $extensionesValidas, ".." . DIRECTORY_SEPARATOR . "src" . DIRECTORY_SEPARATOR . $rutaImagenes . DIRECTORY_SEPARATOR . "users", $maxFichero, false);
 
         /*
-         Si no ha habido error en la subida del fichero redireccionamos a valid.php
+        Sino ha habido error en la subida del fichero redireccionamos a perfil-usuario.php
          Si ha habido error volveremos a mostrar el formulario
          */
         if (empty($errores)) {
@@ -80,7 +80,7 @@ if (isset($_SESSION["correo"])) {
             $_SESSION["momentoLogin"] = time();
 
             //Redirigimos a valid.php
-            header("location:../controllers/inicio.php");
+            header("location:./inicio.php");
         } else {
             require($_SERVER["DOCUMENT_ROOT"] . APP_ROOT . "templates/form-registro.php");
         }
