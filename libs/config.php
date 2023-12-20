@@ -10,7 +10,7 @@
 /**
  * Constante que define la ruta del proyecto
  */
-const APP_ROOT = "/app-dwes-roger-jonathan/";
+const APP_ROOT = "/app-dwes/";
 
 /**
  * Ruta de los estilos del proyecto
