@@ -1,6 +1,6 @@
 <?php
 //Variables y constantes comunes
-require($_SERVER["DOCUMENT_ROOT"] . "/app-dwes-roger-jonathan/libs/config.php");
+require($_SERVER["DOCUMENT_ROOT"] . "/app-dwes/libs/config.php");
 //Libreria de funciones de validación
 require($_SERVER["DOCUMENT_ROOT"] . APP_ROOT . "libs/utils.php");
 //Libreria de componentes

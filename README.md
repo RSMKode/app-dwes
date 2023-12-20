@@ -7,7 +7,7 @@
 Ejercicio evaluable de la asignatura Desarrollo en Entorno Servidor - 2º DAW.
 
 Las características de la aplicación se detallan en:
-[Evaluable DWES semipresencial.pdf](https://github.com/RSMKode/app-dwes-roger-jonathan/files/13383127/Evaluable.DWES.semipresencial.pdf)
+[Evaluable DWES semipresencial.pdf](https://github.com/RSMKode/app-dwes/files/13383127/Evaluable.DWES.semipresencial.pdf)
 
 ## Instrucciones y aclaraciones:
 La app utiliza el valor de la constante $_SERVER['DOCUMENT_ROOT'] definida en la configuración de Apache de XAMPP para las rutas absolutas.
