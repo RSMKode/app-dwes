@@ -15,22 +15,22 @@ if (count($errores) != 0) {
 <form action="" method="post" enctype="multipart/form-data">
     Nombre completo<sup>*</sup>
     <br>
-    <input type="text" name="nombre" value="<?= isset($nombre) ? $nombre : ""; ?>" placeholder="Introduce aquí tu nombre">
+    <input type="text" name="nombre" value="<?= isset($datos_usuario["nombre"]) ? $datos_usuario["nombre"] : ""; ?>" placeholder="Introduce aquí tu nombre">
     <br>
 
     Dirección de correo electrónico<sup>*</sup>
     <br>
-    <input type="text" name="correo" value="<?= isset($correo) ? $correo : ""; ?>" placeholder="ejemplo@google.com">
+    <input type="text" name="correo" value="<?= isset($datos_usuario["email"]) ? $datos_usuario["email"] : ""; ?>" placeholder="ejemplo@google.com">
     <br>
 
     Contraseña<sup>*</sup>
     <br>
-    <input type="password" name="pass" value="<?= isset($pass) ? $pass : ""; ?>" placeholder="**********">
+    <input type="password" name="pass" value="<?= isset($datos_usuario["pass"]) ? $datos_usuario["pass"] : ""; ?>" placeholder="**********">
     <br>
 
     Fecha de nacimiento<sup>*</sup>
     <br>
-    <input type="date" name="fechaNacimiento" max="<?= $fechaHoy ?> " value="<?= isset($fechaNacimiento) ? $fechaNacimiento : $fechaHoy; ?>">
+    <input type="date" name="fechaNacimiento" max="<?= $fechaHoy ?> " value="<?= isset($datos_usuario["f_nacimiento"]) ? $datos_usuario["f_nacimiento"] : $fechaHoy; ?>">
     <br>
 
     Foto de perfil
@@ -44,9 +44,9 @@ if (count($errores) != 0) {
     pintaSelect($idiomas, "idioma")
     ?>
     <br>
-    Comentario
+    Descripción
     <br>
-    <textarea name="comentario" value="<?= isset($comentario) ? $comentario : ""; ?> " placeholder="Escribe aquí tu descripción personal"></textarea>
+    <textarea name="descripcion" value="<?= isset($datos_usuario["descripcion"]) ? $datos_usuario["descripcion"] : ""; ?> " placeholder="Escribe aquí tu descripción personal"></textarea>
     <br>
 
     <input type="submit" name="enviar" value="Enviar">

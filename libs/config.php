@@ -7,6 +7,11 @@
  * 
  */
 
+const DB_HOSTNAME = "localhost";
+const DB_NOMBRE = "evaluable_7w";
+const DB_USUARIO = "root";
+const DB_CLAVE = '';
+
 /**
  * Constante que define la ruta del proyecto
  */

@@ -5,11 +5,6 @@ require($_SERVER["DOCUMENT_ROOT"] . "/app-dwes/libs/config.php");
 require($_SERVER["DOCUMENT_ROOT"] . APP_ROOT . "libs/utils.php");
 //Libreria de componentes
 require($_SERVER["DOCUMENT_ROOT"] . APP_ROOT . "libs/componentes.php");
-//Libreria de seguridad
-require($_SERVER["DOCUMENT_ROOT"] . APP_ROOT . "libs/seguridad.php");
-
-//CLASES MODELO
-require("../model/classUsuario.php");
 
 session_start();
 //Se comprueba inactividad, que sea la misma ip de inicio de sesión, y se regenera el id si han pasado 5 minutos
@@ -32,7 +27,7 @@ $errores = [];
 echo "<h1>Iniciar Sesión</h1>";
 echo "<main class='container'>";
 
-if (isset($_SESSION["nivel"]) && $_SESSION["nivel"] == 1) {
+if (isset($_SESSION["correo"])) {
     // Si ya se ha iniciado sesión, creamos enlace a la página principal
     echo "<p>Ya has iniciado sesión.</p>";
     echo pintaEnlace(APP_ROOT . "/controllers/perfil-usuario.php", "Ir al perfil de usuario");
@@ -49,26 +44,46 @@ if (isset($_SESSION["nivel"]) && $_SESSION["nivel"] == 1) {
     cTexto($pass, "pass", $errores, "pass", 30, 4);
 
     if (empty($errores)) {
+        /*
+    El código de la comprobación del usuario y la contraseña mejor en una función, hace el código más claro y fácil de modificar.
+    Ademas la función se podría reutilizar.
+    La función devolverá los datos del fichero en caso de que usuario y contraseña ssean correctos y false en caso contrario
+*/
+        $archivo = fopen($_SERVER["DOCUMENT_ROOT"] . APP_ROOT . "src" . DIRECTORY_SEPARATOR . $rutaArchivos . DIRECTORY_SEPARATOR . "datosUsuarios.txt", "r");
+        while (!feof($archivo)) {
+            $linea = str_replace("\n", "", fgets($archivo));
 
-        $usuario = new Usuario();
+            if ($linea != "") {
+                $datos = explode("|", $linea);
 
+                $correoTemp = $datos[0];
+                $passTemp = $datos[1];
 
-        if ($datos_usuario = $usuario->verificarUsuario($correo, $pass)) {
+                if ($correoTemp == $correo && $passTemp == $pass) {
 
+                    $correo = $datos[0];
+                    $pass = $datos[1];
+                    $nombre = $datos[2];
+                    $fechaNacimiento = $datos[3];
+                    $rutaFoto = $datos[4];
+                    $idioma = $datos[5];
+                    $comentario = $datos[6];
+                    fclose($archivo);
 
-            $_SESSION["id_user"] = $datos_usuario["id_user"];
-            $_SESSION["email"] = $datos_usuario["email"];
-            $_SESSION["pass"] = $datos_usuario["pass"];
-            $_SESSION["nombre"] = $datos_usuario["nombre"];
-            $_SESSION["f_nacimiento"] = $datos_usuario["f_nacimiento"];
-            $_SESSION["foto_perfil"] = $datos_usuario["foto_perfil"];
-            // $_SESSION["idioma"] = $datos_usuario["idioma"];
-            $_SESSION["descripcion"] = $datos_usuario["descripcion"];
-            $_SESSION["nivel"] = $datos_usuario["nivel"];
-            $_SESSION["momentoLogin"] = time();
-            $_SESSION["ip"] = $_SERVER['REMOTE_ADDR'];
-            header("location:./mostrar-usuarios.php");
+                    $_SESSION["correo"] = $correo;
+                    $_SESSION["pass"] = $pass;
+                    $_SESSION["nombre"] = $nombre;
+                    $_SESSION["fechaNacimiento"] = $fechaNacimiento;
+                    $_SESSION["rutaFoto"] = $rutaFoto;
+                    $_SESSION["idioma"] = $idioma;
+                    $_SESSION["comentario"] = $comentario;
+                    $_SESSION["momentoLogin"] = time();
+                    $_SESSION["ip"] = $_SERVER['REMOTE_ADDR'];
+                    header("location:./perfil-usuario.php");
+                }
+            }
         }
+        fclose($archivo);
 
         //Si no se encuentra el usuario en el archivo guardamos un log del fallo de inicio de sesión
         $horaActual = date("d-m-Y H:i:s");

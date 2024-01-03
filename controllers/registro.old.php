@@ -5,11 +5,6 @@ require($_SERVER["DOCUMENT_ROOT"] . "/app-dwes/libs/config.php");
 require($_SERVER["DOCUMENT_ROOT"] . APP_ROOT . "libs/utils.php");
 //Libreria de componentes
 require($_SERVER["DOCUMENT_ROOT"] . APP_ROOT . "libs/componentes.php");
-//Libreria de seguridad
-require($_SERVER["DOCUMENT_ROOT"] . APP_ROOT . "libs/seguridad.php");
-
-//CLASES MODELO
-require("../model/classUsuario.php");
 
 session_start();
 //Se comprueba inactividad, que sea la misma ip de inicio de sesión, y se regenera el id si han pasado 5 minutos
@@ -27,7 +22,6 @@ cabecera("Registro", $rutaEstilos, $esquemaColor);
 require($_SERVER["DOCUMENT_ROOT"] . APP_ROOT . "templates/encabezado.php");
 
 $errores = [];
-$datos_usuario = [];
 
 echo "<h1>Registro</h1>";
 echo "<main class='container'>";
@@ -35,7 +29,7 @@ echo "<main class='container'>";
 Si ya se ha iniciado lo mejor es redirigir a otra página o en este caso mostrar el mensaje en el formulario con $errores
 */
 
-if (isset($_SESSION["nivel"]) && $_SESSION["nivel"] == 1) {
+if (isset($_SESSION["correo"])) {
     // Si ya se ha iniciado sesión, creamos enlace a la página principal
     echo "<p>Ya has iniciado sesión.</p>";
     echo pintaEnlace(APP_ROOT . "controllers/perfil-usuario.php", "Ir al perfil de usuario");
@@ -44,26 +38,26 @@ if (isset($_SESSION["nivel"]) && $_SESSION["nivel"] == 1) {
     require($_SERVER["DOCUMENT_ROOT"] . APP_ROOT . "templates/form-registro.php");
 } else {
     //Sanitizamos
-    $datos_usuario["nombre"] = recoge("nombre");
-    $datos_usuario["email"] = recoge("correo");
-    $datos_usuario["pass"] = recoge("pass");
-    $datos_usuario["f_nacimiento"] = recoge("fechaNacimiento");
-    $datos_usuario["descripcion"] = recoge("descripcion");
-    // $idioma = recogeArray("idioma");
+    $nombre = recoge("nombre");
+    $correo = recoge("correo");
+    $pass = recoge("pass");
+    $fechaNacimiento = recoge("fechaNacimiento");
+    $idioma = recoge("idioma");
+    $comentario = recoge("comentario");
 
     //Validamos los campos que no son ficheros
-    cTexto($datos_usuario["nombre"], "nombre", $errores, "nombre", 40, 1);
-    cTexto($datos_usuario["email"], "correo", $errores, "correo");
-    cTexto($datos_usuario["pass"], "pass", $errores, "pass", 30, 4);
-    cFecha($datos_usuario["f_nacimiento"], "fechaNacimiento", $errores, FORMATOS_FECHA[1]);
-    cTexto($datos_usuario["descripcion"], "descripcion", $errores, "descripcion", 300, 0);
-    // cSelect($idioma, "idioma", $errores, $idiomas, 0);
+    cTexto($nombre, "nombre", $errores, "nombre", 40, 1);
+    cTexto($correo, "correo", $errores, "correo");
+    cTexto($pass, "pass", $errores, "pass", 30, 4);
+    cFecha($fechaNacimiento, "fechaNacimiento", $errores, FORMATOS_FECHA[1]);
+    cSelect($idioma, "idioma", $errores, $idiomas, 0);
+    cTexto($comentario, "comentario", $errores, "comentario", 300, 0);
 
     //Sino ha habido errores en el resto de campos comprobamos el fichero
     if (empty($errores)) {
 
         //En este caso la subida de la foto no es obligatoria
-        $datos_usuario["foto_perfil"] = cFile("foto", $errores, $extensionesValidas, ".." . DIRECTORY_SEPARATOR . "src" . DIRECTORY_SEPARATOR . $rutaImagenes . DIRECTORY_SEPARATOR . "users", $maxFichero, false);
+        $rutaFoto = cFile("foto", $errores, $extensionesValidas, ".." . DIRECTORY_SEPARATOR . "src" . DIRECTORY_SEPARATOR . $rutaImagenes . DIRECTORY_SEPARATOR . "users", $maxFichero, false);
 
         /*
         Sino ha habido error en la subida del fichero redireccionamos a perfil-usuario.php
@@ -71,27 +65,22 @@ if (isset($_SESSION["nivel"]) && $_SESSION["nivel"] == 1) {
          */
         if (empty($errores)) {
 
-            $datos_usuario["pass"] = encriptar($datos_usuario["pass"]);
+            //Escribimos datos en fichero
+            $archivo = fopen($_SERVER["DOCUMENT_ROOT"] . APP_ROOT . "src" . DIRECTORY_SEPARATOR . $rutaArchivos . DIRECTORY_SEPARATOR . "datosUsuarios.txt", "a");
+            fwrite($archivo, $correo . "|" . $pass . "|" . $nombre . "|" . $fechaNacimiento . "|" . $rutaFoto . "|" . $idioma . "|" . $comentario . "|" . PHP_EOL);
+            fclose($archivo);
 
-            $usuario = new Usuario();
-
-            $usuario->addUsuario($datos_usuario);
-
-
-            $_SESSION["id_user"] = $datos_usuario["id_user"];
-            $_SESSION["email"] = $datos_usuario["email"];
-            $_SESSION["pass"] = $datos_usuario["pass"];
-            $_SESSION["nombre"] = $datos_usuario["nombre"];
-            $_SESSION["f_nacimiento"] = $datos_usuario["f_nacimiento"];
-            $_SESSION["foto_perfil"] = $datos_usuario["foto_perfil"];
-            // $_SESSION["idioma"] = $datos_usuario["idioma"];
-            $_SESSION["descripcion"] = $datos_usuario["descripcion"];
-            $_SESSION["nivel"] = $datos_usuario["nivel"];
+            $_SESSION["correo"] = $correo;
+            $_SESSION["pass"] = $pass;
+            $_SESSION["nombre"] = $nombre;
+            $_SESSION["fechaNacimiento"] = $fechaNacimiento;
+            $_SESSION["rutaFoto"] = $rutaFoto;
+            $_SESSION["idioma"] = $idioma;
+            $_SESSION["comentario"] = $comentario;
             $_SESSION["momentoLogin"] = time();
-            $_SESSION["ip"] = $_SERVER['REMOTE_ADDR'];
 
-            //Redirigimos
-            header("location:./mostrar-usuarios.php");
+            //Redirigimos a valid.php
+            header("location:./inicio.php");
         } else {
             require($_SERVER["DOCUMENT_ROOT"] . APP_ROOT . "templates/form-registro.php");
         }

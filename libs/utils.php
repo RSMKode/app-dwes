@@ -167,7 +167,7 @@ function cTexto(string $text, string $campo, array &$errores, string $tipo, int 
             $regexp = "/^[a-zñÑ0-9-_@$espacios]{" . $min . "," . $max . "}$/u$case";
             break;
 
-        case "comentario":
+        case "descripcion":
             $regexp = "/^[a-zñÑ0-9-\.,;$espacios]{" . $min . "," . $max . "}$/u$case";
             break;
 
