@@ -8,7 +8,7 @@
         <ul>
             <?php
 
-            if (isset($_SESSION["correo"])) {
+            if (isset($_SESSION["email"])) {
                 echo "<li>";
                 echo pintaEnlace(APP_ROOT . "controllers/perfil-usuario.php", "Perfil de Usuario", false);
                 echo "</li>";

@@ -1,0 +1,2 @@
+SQLSTATE[HY000] [1045] Access denied for user ''@'localhost' (using password: NO)## Fichero: C:\xampp\htdocs\app-dwes\controllers\crearBD.php## Línea: 19##Código: 1045##Instante: 0.87058700 1704299696
+SQLSTATE[HY000] [1045] Access denied for user ''@'localhost' (using password: NO)## Fichero: C:\xampp\htdocs\app-dwes\controllers\crearBD.php## Línea: 19##Código: 1045##Instante: 0.23992100 1704299739

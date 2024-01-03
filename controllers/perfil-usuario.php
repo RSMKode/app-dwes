@@ -24,25 +24,27 @@ echo "<main class='container'>";
 /*
 Lo mismo que os he comentado en alta de registro para impedir que esto lo vea un usuario no logueado
 */
-if (isset($_SESSION["correo"])) {
+if (isset($_SESSION["nivel"]) && $_SESSION["nivel"] == 1) {
 
-    $correo = $_SESSION["correo"];
+    $email = $_SESSION["email"];
     $pass = $_SESSION["pass"];
     $nombre = $_SESSION["nombre"];
-    $fechaNacimiento = $_SESSION["fechaNacimiento"];
-    $rutaFoto = $_SESSION["rutaFoto"];
-    $idioma = $_SESSION["idioma"];
-    $comentario = $_SESSION["comentario"];
+    $f_nacimiento = $_SESSION["f_nacimiento"];
+    $foto_perfil = $_SESSION["foto_perfil"];
+    $descripcion = $_SESSION["descripcion"];
+    $nivel = $_SESSION["nivel"];
+    // $idioma = $_SESSION["idioma"];
 
     echo "<article class='usuario'>";
 
     echo "<h1>$nombre</h1>";
-    echo "<p>Correo: $correo</p>";
+    echo "<p>email: $email</p>";
     echo "<p>Contraseña: ********</p>";
-    echo "<p>Fecha de nacimiento: $fechaNacimiento</p>";
-    if ($rutaFoto != "") echo "<img src='$rutaFoto' alt='Imagen de $nombre'>";
-    if ($idioma != "") echo "<p>Idioma preferente: $idioma</p>";
-    if ($comentario != "") echo "<p>Comentario:<br>$comentario</p>";
+    echo "<p>Fecha de nacimiento: $f_nacimiento</p>";
+    if ($foto_perfil != "") echo "<img src='$foto_perfil' alt='Imagen de $nombre'>";
+    if ($descripcion != "") echo "<p>Comentario:<br>$descripcion</p>";
+    echo "<p>Nivel: $nivel</p>";
+    // if ($idioma != "") echo "<p>Idioma preferente: $idioma</p>";
 
     echo "</article>";
 

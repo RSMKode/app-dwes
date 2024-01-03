@@ -5,4 +5,6 @@ echo "<br>";
 echo APP_ROOT;
 echo "<br>";
 echo $_SERVER["HTTP_HOST"];
+echo "<br>";
+echo ([]) ? "true" : "false";
 //header("Location:/app-dwes");
