@@ -18,11 +18,6 @@ const DB_CLAVE = '';
 const APP_ROOT = "/app-dwes/";
 
 /**
- * Ruta de los estilos del proyecto
- */
-$rutaEstilos = APP_ROOT . "templates/styles.css";
-
-/**
  * Colores de tema de la página
  */
 const TEMAS = ['Oscuro', 'Claro'];
@@ -30,27 +25,27 @@ const TEMAS = ['Oscuro', 'Claro'];
 /**
  * Tiempo de inactividad del usuario en segundos
  */
-$inactivityTime = 60 * 20;
+const INACTIVITY_TIME = 60 * 20;
 
 /**
  * Donde almacenaremos las imágenes que nos suben los usuarios
  */
-$rutaImagenes = "images";
+const RUTA_IMAGENES = "images";
 
 /**
  * Ruta donde almacenaremos los archivos de texto
  */
-$rutaArchivos = "archivos";
+const RUTA_ARCHIVOS  = "archivos";
 
 /**
  * Array que guarda las extensiones válidas
  */
-$extensionesValidas = ["jpeg", "gif", "jpg", "png", "webp"];
+const EXTENSIONES_VALIDAS = ["jpeg", "gif", "jpg", "png", "webp"];
 
 /**
  * Tamaño máximo del fichero subido. En bytes
  */
-$maxFichero = 2000000;
+const MAX_FICHERO = 2000000;
 
 /**
  * Formatos de fecha válidos

@@ -15,18 +15,18 @@ class Idioma extends Modelo
 
     public function getIdiomasIds()
     {
-        $consulta = "SELECT id_idioma FROM idioma";
+        $consulta = "SELECT * FROM idioma";
         $result = $this->conexion->prepare($consulta);
 
         $result->execute();
         $resultado = $result->fetchAll(PDO::FETCH_ASSOC);
 
-        $array_ids = [];
+        $array_idiomas = [];
 
         foreach ($resultado as $elemento) {
-            array_push($array_ids, $elemento["id_idioma"]);
+            $array_idiomas[$elemento['id_idioma']] = $elemento["idioma"];
         }
-        return $array_ids;
+        return $array_idiomas;
     }
     public function getIdiomas()
     {
@@ -37,7 +37,7 @@ class Idioma extends Modelo
         $resultado = $result->fetchAll(PDO::FETCH_ASSOC);
         return $resultado;
     }
-    public function getIdioma(array $ids_idiomas)
+    public function getIdiomasAdmin(array $ids_idiomas)
     {
         $string_idiomas = implode(",", $ids_idiomas);
         $consulta = "SELECT * FROM idioma WHERE id_idioma IN (:string_idiomas)";
