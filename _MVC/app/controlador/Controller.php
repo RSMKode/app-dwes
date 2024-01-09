@@ -6,11 +6,12 @@ class Controller
     public function inicio()
     {
         $params = array(
+            'visual' => ["vista" => "inicio"],
             'mensaje' => 'Bienvenido al repositorio de alimentos',
             'fecha' => date('d-m-y')
         );
-      
-        require __DIR__.'/../../web/templates/inicio.php';
+
+        require __DIR__ . '/../../web/templates/inicio.php';
     }
 
     public function error()
@@ -34,7 +35,7 @@ class Controller
             error_log($e->getMessage() . microtime() . PHP_EOL, 3, "logError.txt");
             header('Location: index.php?ctl=error');
         }
-        $menu='menu2.php' ;
+        $menu = 'menu2.php';
         require __DIR__ . '/../../web/templates/mostrarAlimentos.php';
     }
 
@@ -124,13 +125,13 @@ class Controller
     public function ver()
     {
         try {
-            if (! isset($_GET['id'])) {
+            if (!isset($_GET['id'])) {
                 throw new Exception('Página no encontrada');
             }
             $id = recoge('id');
             $m = new Alimentos();
             $params['alimentos'] = $m->dameAlimento($id);
-            if (! $params['alimentos'])
+            if (!$params['alimentos'])
                 $params['mensaje'] = "No hay detalles que mostar";
         } catch (Exception $e) {
             error_log($e->getMessage() . microtime() . PHP_EOL, 3, "logExceptio.txt");
@@ -143,5 +144,3 @@ class Controller
         require __DIR__ . '/../../web/templates/verAlimento.php';
     }
 }
-
-?>
