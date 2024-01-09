@@ -7,13 +7,15 @@ require("../app/libs/utils.php");
 require("../app/libs/componentes.php");
 //Clase sesión
 require("../app/libs/classSesion.php");
+require("../app/libs/seguridad.php");
 require("../app/controllers/Controller.php");
 require("../app/controllers/ControllerUser.php");
 require("../app/controllers/ControllerService.php");
 //Modelos
 require("../app/model/classUsuario.php");
+require("../app/model/classIdioma.php");
 
-$sesion = new Sesion();
+const SESION = new Sesion();
 
 //Comprobamos el color de la página
 cColor();
@@ -41,7 +43,7 @@ if (isset($_GET['ctl'])) {
         header('Location:index.php?ctl=error&error=' . $_GET['ctl']);
     }
 } else {
-    $ruta = 'index';
+    $ruta = 'indice';
 }
 $controlador = $map[$ruta];
 /* 

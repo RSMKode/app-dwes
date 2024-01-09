@@ -55,7 +55,7 @@ function pie()
 function pintaCheck(array $valores, string $name)
 {
     foreach ($valores as $key => $valor) {
-        echo '<input type="checkbox" name="' . $name . '[]" value=' . $valor . '>' . $valor;
+        echo '<input type="checkbox" name="' . $name . '[]" value=' . $key . '> ' . $valor . '<br>';
     };
 };
 

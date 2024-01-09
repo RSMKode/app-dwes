@@ -159,7 +159,7 @@ function cTexto(string $text, string $campo, array &$errores, string $tipo, int 
             $regexp = "/^[a-zñÑ$espacios]{" . $min . "," . $max . "}$/u$case";
             break;
 
-        case "correo":
+        case "email":
             $regexp = "/^[a-zñÑ][a-z0-9_\.]{2,}@[a-zñÑ\.]{3,}[\.][a-zñÑ]{2,}$/ui";
             break;
 

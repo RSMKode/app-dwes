@@ -20,13 +20,12 @@ class Sesion
 
     private function iniciarSesion(): void
     {
-        session_name($this->nombre_sesion);
         session_start();
 
         if (isset($_SESSION['nivel'])) {
             if ($_SESSION['nivel'] > 0) {
-                $this->comprobarInactividad();
-                $this->comprobarIP();
+                // $this->comprobarInactividad();
+                // $this->comprobarIP();
             }
         } else {
             $_SESSION['nivel'] = 0;
@@ -42,7 +41,7 @@ class Sesion
         session_destroy();
     }
 
-    public function login(string $correo, string $pass): bool
+    public function login(string $correo, string $pass, array &$errores): bool
     {
         // Regenerar identificador de sesión
         session_regenerate_id();
@@ -62,10 +61,11 @@ class Sesion
             $_SESSION["nivel"] = $datos_usuario["nivel"];
             $_SESSION["ulitma_actividad"] = time();
             $_SESSION["ip"] = $_SERVER['REMOTE_ADDR'];
+            return true;
+        } else {
+            $errores['login'] = "Usuario o contraseña incorrectos";
+            return false;
         }
-
-
-        return true;
     }
 
     public function comprobarInactividad(): bool
