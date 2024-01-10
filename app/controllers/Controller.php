@@ -3,7 +3,7 @@
 
 class Controller
 {
-    private static $ruta_layout = __DIR__ . '/../../web/templates/layout.php';
+    protected static $ruta_layout = __DIR__ . '/../../web/templates/layout.php';
 
     public function indice()
     {

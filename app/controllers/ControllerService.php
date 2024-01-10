@@ -1,9 +1,8 @@
 
 <?php
 
-class ControllerService
+class ControllerService extends Controller
 {
-    private static $ruta_layout = __DIR__ . '/../../web/templates/layout.php';
 
     public function index()
     {

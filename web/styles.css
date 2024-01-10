@@ -178,6 +178,10 @@ img {
   color: var(--accent);
 }
 
+.exito {
+  color: green;
+}
+
 .errores {
   color: var(--accent);
   max-width: 20rem;

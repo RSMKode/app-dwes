@@ -23,12 +23,12 @@ class Usuario extends Modelo
         return $resultado;
     }
 
-    public function getUsuario($id_usuario)
+    public function getUsuario($email)
     {
-        $consulta = "SELECT * FROM usuario WHERE id_user = :id_usuario";
+        $consulta = "SELECT * FROM usuario WHERE email = :email";
         $result = $this->conexion->prepare($consulta);
 
-        $result->bindParam(':id_usuario', $id_usuario);
+        $result->bindParam(':email', $email);
 
         $result->execute();
         $resultado = $result->fetchAll(PDO::FETCH_ASSOC);
@@ -54,15 +54,38 @@ class Usuario extends Modelo
         return false;
     }
 
-    public function addUsuario($datos_usuario)
+    public function addUsuario($datos_usuario, $nivel_usuario)
     {
-        $datos_usuario["nivel"] = 1;
-        $datos_usuario["activo"] = 0;
+        try {
+            $this->conexion->beginTransaction();
 
-        $consulta = "INSERT INTO usuario (nombre, email, pass, f_nacimiento, foto_perfil, descripcion, nivel, activo) 
+            $datos_usuario["nivel"] = $nivel_usuario;
+            $datos_usuario["activo"] = 0;
+
+            $consulta = "INSERT INTO usuario (nombre, email, pass, f_nacimiento, foto_perfil, descripcion, nivel, activo) 
                         values (:nombre, :email, :pass, :f_nacimiento, :foto_perfil, :descripcion, :nivel, :activo)";
-        $result = $this->conexion->prepare($consulta);
 
-        return $result->execute($datos_usuario);
+            $result = $this->conexion->prepare($consulta);
+
+            $result->bindParam(':nombre', $datos_usuario["nombre"]);
+            $result->bindParam(':email', $datos_usuario["email"]);
+            $result->bindParam(':pass', $datos_usuario["pass"]);
+            $result->bindParam(':f_nacimiento', $datos_usuario["f_nacimiento"]);
+            $result->bindParam(':foto_perfil', $datos_usuario["foto_perfil"]);
+            $result->bindParam(':descripcion', $datos_usuario["descripcion"]);
+            $result->bindParam(':nivel', $datos_usuario["nivel"]);
+            $result->bindParam(':activo', $datos_usuario["activo"]);
+
+            $result->execute();
+
+            $id_user = $this->conexion->lastInsertId();
+            $usuario_idioma = new UsuarioIdioma();
+            $usuario_idioma->addUsuarioIdiomas($id_user, $datos_usuario["idiomas"]);
+
+            return $this->conexion->commit();
+        } catch (PDOException $e) {
+            $this->conexion->rollBack();
+            return false;
+        }
     }
 }

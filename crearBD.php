@@ -10,19 +10,19 @@
 */
 
 //En config.php tenemos los valores de conexión a la BD
-include('../libs/config.php');
+require('app/libs/config.php');
 try {
     /*
     Conectamos
     No le pasamos nombre de BD porque vamos a crearla
     */
-    $pdo = new PDO('mysql:host=' . $db_hostname, $db_usuario, $db_clave);
+    $pdo = new PDO('mysql:host=' . DB_HOSTNAME, DB_USUARIO, DB_CLAVE);
     //UTF8  
     $pdo->exec("set names utf8");
     // Accionamos el uso de excepciones
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     //Leemos el fichero que contiene el sql
-    $sqlBD = file_get_contents("evaluable.sql");
+    $sqlBD = file_get_contents("evaluable_7w.sql");
     //Ejecutamos la consulta
     $pdo->exec($sqlBD);
     echo ("La BD ha sido creada");

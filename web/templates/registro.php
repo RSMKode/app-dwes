@@ -1,6 +1,13 @@
 <main class="container">
     <?php
+    if (isset($params['mensaje'])) {
+    ?>
+        <p class="exito"><?= $params['mensaje'] ?></p>
+    <?php
+    }
+
     if (count($errores) != 0) {
+
         echo "<ul class='errores'>";
         echo "Hay errores en el formulario:<br>";
         foreach ($errores as $error) {
@@ -41,9 +48,7 @@
         Idioma preferente
         <br>
         <?php
-        $idioma = new Idioma();
-        $ids_idiomas = $idioma->getIdiomasIds();
-        pintaCheck($ids_idiomas, "idioma")
+        pintaCheck($ids_idiomas, "idiomas")
         ?>
         Descripción
         <br>
@@ -53,6 +58,6 @@
         <input type="submit" name="enviar" value="Enviar">
         <input type="reset" name="borrar" value="Borrar">
     </form>
-    <a class="accent" href="../controllers/inicio.php">Si ya estás registrado, pulsa aqúi</a>
+    <a class="accent" href="index.php?ctl=inicio_sesion">Si ya estás registrado, pulsa aqúi</a>
 
 </main>

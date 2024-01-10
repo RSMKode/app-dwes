@@ -17,6 +17,9 @@ const DB_CLAVE = '';
  */
 const APP_ROOT = "/app-dwes/";
 
+//NO USAR
+const RUTA_BASE = __DIR__ . "../../";
+
 /**
  * Colores de tema de la página
  */
