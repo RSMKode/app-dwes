@@ -16,7 +16,7 @@ require("../app/model/classUsuario.php");
 require("../app/model/classIdioma.php");
 require("../app/model/classUsuarioIdioma.php");
 
-const SESION = new Sesion();
+ $SESION = new Sesion();
 
 //Comprobamos el color de la página
 cColor();

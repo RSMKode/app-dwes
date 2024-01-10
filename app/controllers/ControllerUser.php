@@ -24,7 +24,7 @@ class ControllerUser extends Controller
                 if (empty($errores)) {
                     $sesion = new Sesion();
 
-                    if (SESION->login($email, $pass, $errores)) {
+                    if ($sesion->login($email, $pass, $errores)) {
                         header('Location: index.php?ctl=perfil_usuario');
                     };
                 }
@@ -47,7 +47,9 @@ class ControllerUser extends Controller
 
     public function cerrar_sesion()
     {
-        SESION->cerrarSesion();
+        $sesion = new Sesion();
+
+        $sesion->cerrarSesion();
         header('Location: index.php');
     }
 
