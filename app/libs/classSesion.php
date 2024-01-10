@@ -82,6 +82,12 @@ class Sesion
         return true;
     }
 
+    public function comprobarNivel1() {
+        if($_SESSION['nivel'] != 1) {
+            header('Location: index.php');
+        }
+    }
+
     public function comprobarIP(): void
     {
         if ($_SESSION['user_ip'] !== $_SERVER['REMOTE_ADDR']) {

@@ -22,9 +22,9 @@ class ControllerUser extends Controller
                 cTexto($pass, "pass", $errores, "pass", 30, 4);
 
                 if (empty($errores)) {
-                    $sesion = new Sesion();
 
-                    if ($sesion->login($email, $pass, $errores)) {
+
+                    if (self::login($email, $pass, $errores)) {
                         header('Location: index.php?ctl=perfil_usuario');
                     };
                 }
@@ -47,14 +47,15 @@ class ControllerUser extends Controller
 
     public function cerrar_sesion()
     {
-        $sesion = new Sesion();
+        
 
-        $sesion->cerrarSesion();
+        self::cerrarSesion();
         header('Location: index.php');
     }
 
     public function perfil_usuario()
     {
+        self::comprobarNivel1();
         $params = [
             'titulo' => 'Perfil de Usuario',
             'vista' => 'perfil_usuario',

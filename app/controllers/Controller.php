@@ -1,7 +1,8 @@
 
 <?php
 
-class Controller
+
+class Controller extends Sesion
 {
     protected static $ruta_layout = __DIR__ . '/../../web/templates/layout.php';
 
