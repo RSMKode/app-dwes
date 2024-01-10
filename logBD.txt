@@ -1,0 +1,3 @@
+SQLSTATE[HY000] [1045] Access denied for user ''@'localhost' (using password: NO)## Fichero: C:\xampp\htdocs\app-dwes\crearBD.php## Línea: 19##Código: 1045##Instante: 0.65561400 1704893293
+SQLSTATE[3D000]: Invalid catalog name: 1046 No database selected## Fichero: C:\xampp\htdocs\app-dwes\crearBD.php## Línea: 27##Código: 3D000##Instante: 0.69251200 1704893330
+SQLSTATE[3D000]: Invalid catalog name: 1046 No database selected## Fichero: C:\xampp\htdocs\app-dwes\crearBD.php## Línea: 27##Código: 3D000##Instante: 0.71975200 1704893334

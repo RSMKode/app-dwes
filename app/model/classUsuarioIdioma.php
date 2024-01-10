@@ -1,7 +1,7 @@
 <?php
 require_once('classModelo.php');
 
-class Usuario_Idioma extends Modelo
+class UsuarioIdioma extends Modelo
 {
     /**
      * En esta clase crearemos las consultas relacionadas con la tabla usuarios
@@ -13,7 +13,7 @@ class Usuario_Idioma extends Modelo
         $this->conexion = parent::GetInstance();
     }
 
-    public function getIdiomaUsuario($id_usuario)
+    public function getUsuarioIdioma($id_usuario)
     {
         $consulta = "SELECT * FROM user-idioma WHERE id_user = :id_usuario";
         $result = $this->conexion->prepare($consulta);
@@ -26,17 +26,22 @@ class Usuario_Idioma extends Modelo
     }
 
 
-    public function addIdiomaUsuario($id_usuario, $id_idioma)
+    public function addUsuarioIdiomas($id_usuario, $ids_idiomas)
     {
-
-        $consulta = "INSERT INTO user_idioma (id_user, id_idioma) 
+        try {
+            foreach ($ids_idiomas as $id_idioma) {
+                $consulta = "INSERT INTO user_idioma (id_user, id_idioma) 
                         values (:id_usuario, :id_idioma)";
-        $result = $this->conexion->prepare($consulta);
+                $result = $this->conexion->prepare($consulta);
 
-        $result->bindParam(':id_usuario', $id_usuario);
-        $result->bindParam(':id_idioma', $id_idioma);
+                $result->bindParam(':id_usuario', $id_usuario);
+                $result->bindParam(':id_idioma', $id_idioma);
 
-
-        return $result->execute();
+                $result->execute();
+            }
+            return true;
+        } catch (Exception $e) {
+            return false;
+        }
     }
 }

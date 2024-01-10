@@ -14,6 +14,7 @@ require("../app/controllers/ControllerService.php");
 //Modelos
 require("../app/model/classUsuario.php");
 require("../app/model/classIdioma.php");
+require("../app/model/classUsuarioIdioma.php");
 
 const SESION = new Sesion();
 
@@ -28,8 +29,10 @@ $map = [
     */
     'indice' => ['controller' => 'Controller', 'action' => 'indice'],
     'error' => ['controller' => 'Controller', 'action' => 'error'],
-    'inicio_sesion' => ['controller' => 'ControllerUser', 'action' => 'inicio_sesion'],
     'registro' => ['controller' => 'ControllerUser', 'action' => 'registro'],
+    'inicio_sesion' => ['controller' => 'ControllerUser', 'action' => 'inicio_sesion'],
+    'cerrar_sesion' => ['controller' => 'ControllerUser', 'action' => 'cerrar_sesion'],
+    'perfil_usuario' => ['controller' => 'ControllerUser', 'action' => 'perfil_usuario'],
     'lista-usuarios' => ['controller' => 'ControllerUser', 'action' => 'lista-usuarios'],
     'ver' => ['controller' => 'Controller', 'action' => 'ver'],
 ];

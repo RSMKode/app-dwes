@@ -1,9 +1,8 @@
 
 <?php
 
-class ControllerUser
+class ControllerUser extends Controller
 {
-    private static $ruta_layout = __DIR__ . '/../../web/templates/layout.php';
 
     public function inicio_sesion()
     {
@@ -39,15 +38,37 @@ class ControllerUser
             }
 
             $params = [
-                'titulo' => "Iniciar sesión",
+                'titulo' => 'Iniciar sesión',
                 'vista' => 'inicio_sesion',
             ];
             require self::$ruta_layout;
         }
     }
 
+    public function cerrar_sesion()
+    {
+        SESION->cerrarSesion();
+        header('Location: index.php');
+    }
+
+    public function perfil_usuario()
+    {
+        $params = [
+            'titulo' => 'Perfil de Usuario',
+            'vista' => 'perfil_usuario',
+        ];
+        require self::$ruta_layout;
+    }
+
     public function registro()
     {
+        $params = [
+            'titulo' => 'Registro',
+            'vista' => 'registro',
+        ];
+
+        $idioma = new Idioma();
+        $ids_idiomas = $idioma->getIdiomasIds();
 
         $errores = [];
 
@@ -62,7 +83,7 @@ class ControllerUser
                 $datos_usuario["pass"] = recoge("pass");
                 $datos_usuario["f_nacimiento"] = recoge("fechaNacimiento");
                 $datos_usuario["descripcion"] = recoge("descripcion");
-                // $idioma = recogeArray("idioma");
+                $datos_usuario["idiomas"]  = recogeArray("idiomas");
 
                 //Validamos los campos que no son ficheros
                 cTexto($datos_usuario["nombre"], "nombre", $errores, "nombre", 40, 1);
@@ -70,30 +91,39 @@ class ControllerUser
                 cTexto($datos_usuario["pass"], "pass", $errores, "pass", 30, 4);
                 cFecha($datos_usuario["f_nacimiento"], "fechaNacimiento", $errores, FORMATOS_FECHA[1]);
                 cTexto($datos_usuario["descripcion"], "descripcion", $errores, "descripcion", 300, 0);
-                // cSelect($idioma, "idioma", $errores, $idiomas, 0);
+
+                //El array keys sirve para pasarle un array con las claves (ids) del array de idiomas
+                cCheck($datos_usuario["idiomas"], "idiomas", $errores, array_keys($ids_idiomas), false);
 
                 //Sino ha habido errores en el resto de campos comprobamos el fichero
                 if (empty($errores)) {
 
+                    $ruta_fichero = "src" . DIRECTORY_SEPARATOR . RUTA_IMAGENES . DIRECTORY_SEPARATOR . "users";
                     //En este caso la subida de la foto no es obligatoria
-                    $datos_usuario["foto_perfil"] = cFile("foto", $errores, EXTENSIONES_VALIDAS, __DIR__ . ".." . DIRECTORY_SEPARATOR . "web" . DIRECTORY_SEPARATOR . "src" . DIRECTORY_SEPARATOR . RUTA_IMAGENES . DIRECTORY_SEPARATOR . "users", MAX_FICHERO, false);
+                    $datos_usuario["foto_perfil"] = cFile(
+                        "foto",
+                        $errores,
+                        EXTENSIONES_VALIDAS,
+                        $ruta_fichero,
+                        MAX_FICHERO,
+                        false
+                    );
 
                     /*
                     Sino ha habido error en la subida del fichero
-                     */
+                    */
                     if (empty($errores)) {
+                        echo ($datos_usuario["foto_perfil"]);
                         $datos_usuario["pass"] = encriptar($datos_usuario["pass"]);
 
                         $usuario = new Usuario();
-                        if ($usuario->addUsuario($datos_usuario))
-                            header('Location: index.php?ctl=inicio_sesion');
+                        if ($usuario->addUsuario($datos_usuario, 1)) {
+                            unset($datos_usuario);
+                            $params['mensaje'] = "Usuario registrado correctamente";
+                        }
                     }
                 }
             }
-            $params = [
-                'titulo' => "Registro",
-                'vista' => 'registro',
-            ];
             require self::$ruta_layout;
         }
     }
