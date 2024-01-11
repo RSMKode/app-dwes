@@ -4,6 +4,7 @@ class Sesion
 {
     protected $nombre_sesion = 'PHPSESSID';
     protected $tiempo_inactividad = 3600; // 1 hora
+    protected static $instancia;
 
     public function __construct(int|bool $tiempo_inactividad = false, string|bool $nombre_sesion = false)
     {
@@ -17,6 +18,18 @@ class Sesion
 
         $this->iniciarSesion();
     }
+
+    public static function getInstance(): Sesion
+    {
+        // Si la instancia no existe, la creamos
+        if (!self::$instancia) {
+            self::$instancia = new Sesion();
+        }
+
+        // Devolvemos la instancia
+        return self::$instancia;
+    }
+
 
     private function iniciarSesion(): void
     {
