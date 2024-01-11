@@ -23,6 +23,20 @@
   padding: 0;
 }
 
+body::after {
+  /*Pillaos el Monster Hunter primer aviso*/
+  content: "adsfasdfsdf";
+  position: absolute;
+  opacity: 0.1;
+  width: 100%;
+  height: 100%;
+  object-fit: none;
+  background-repeat: no-repeat;
+  background-image: url("../web/src/images/services/MHW.jpg");
+  background-size: cover;
+  z-index: -1;
+}
+
 body {
   position: relative;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
