@@ -27,14 +27,14 @@ $map = [
     Puede quedar de la siguiente manera
     'inicio' => array('controller' =>'Controller', 'action' =>'inicio', 'nivel_usuario'=>0)
     */
-    'indice' => ['controller' => 'Controller', 'action' => 'indice'],
-    'error' => ['controller' => 'Controller', 'action' => 'error'],
-    'registro' => ['controller' => 'ControllerUser', 'action' => 'registro'],
-    'inicio_sesion' => ['controller' => 'ControllerUser', 'action' => 'inicio_sesion'],
-    'cerrar_sesion' => ['controller' => 'ControllerUser', 'action' => 'cerrar_sesion'],
-    'perfil_usuario' => ['controller' => 'ControllerUser', 'action' => 'perfil_usuario'],
-    'lista-usuarios' => ['controller' => 'ControllerUser', 'action' => 'lista-usuarios'],
-    'ver' => ['controller' => 'Controller', 'action' => 'ver'],
+    'indice' => ['controller' => 'Controller', 'action' => 'indice', 'nivel_usuario' => 0],
+    'error' => ['controller' => 'Controller', 'action' => 'error', 'nivel_usuario' => 0],
+    'registro' => ['controller' => 'ControllerUser', 'action' => 'registro', 'nivel_usuario' => 0],
+    'inicio_sesion' => ['controller' => 'ControllerUser', 'action' => 'inicio_sesion', 'nivel_usuario' => 0],
+    'cerrar_sesion' => ['controller' => 'ControllerUser', 'action' => 'cerrar_sesion', 'nivel_usuario' => 0],
+    'perfil_usuario' => ['controller' => 'ControllerUser', 'action' => 'perfil_usuario', 'nivel_usuario' => 1],
+    'perfil_editar' => ['controller' => 'ControllerUser', 'action' => 'perfil_editar', 'nivel_usuario' => 1],
+    'lista-usuarios' => ['controller' => 'ControllerUser', 'action' => 'lista-usuarios', 'nivel_usuario' => 2],
 ];
 // Parseo de la ruta
 if (isset($_GET['ctl'])) {
@@ -56,10 +56,14 @@ En caso de estar utilizando sesiones y permisos en las diferentes acciones compr
 */
 
 if (method_exists($controlador['controller'], $controlador['action'])) {
-    call_user_func([
-        new $controlador['controller'],
-        $controlador['action']
-    ]);
+    if ($controlador['nivel_usuario'] <= $_SESSION['nivel']) {
+        call_user_func([
+            new $controlador['controller'],
+            $controlador['action']
+        ]);
+    } else {
+        header('Location:index.php');
+    }
 } else {
     header('Status: 404 Not Found');
     echo '<html><body><h1>Error 404: El controlador <i>' .
@@ -68,28 +72,3 @@ if (method_exists($controlador['controller'], $controlador['action'])) {
         $controlador['action'] .
         '</i> no existe</h1></body></html>';
 }
-
-?>
-<!-- <h1>App DWES</h1>
-<main class="container">
-    <ul class="nav">
-        <li>
-            <a href="controllers/registro.php">Registrarse</a>
-        </li>
-        <li>
-            <a href="controllers/inicio.php">Iniciar sesión</a>
-        </li>
-        <br>
-        <li>
-            <a href="controllers/mostrar-usuarios.php">Mostrar usuarios</a>
-        </li>
-        <br>
-        <li>
-            <a href="controllers/servicios-lista.php">Mostrar servicios</a>
-        </li>
-        <li>
-            <a href="controllers/servicios-alta.php">Dar de alta un servicio</a>
-        </li>
-        <br>
-    </ul>
-</main> -->

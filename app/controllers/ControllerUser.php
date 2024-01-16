@@ -118,14 +118,81 @@ class ControllerUser extends Controller
                         $datos_usuario["pass"] = encriptar($datos_usuario["pass"]);
 
                         $usuario = new Usuario();
-                        if ($usuario->addUsuario($datos_usuario, 1)) {
-                            unset($datos_usuario);
-                            $params['mensaje'] = "Usuario registrado correctamente";
+                        if ($usuario->getUsuario($datos_usuario["email"])) {
+                            $errores["email"] = "El email ya está registrado";
+                        } else {
+                            if ($usuario->addUsuario($datos_usuario, 1)) {
+                                unset($datos_usuario);
+                                $params['mensaje'] = "Usuario registrado correctamente";
+                            }
                         }
                     }
                 }
             }
             require self::$ruta_layout;
         }
+    }
+
+    public function perfil_editar()
+    {
+        $params = [
+            'titulo' => 'Editar Perfil',
+            'vista' => 'perfil_editar',
+        ];
+
+        $idioma = new Idioma();
+        $ids_idiomas = $idioma->getIdiomasIds();
+
+        $errores = [];
+
+        if (isset($_REQUEST['enviar'])) {
+
+            //Sanitizamos
+            $datos_usuario["nombre"] = recoge("nombre");
+            $datos_usuario["pass"] = recoge("pass");
+            $datos_usuario["f_nacimiento"] = recoge("fechaNacimiento");
+            $datos_usuario["descripcion"] = recoge("descripcion");
+            $datos_usuario["idiomas"]  = recogeArray("idiomas");
+
+            //Validamos los campos que no son ficheros
+            cTexto($datos_usuario["nombre"], "nombre", $errores, "nombre", 40, 1);
+            cTexto($datos_usuario["pass"], "pass", $errores, "pass", 30, 4);
+            cFecha($datos_usuario["f_nacimiento"], "fechaNacimiento", $errores, FORMATOS_FECHA[1]);
+            cTexto($datos_usuario["descripcion"], "descripcion", $errores, "descripcion", 300, 0);
+
+            //El array keys sirve para pasarle un array con las claves (ids) del array de idiomas
+            cCheck($datos_usuario["idiomas"], "idiomas", $errores, array_keys($ids_idiomas), false);
+
+            //Sino ha habido errores en el resto de campos comprobamos el fichero
+            if (empty($errores)) {
+
+                $ruta_fichero = "src" . DIRECTORY_SEPARATOR . RUTA_IMAGENES . DIRECTORY_SEPARATOR . "users";
+                //En este caso la subida de la foto no es obligatoria
+                $datos_usuario["foto_perfil"] = cFile(
+                    "foto",
+                    $errores,
+                    EXTENSIONES_VALIDAS,
+                    $ruta_fichero,
+                    MAX_FICHERO,
+                    false
+                );
+
+                /*
+                    Sino ha habido error en la subida del fichero
+                    */
+                if (empty($errores)) {
+                    $datos_usuario["pass"] = encriptar($datos_usuario["pass"]);
+
+                    $usuario = new Usuario();
+
+                    if ($usuario->updateUsuario($datos_usuario, 1)) {
+                        
+                        $params['mensaje'] = "Usuario modificado correctamente";
+                        unset($datos_usuario);
+                    }
+                }
+            }
+        }
+        require self::$ruta_layout;
     }
 }
