@@ -13,7 +13,7 @@ class UsuarioIdioma extends Modelo
         $this->conexion = parent::GetInstance();
     }
 
-    public function getUsuarioIdioma($id_usuario)
+    public function getUsuarioIdiomas($id_usuario)
     {
         $consulta = "SELECT * FROM user-idioma WHERE id_user = :id_usuario";
         $result = $this->conexion->prepare($consulta);
@@ -22,9 +22,8 @@ class UsuarioIdioma extends Modelo
 
         $result->execute();
         $resultado = $result->fetchAll(PDO::FETCH_ASSOC);
-        return $resultado[0];
+        return $resultado;
     }
-
 
     public function addUsuarioIdiomas($id_usuario, $ids_idiomas)
     {
@@ -39,6 +38,22 @@ class UsuarioIdioma extends Modelo
 
                 $result->execute();
             }
+            return true;
+        } catch (Exception $e) {
+            return false;
+        }
+    }
+    public function deleteUsuarioIdiomas($id_usuario)
+    {
+        try {
+
+            $consulta = "DELETE FROM user_idioma WHERE id_user = :id_usuario";
+            $result = $this->conexion->prepare($consulta);
+
+            $result->bindParam(':id_usuario', $id_usuario);
+
+            $result->execute();
+
             return true;
         } catch (Exception $e) {
             return false;

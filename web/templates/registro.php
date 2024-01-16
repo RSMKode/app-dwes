@@ -32,7 +32,7 @@
 
         Contraseña<sup>*</sup>
         <br>
-        <input type="password" name="pass" value="<?= isset($datos_usuario["pass"]) ? $datos_usuario["pass"] : ""; ?>" placeholder="**********">
+        <input type="password" name="pass" placeholder="**********">
         <br>
 
         Fecha de nacimiento<sup>*</sup>

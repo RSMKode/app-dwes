@@ -55,7 +55,7 @@ function pie()
 function pintaCheck(array $valores, string $name)
 {
     foreach ($valores as $key => $valor) {
-        echo '<input type="checkbox" name="' . $name . '[]" value=' . $key . '> ' . $valor . '<br>';
+        echo '<input type="checkbox" name="' . $name . '[]" id="' . $key . '" value=' . $key . '><label for="' . $key . '">' . $valor . '</label>';
     };
 };
 
@@ -70,7 +70,7 @@ function pintaCheck(array $valores, string $name)
 function pintaRadio(array $valores, string $name)
 {
     foreach ($valores as $key => $valor) {
-        echo '<input type="radio" name="' . $name . '" value="' . $valor . '">' . $valor . '<br>';
+        echo '<input type="radio" id="' . $name . '" name="' . $name . '" value="' . $valor . '"><label for="' . $name . '">' . $valor . '</label>';
     };
 };
 
@@ -84,11 +84,11 @@ function pintaRadio(array $valores, string $name)
  */
 function pintaSelect(array $valores, string $name, bool $esAsociativo = false)
 {
-    echo "<select name='$name'>";
+    echo "<select id='$name' name='$name'>";
 
     foreach ($valores as $key => $valor) {
         if (!$esAsociativo) $key = $valor;
-        echo '<option value="' . $key . '">' . $valor . '<br>';
+        echo '<option value="' . $key . '">' . $valor;
     };
     echo "</select>";
 };

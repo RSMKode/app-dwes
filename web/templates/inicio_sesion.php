@@ -21,7 +21,7 @@
 
         Contraseña
         <br>
-        <input type="password" name="pass" value="<?= isset($pass) ? $pass : ""; ?>" placeholder="********">
+        <input type="password" name="pass" placeholder="********">
         <br>
 
         <input type="submit" name="enviar" value="Enviar">
