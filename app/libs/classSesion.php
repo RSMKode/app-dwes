@@ -69,7 +69,7 @@ class Sesion
             $_SESSION["nombre"] = $datos_usuario["nombre"];
             $_SESSION["f_nacimiento"] = $datos_usuario["f_nacimiento"];
             $_SESSION["foto_perfil"] = $datos_usuario["foto_perfil"];
-            // $_SESSION["idioma"] = $datos_usuario["idioma"];
+            $_SESSION["idiomas"] = $datos_usuario["idiomas"];
             $_SESSION["descripcion"] = $datos_usuario["descripcion"];
             $_SESSION["nivel"] = $datos_usuario["nivel"];
             $_SESSION["ulitma_actividad"] = time();

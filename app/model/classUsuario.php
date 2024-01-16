@@ -87,7 +87,6 @@ class Usuario extends Modelo
             $this->conexion->beginTransaction();
 
             $datos_usuario["nivel"] = $nivel_usuario;
-            $datos_usuario["activo"] = 0;
 
             $consulta = "UPDATE usuario SET nombre = :nombre, pass = :pass, f_nacimiento = :f_nacimiento, foto_perfil = :foto_perfil, descripcion = :descripcion, nivel = :nivel, activo = :activo WHERE email = :email";
 
@@ -104,9 +103,9 @@ class Usuario extends Modelo
 
             $result->execute();
 
-            $id_user = $this->conexion->lastInsertId();
             $usuario_idioma = new UsuarioIdioma();
-            $usuario_idioma->addUsuarioIdiomas($id_user, $datos_usuario["idiomas"]);
+            $usuario_idioma->deleteUsuarioIdiomas($datos_usuario["id_user"]);
+            $usuario_idioma->addUsuarioIdiomas($datos_usuario["id_user"], $datos_usuario["idiomas"]);
 
             return $this->conexion->commit();
         } catch (PDOException $e) {

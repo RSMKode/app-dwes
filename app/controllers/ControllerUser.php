@@ -182,13 +182,30 @@ class ControllerUser extends Controller
                     */
                 if (empty($errores)) {
                     $datos_usuario["pass"] = encriptar($datos_usuario["pass"]);
+                    $datos_usuario["id_user"] = $_SESSION['id_user'];
+                    $datos_usuario["email"] = $_SESSION['email'];
 
                     $usuario = new Usuario();
+                    $sesion = Sesion::getInstance();
 
-                    if ($usuario->updateUsuario($datos_usuario, 1)) {
-                        
-                        $params['mensaje'] = "Usuario modificado correctamente";
-                        unset($datos_usuario);
+                    $nivel = 1;
+                    if ($usuario->updateUsuario($datos_usuario, $nivel)) {
+
+                        $mensaje = "Usuario modificado correctamente";
+
+                        $_SESSION["id_user"] = $datos_usuario["id_user"];
+                        $_SESSION["email"] = $datos_usuario["email"];
+                        $_SESSION["pass"] = $datos_usuario["pass"];
+                        $_SESSION["nombre"] = $datos_usuario["nombre"];
+                        $_SESSION["f_nacimiento"] = $datos_usuario["f_nacimiento"];
+                        $_SESSION["foto_perfil"] = $datos_usuario["foto_perfil"];
+                        $_SESSION["idiomas"] = $datos_usuario["idiomas"];
+                        $_SESSION["descripcion"] = $datos_usuario["descripcion"];
+                        $_SESSION["nivel"] = $nivel;
+                        $_SESSION["ulitma_actividad"] = time();
+                        $_SESSION["ip"] = $_SERVER['REMOTE_ADDR'];
+
+                        header("Location:index.php?ctl=perfil_usuario&mensaje=$mensaje");
                     }
                 }
             }
