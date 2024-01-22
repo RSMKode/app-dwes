@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 10-01-2024 a las 14:26:49
+-- Tiempo de generación: 22-01-2024 a las 21:16:04
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -32,6 +32,14 @@ CREATE TABLE `disponibilidad` (
   `disponibilidad` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
+--
+-- Volcado de datos para la tabla `disponibilidad`
+--
+
+INSERT INTO `disponibilidad` (`id_disponibilidad`, `disponibilidad`) VALUES
+(1, 'Mañanas'),
+(2, 'Tardes');
+
 -- --------------------------------------------------------
 
 --
@@ -42,6 +50,15 @@ CREATE TABLE `disp_servicio` (
   `id_servicio` int(11) NOT NULL,
   `id_disponibilidad` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Volcado de datos para la tabla `disp_servicio`
+--
+
+INSERT INTO `disp_servicio` (`id_servicio`, `id_disponibilidad`) VALUES
+(3, 1),
+(7, 1),
+(7, 2);
 
 -- --------------------------------------------------------
 
@@ -65,11 +82,11 @@ INSERT INTO `idioma` (`id_idioma`, `idioma`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `servicios`
+-- Estructura de tabla para la tabla `servicio`
 --
 
-CREATE TABLE `servicios` (
-  `id_servicios` int(11) NOT NULL,
+CREATE TABLE `servicio` (
+  `id_servicio` int(11) NOT NULL,
   `titulo` varchar(100) NOT NULL,
   `id_user` int(11) NOT NULL,
   `descripcion` varchar(200) NOT NULL,
@@ -77,6 +94,15 @@ CREATE TABLE `servicios` (
   `tipo` tinyint(1) NOT NULL,
   `foto_servicio` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Volcado de datos para la tabla `servicio`
+--
+
+INSERT INTO `servicio` (`id_servicio`, `titulo`, `id_user`, `descripcion`, `precio`, `tipo`, `foto_servicio`) VALUES
+(3, 'PianitosSchool', 26, 'de samfrost y rsmkode', 100000, 2, ''),
+(6, 'asdas', 26, '', 12, 1, ''),
+(7, 'asdasdsadsdads', 26, 'asdsadsa', 1111111, 3, '');
 
 -- --------------------------------------------------------
 
@@ -106,9 +132,9 @@ CREATE TABLE `user_idioma` (
 --
 
 INSERT INTO `user_idioma` (`id_user`, `id_idioma`) VALUES
-(26, 1),
 (26, 2),
-(27, 2);
+(27, 2),
+(28, 1);
 
 -- --------------------------------------------------------
 
@@ -133,8 +159,10 @@ CREATE TABLE `usuario` (
 --
 
 INSERT INTO `usuario` (`id_user`, `nombre`, `email`, `pass`, `f_nacimiento`, `foto_perfil`, `descripcion`, `nivel`, `activo`) VALUES
-(26, 'Miau', 'miau@gmail.com', '$2y$10$g/Z/EaIILGBwGLs33Xf6pevkr1od/0egOXz2rsozfUxzvmnNjYPla', '1999-01-10', 'src\\images\\users\\caballos.jpg', 'miau', 1, 0),
-(27, 'guau', 'guau@gmail.com', '$2y$10$DCyYsXlUHF/9fBf2OHAd.upvPsB/nzujGb5wcKVoOVOwFKUJXxdGa', '1999-01-10', 'src\\images\\users\\1704893053caballos.jpg', 'guau', 1, 0);
+(26, 'Miau', 'miau@gmail.com', '$2y$10$6PYCbeJcJB3hhLffTa14quBTKMZRaSUx0ViG7A2XHUvoL2K1xR3By', '1999-10-10', '', 'miasudsad', 1, 0),
+(27, 'guau', 'guau@gmail.com', '$2y$10$DCyYsXlUHF/9fBf2OHAd.upvPsB/nzujGb5wcKVoOVOwFKUJXxdGa', '1999-01-10', 'src\\images\\users\\1704893053caballos.jpg', 'guau', 1, 0),
+(28, 'Lidia', 'lidia@gmail.com', '$2y$10$S3pjGYtblUVwUSfgAn1a5.T6Mb9odwSWvUN6AQk8rFzscBnjmm4oC', '2000-06-06', 'src\\images\\users\\Thor.jpg', 'Hola soy Lidia', 1, 0),
+(29, 'nyan', 'nyan@gmail.com', '$2y$10$WvnE3xYC8I60RPVT90vB8OKRSIwvc08aSePpezvTXmqf/6CegbVj2', '1999-01-16', '', 'nyan', 1, 0);
 
 --
 -- Índices para tablas volcadas
@@ -160,10 +188,10 @@ ALTER TABLE `idioma`
   ADD UNIQUE KEY `id_idioma` (`id_idioma`);
 
 --
--- Indices de la tabla `servicios`
+-- Indices de la tabla `servicio`
 --
-ALTER TABLE `servicios`
-  ADD PRIMARY KEY (`id_servicios`);
+ALTER TABLE `servicio`
+  ADD PRIMARY KEY (`id_servicio`);
 
 --
 -- Indices de la tabla `tokens`
@@ -194,7 +222,7 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de la tabla `disponibilidad`
 --
 ALTER TABLE `disponibilidad`
-  MODIFY `id_disponibilidad` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_disponibilidad` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `idioma`
@@ -203,16 +231,16 @@ ALTER TABLE `idioma`
   MODIFY `id_idioma` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT de la tabla `servicios`
+-- AUTO_INCREMENT de la tabla `servicio`
 --
-ALTER TABLE `servicios`
-  MODIFY `id_servicios` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `servicio`
+  MODIFY `id_servicio` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- Restricciones para tablas volcadas
@@ -223,7 +251,7 @@ ALTER TABLE `usuario`
 --
 ALTER TABLE `disp_servicio`
   ADD CONSTRAINT `fk_iddisponibilidad` FOREIGN KEY (`id_disponibilidad`) REFERENCES `disponibilidad` (`id_disponibilidad`),
-  ADD CONSTRAINT `fk_idservicio` FOREIGN KEY (`id_servicio`) REFERENCES `servicios` (`id_servicios`);
+  ADD CONSTRAINT `fk_idservicio` FOREIGN KEY (`id_servicio`) REFERENCES `servicio` (`id_servicio`) ON DELETE CASCADE;
 
 --
 -- Filtros para la tabla `tokens`
