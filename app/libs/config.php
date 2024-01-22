@@ -68,7 +68,7 @@ $idiomas = ["Indiferente", "Castellano", "Ingles", "Valenciano",];
 /**
  * Categorias disponibles en los servicios
  */
-$categorias = ["Categoria 1", "Categoria 2", "Categoria 3"];
+const TIPOS_IDS = [1 => "Categoria 1", 2 => "Categoria 2", 3 => "Categoria 3"];
 
 /**
  * Disponibilidades horarias para los servicios

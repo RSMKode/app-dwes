@@ -20,6 +20,12 @@
                     break;
                 case 1:
                     echo "<li>";
+                    echo pintaEnlace("index.php?ctl=servicios_usuario", "Mis servicios");
+                    echo "</li>";
+                    echo "<li>";
+                    echo pintaEnlace("index.php?ctl=servicios_alta", "Crear servicio");
+                    echo "</li>";
+                    echo "<li>";
                     echo pintaEnlace("index.php?ctl=perfil_usuario", "Perfil de Usuario");
                     echo "</li>";
                     echo "<li>";

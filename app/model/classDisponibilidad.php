@@ -1,7 +1,7 @@
 <?php
 require_once('classModelo.php');
 
-class Idioma extends Modelo
+class Disponibilidad extends Modelo
 {
     /**
      * En esta clase crearemos las consultas relacionadas con la tabla usuarios
@@ -13,44 +13,44 @@ class Idioma extends Modelo
         $this->conexion = parent::GetInstance();
     }
 
-    public function getIdiomasIds()
+    public function getDisponibilidadesIds()
     {
-        $consulta = "SELECT * FROM idioma";
+        $consulta = "SELECT * FROM disponibilidad";
         $result = $this->conexion->prepare($consulta);
 
         $result->execute();
         $resultado = $result->fetchAll(PDO::FETCH_ASSOC);
 
-        $array_idiomas = [];
+        $array_disponibilidades = [];
 
         foreach ($resultado as $elemento) {
-            $array_idiomas[$elemento['id_idioma']] = $elemento["idioma"];
+            $array_disponibilidades[$elemento['id_disponibilidad']] = $elemento["disponibilidad"];
         }
-        return $array_idiomas;
+        return $array_disponibilidades;
     }
-    public function getIdiomas()
+    public function getDisponibilidades()
     {
-        $consulta = "SELECT * FROM idioma";
+        $consulta = "SELECT * FROM disponibilidad";
         $result = $this->conexion->prepare($consulta);
 
         $result->execute();
         $resultado = $result->fetchAll(PDO::FETCH_ASSOC);
         return $resultado;
     }
-    public function getIdiomasAdmin(array $ids_idiomas)
+    public function getDisponibilidadesAdmin(array $ids_disponibilidades)
     {
-        $string_idiomas = implode(",", $ids_idiomas);
-        $consulta = "SELECT * FROM idioma WHERE id_idioma IN (:string_idiomas)";
+        $string_disponibilidades = implode(",", $ids_disponibilidades);
+        $consulta = "SELECT * FROM disponibilidad WHERE id_disponibilidad IN (:string_disponibilidades)";
         $result = $this->conexion->prepare($consulta);
 
-        $result->bindParam(':string_idiomas', $string_idiomas);
+        $result->bindParam(':string_idiomas', $string_disponibilidades);
 
         $result->execute();
         $resultado = $result->fetchAll(PDO::FETCH_ASSOC);
         return $resultado[0];
     }
 
-    public function addIdioma($datos_usuario)
+    public function addDisponibilidad($datos_usuario)
     {
         // $datos_usuario["nivel"] = 1;
         // $datos_usuario["activo"] = 0;

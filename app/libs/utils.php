@@ -310,7 +310,7 @@ function cSelect(string $text, string $campo, array &$errores, array $valores, b
     if (!$requerido && $text == "") {
         return true;
     }
-    if (in_array($text, $valores)) {
+    if (in_array($text, array_keys($valores))) {
         return true;
     }
     $errores[$campo] = "Error en el campo $campo";
