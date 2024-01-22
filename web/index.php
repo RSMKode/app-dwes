@@ -15,6 +15,9 @@ require("../app/controllers/ControllerService.php");
 require("../app/model/classUsuario.php");
 require("../app/model/classIdioma.php");
 require("../app/model/classUsuarioIdioma.php");
+require("../app/model/classServicio.php");
+require("../app/model/classDisponibilidad.php");
+require("../app/model/classServicioDisponibilidad.php");
 
 $sesion = Sesion::getInstance();
 
@@ -34,7 +37,9 @@ $map = [
     'cerrar_sesion' => ['controller' => 'ControllerUser', 'action' => 'cerrar_sesion', 'nivel_usuario' => 0],
     'perfil_usuario' => ['controller' => 'ControllerUser', 'action' => 'perfil_usuario', 'nivel_usuario' => 1],
     'perfil_editar' => ['controller' => 'ControllerUser', 'action' => 'perfil_editar', 'nivel_usuario' => 1],
-    'lista-usuarios' => ['controller' => 'ControllerUser', 'action' => 'lista-usuarios', 'nivel_usuario' => 2],
+    'lista_usuarios' => ['controller' => 'ControllerUser', 'action' => 'lista_usuarios', 'nivel_usuario' => 2],
+    'servicios_alta' => ['controller' => 'ControllerService', 'action' => 'servicios_alta', 'nivel_usuario' => 1],
+    'servicios_usuario' => ['controller' => 'ControllerService', 'action' => 'servicios_usuario', 'nivel_usuario' => 1],
 ];
 // Parseo de la ruta
 if (isset($_GET['ctl'])) {
