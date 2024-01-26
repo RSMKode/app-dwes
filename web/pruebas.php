@@ -1,7 +1,7 @@
 <?php
 require($_SERVER["DOCUMENT_ROOT"] . "/app-dwes/app/libs/config.php");
 require($_SERVER["DOCUMENT_ROOT"] . "/app-dwes/app/model/classIdioma.php");
-require($_SERVER["DOCUMENT_ROOT"] . "/app-dwes/app/model/classUsuarioIdioma.php");
+require($_SERVER["DOCUMENT_ROOT"] . "/app-dwes/app/model/classUsuario.php");
 require($_SERVER["DOCUMENT_ROOT"] . "/app-dwes/app/model/classServicio.php");
 
 
@@ -27,10 +27,34 @@ print_r($idiomas);
 echo "</pre>";
 echo "<br>";
 
+$usuario = new Usuario();
+
+$user_idiomas = $usuario->getUsuarioIdiomas(31);
+echo "ARRAY USUARIO IDIOMAS:<pre>";
+print_r($user_idiomas);
+echo "</pre>";
+echo "<br>";
+
 $servicio = new Servicio();
 
-$servicios = $servicio->getServiciosUser(26);
+$servicios = $servicio->getServicios();
 echo "ARRAY SERVICIOS:<pre>";
 print_r($servicios);
 echo "</pre>";
 echo "<br>";
+
+$servicio1 = $servicio->getServicio(1);
+echo "SERVICIO 1:<pre>";
+print_r($servicio1);
+echo "</pre>";
+echo "<br>";
+
+
+
+// $servicio = new Servicio();
+
+// $servicios = $servicio->getServiciosUser(26);
+// echo "ARRAY SERVICIOS:<pre>";
+// print_r($servicios);
+// echo "</pre>";
+// echo "<br>";

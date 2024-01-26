@@ -7,10 +7,14 @@ class Controller
 
     public function indice()
     {
+        $servicio = new Servicio();
+        $servicios = $servicio->getServicios();
+
         $params = [
             'titulo' => "APP DWES",
             'vista' => 'indice',
-            'mensaje' => 'Bienvenido al repositorio de alimentos'
+            'mensaje' => 'Bienvenido al repositorio de alimentos',
+            'servicios' => $servicios
         ];
 
         require self::$ruta_layout;

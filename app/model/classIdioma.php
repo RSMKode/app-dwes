@@ -50,15 +50,24 @@ class Idioma extends Modelo
         return $resultado[0];
     }
 
-    public function addIdioma($datos_usuario)
+    public function addIdioma($idioma)
     {
-        // $datos_usuario["nivel"] = 1;
-        // $datos_usuario["activo"] = 0;
+        $consulta = "INSERT INTO idioma (idioma) 
+                        values (:idioma)";
+        $result = $this->conexion->prepare($consulta);
 
-        // $consulta = "INSERT INTO usuario (nombre, email, pass, f_nacimiento, foto_perfil, descripción, nivel, activo) 
-        //                 values (:nombre, :email, :pass, :f_nacimiento, :foto_perfil, :descripción, :nivel, :activo)";
-        // $result = $this->conexion->prepare($consulta);
+        $result->bindParam(':idioma', $idioma);
 
-        // return $result->execute($datos_usuario);
+        return $result->execute();
+    }
+
+    public function deleteIdioma($id_idioma)
+    {
+        $consulta = "DELETE FROM idioma WHERE id_idioma = :id_idioma";
+        $result = $this->conexion->prepare($consulta);
+
+        $result->bindParam(':id_idioma', $id_idioma);
+
+        return $result->execute();
     }
 }

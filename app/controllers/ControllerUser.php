@@ -61,6 +61,46 @@ class ControllerUser extends Controller
         require self::$ruta_layout;
     }
 
+    public function admin()
+    {
+        $errores = [];
+        if (isset($_REQUEST['enviar']) || isset($_REQUEST['eliminar_idioma']) || isset($_REQUEST['eliminar_disponibilidad'])) {
+
+            //Sanitizamos
+            $admin["idioma"] = recoge("idioma");
+            $admin["disponibilidad"] = recoge("disponibilidad");
+
+            $admin["eliminar_idioma"] = recoge("eliminar_idioma");
+            $admin["eliminar_disponibilidad"] = recoge("eliminar_disponibilidad");
+
+            cTexto($admin["idioma"], "idioma", $errores, "nombre", 40, 0);
+            cTexto($admin["disponibilidad"], "disponibilidad", $errores, "descripcion", 40, 0);
+
+            cNum($admin["eliminar_idioma"], "eliminar_disponibilidad", $errores, false);
+            cNum($admin["eliminar_disponibilidad"], "eliminar_disponibilidad", $errores, false);
+
+            if (empty($errores)) {
+                $idioma = new Idioma();
+                $disponibilidad = new Disponibilidad();
+
+                if ($admin["idioma"]) $idioma->addIdioma($admin["idioma"]);
+
+                if ($admin["disponibilidad"]) $disponibilidad->addDisponibilidad($admin["disponibilidad"]);
+
+                if ($admin["eliminar_idioma"]) $idioma->deleteIdioma($admin["eliminar_idioma"]);
+                if ($admin["eliminar_disponibilidad"]) $disponibilidad->deleteDisponibilidad($admin["eliminar_disponibilidad"]);
+
+                header("location=index.php?ctl=admin");
+            }
+        }
+
+        $params = [
+            'titulo' => 'Panel de Administrador',
+            'vista' => 'admin',
+        ];
+        require self::$ruta_layout;
+    }
+
     public function registro()
     {
         $params = [
@@ -184,11 +224,14 @@ class ControllerUser extends Controller
                     $datos_usuario["pass"] = encriptar($datos_usuario["pass"]);
                     $datos_usuario["id_user"] = $_SESSION['id_user'];
                     $datos_usuario["email"] = $_SESSION['email'];
+                    if ($datos_usuario["foto_perfil"] == "") {
+                        $datos_usuario["foto_perfil"] = $_SESSION['foto_perfil'];
+                    }
 
                     $usuario = new Usuario();
                     $sesion = Sesion::getInstance();
 
-                    $nivel = 1;
+                    $nivel = $_SESSION['nivel'];
                     if ($usuario->updateUsuario($datos_usuario, $nivel)) {
 
                         $mensaje = "Usuario modificado correctamente";
@@ -199,7 +242,15 @@ class ControllerUser extends Controller
                         $_SESSION["nombre"] = $datos_usuario["nombre"];
                         $_SESSION["f_nacimiento"] = $datos_usuario["f_nacimiento"];
                         $_SESSION["foto_perfil"] = $datos_usuario["foto_perfil"];
-                        $_SESSION["idiomas"] = $datos_usuario["idiomas"];
+
+                        $idioma = new Idioma();
+                        $idiomas_ids = $idioma->getIdiomasIds();
+                        $idiomas = [];
+                        foreach ($datos_usuario["idiomas"] as $id_idioma) {
+                            $idiomas[] = ["id_idioma" => $id_idioma, "idioma" => $idiomas_ids[$id_idioma]];
+                        }
+
+                        $_SESSION["idiomas"] = $idiomas;
                         $_SESSION["descripcion"] = $datos_usuario["descripcion"];
                         $_SESSION["nivel"] = $nivel;
                         $_SESSION["ulitma_actividad"] = time();

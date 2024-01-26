@@ -50,15 +50,25 @@ class Disponibilidad extends Modelo
         return $resultado[0];
     }
 
-    public function addDisponibilidad($datos_usuario)
+    public function addDisponibilidad($disponibilidad)
     {
-        // $datos_usuario["nivel"] = 1;
-        // $datos_usuario["activo"] = 0;
+        $consulta = "INSERT INTO disponibilidad (disponibilidad) 
+                        values (:disponibilidad)";
+        $result = $this->conexion->prepare($consulta);
 
-        // $consulta = "INSERT INTO usuario (nombre, email, pass, f_nacimiento, foto_perfil, descripción, nivel, activo) 
-        //                 values (:nombre, :email, :pass, :f_nacimiento, :foto_perfil, :descripción, :nivel, :activo)";
-        // $result = $this->conexion->prepare($consulta);
+        $result->bindParam(':disponibilidad', $disponibilidad);
 
-        // return $result->execute($datos_usuario);
+        return $result->execute();
+    }
+
+    public function deleteDisponibilidad($id_disponibilidad)
+    {
+
+        $consulta = "DELETE FROM disponibilidad WHERE id_disponibilidad = :id_disponibilidad";
+        $result = $this->conexion->prepare($consulta);
+
+        $result->bindParam(':id_disponibilidad', $id_disponibilidad);
+
+        return $result->execute();
     }
 }

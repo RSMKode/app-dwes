@@ -31,8 +31,10 @@ class Usuario extends Modelo
         $result->bindParam(':email', $email);
 
         $result->execute();
+        $usuario = $result->fetch(PDO::FETCH_ASSOC);
+        $usuario["idiomas"] = $this->getUsuarioIdiomas($usuario["id_user"]);
 
-        return ($resultado = $result->fetch(PDO::FETCH_ASSOC)) ? $resultado : false;
+        return ($usuario) ? $usuario : false;
     }
 
     public function verificarUsuario($email, $pass)
@@ -72,8 +74,7 @@ class Usuario extends Modelo
             $result->execute();
 
             $id_user = $this->conexion->lastInsertId();
-            $usuario_idioma = new UsuarioIdioma();
-            $usuario_idioma->addUsuarioIdiomas($id_user, $datos_usuario["idiomas"]);
+            $this->addUsuarioIdiomas($id_user, $datos_usuario["idiomas"]);
 
             return $this->conexion->commit();
         } catch (PDOException $e) {
@@ -103,13 +104,70 @@ class Usuario extends Modelo
 
             $result->execute();
 
-            $usuario_idioma = new UsuarioIdioma();
-            $usuario_idioma->deleteUsuarioIdiomas($datos_usuario["id_user"]);
-            $usuario_idioma->addUsuarioIdiomas($datos_usuario["id_user"], $datos_usuario["idiomas"]);
+            $this->deleteUsuarioIdiomas($datos_usuario["id_user"]);
+            $this->addUsuarioIdiomas($datos_usuario["id_user"], $datos_usuario["idiomas"]);
 
             return $this->conexion->commit();
         } catch (PDOException $e) {
             $this->conexion->rollBack();
+            return false;
+        }
+    }
+
+    public function getUsuarioIdiomas($id_usuario)
+    {
+        $consulta = "SELECT * FROM `user-idioma` JOIN idioma ON `user-idioma`.id_idioma = idioma.id_idioma WHERE `user-idioma`.id_user = :id_usuario";
+        /*$consulta = "SELECT * FROM usuario JOIN `user-idioma` ON usuario.id_user = `user-idioma`.id_user WHERE usuario.email = :email";
+*/
+        $result = $this->conexion->prepare($consulta);
+
+        $result->bindParam(':id_usuario', $id_usuario);
+
+        $result->execute();
+        $resultado = $result->fetchAll(PDO::FETCH_ASSOC);
+        $idiomas = [];
+        foreach ($resultado as $idioma) {
+            $idiomas[] = ["id_idioma" => $idioma["id_idioma"], "idioma" => $idioma["idioma"]];
+        }
+
+        return $idiomas;
+    }
+
+    public function addUsuarioIdiomas($id_usuario, $ids_idiomas)
+    {
+        try {
+            foreach ($ids_idiomas as $id_idioma) {
+                $consulta = "INSERT INTO `user-idioma` (id_user, id_idioma) 
+                VALUES (:id_usuario, :id_idioma)";
+
+                $result = $this->conexion->prepare($consulta);
+
+                $result->bindParam(':id_usuario', $id_usuario);
+                $result->bindParam(':id_idioma', $id_idioma);
+
+                $result->execute();
+            }
+            return true;
+        } catch (Exception $e) {
+            error_log($e->getMessage() . microtime() . PHP_EOL, 3, "src/logError.txt");
+            return false;
+        }
+    }
+    public function deleteUsuarioIdiomas($id_usuario)
+    {
+        try {
+
+            $consulta = "DELETE FROM `user-idioma` WHERE id_user = :id_usuario";
+            $result = $this->conexion->prepare($consulta);
+
+            $result->bindParam(':id_usuario', $id_usuario);
+
+            $result->execute();
+
+            return true;
+        } catch (Exception $e) {
+            error_log($e->getMessage() . microtime() . PHP_EOL, 3, "src/logError.txt");
+
             return false;
         }
     }
