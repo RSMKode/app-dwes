@@ -20,43 +20,40 @@
     ?>
 
     <form action="" method="post" enctype="multipart/form-data">
-        Nombre completo<sup>*</sup>
-        <br>
-        <input type="text" name="nombre" value="<?= isset($datos_usuario["nombre"]) ? $datos_usuario["nombre"] : ""; ?>" placeholder="Introduce aquí tu nombre">
-        <br>
-
-        Dirección de correo electrónico<sup>*</sup>
-        <br>
-        <input type="text" name="email" value="<?= isset($datos_usuario["email"]) ? $datos_usuario["email"] : ""; ?>" placeholder="ejemplo@google.com">
-        <br>
-
-        Contraseña<sup>*</sup>
-        <br>
-        <input type="password" name="pass" placeholder="**********">
-        <br>
-
-        Fecha de nacimiento<sup>*</sup>
-        <br>
-        <input type="date" name="fechaNacimiento" max="<?= $fechaHoy ?> " value="<?= isset($datos_usuario["f_nacimiento"]) ? $datos_usuario["f_nacimiento"] : date('Y-m-d', time()); ?>">
-        <br>
-
-        Foto de perfil
-        <br>
-        <input type="file" name="foto" id="foto" /><br>
-        <br>
-
-        Idioma preferente
-        <br>
-        <?php
-        pintaCheck($ids_idiomas, "idiomas")
-        ?>
-        Descripción
-        <br>
-        <textarea name="descripcion" value="<?= isset($datos_usuario["descripcion"]) ? $datos_usuario["descripcion"] : ""; ?> " placeholder="Escribe aquí tu descripción personal"></textarea>
-        <br>
-
-        <input type="submit" name="enviar" value="Enviar">
-        <input type="reset" name="borrar" value="Borrar">
+        <label>
+            <span>Nombre completo<sup>*</sup></span>
+            <input type="text" name="nombre" value="<?= isset($datos_usuario["nombre"]) ? $datos_usuario["nombre"] : ""; ?>" placeholder="Introduce aquí tu nombre">
+        </label>
+        <label>
+            <span>Dirección de correo electrónico<sup>*</sup></span>
+            <input type="text" name="email" value="<?= isset($datos_usuario["email"]) ? $datos_usuario["email"] : ""; ?>" placeholder="ejemplo@google.com">
+        </label>
+        <label>
+            <span>Contraseña<sup>*</sup></span>
+            <input type="password" name="pass" placeholder="**********">
+        </label>
+        <label>
+            <span>Fecha de nacimiento<sup>*</sup></span>
+            <input type="date" name="fechaNacimiento" max="<?= $fechaHoy ?> " value="<?= isset($datos_usuario["f_nacimiento"]) ? $datos_usuario["f_nacimiento"] : date('Y-m-d', time()); ?>">
+        </label>
+        <label>
+            <span> Foto de perfil</span>
+            <input type="file" name="foto" id="foto" />
+        </label>
+        <label>
+            <span>Idioma preferente</span>
+            <?php
+            pintaCheck($ids_idiomas, "idiomas")
+            ?>
+        </label>
+        <label>
+            <span>Descripción</span>
+            <textarea name="descripcion" value="<?= isset($datos_usuario["descripcion"]) ? $datos_usuario["descripcion"] : ""; ?> " placeholder="Escribe aquí tu descripción personal"></textarea>
+        </label>
+        <div class="horizontal">
+            <input type="submit" name="enviar" value="Enviar">
+            <input type="reset" name="borrar" value="Borrar">
+        </div>
     </form>
     <a class="accent" href="index.php?ctl=inicio_sesion">Si ya estás registrado, pulsa aqúi</a>
 

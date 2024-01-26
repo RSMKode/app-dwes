@@ -55,7 +55,7 @@ class Usuario extends Modelo
             $datos_usuario["nivel"] = $nivel_usuario;
             $datos_usuario["activo"] = 0;
 
-            $consulta = "INSERT INTO usuario (nombre, email, pass, f_nacimiento, foto_perfil, descripcion, nivel, activo) 
+            $consulta = "INSERT INTO usuario (nombre, email, pass, f_nacimiento, foto_perfil, descripción, nivel, activo) 
                         values (:nombre, :email, :pass, :f_nacimiento, :foto_perfil, :descripcion, :nivel, :activo)";
 
             $result = $this->conexion->prepare($consulta);
@@ -88,7 +88,7 @@ class Usuario extends Modelo
 
             $datos_usuario["nivel"] = $nivel_usuario;
 
-            $consulta = "UPDATE usuario SET nombre = :nombre, pass = :pass, f_nacimiento = :f_nacimiento, foto_perfil = :foto_perfil, descripcion = :descripcion, nivel = :nivel, activo = :activo WHERE email = :email";
+            $consulta = "UPDATE usuario SET nombre = :nombre, pass = :pass, f_nacimiento = :f_nacimiento, foto_perfil = :foto_perfil, descripción = :descripcion, nivel = :nivel, activo = :activo WHERE email = :email";
 
             $result = $this->conexion->prepare($consulta);
 

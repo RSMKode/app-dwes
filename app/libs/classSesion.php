@@ -70,7 +70,7 @@ class Sesion
             $_SESSION["f_nacimiento"] = $datos_usuario["f_nacimiento"];
             $_SESSION["foto_perfil"] = $datos_usuario["foto_perfil"];
             $_SESSION["idiomas"] = $datos_usuario["idiomas"];
-            $_SESSION["descripcion"] = $datos_usuario["descripcion"];
+            $_SESSION["descripcion"] = $datos_usuario["descripción"];
             $_SESSION["nivel"] = $datos_usuario["nivel"];
             $_SESSION["ulitma_actividad"] = time();
             $_SESSION["ip"] = $_SERVER['REMOTE_ADDR'];

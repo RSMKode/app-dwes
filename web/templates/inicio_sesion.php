@@ -14,18 +14,19 @@
 
     <form action="" method="post" enctype="multipart/form-data">
 
-        Dirección de correo electrónico
-        <br>
-        <input type="text" name="email" value="<?= isset($email) ? $email : ""; ?>" placeholder="ejemplo@google.com">
-        <br>
+        <label>
+            <span>Dirección de correo electrónico<sup>*</sup></span>
+            <input type="text" name="email" value="<?= isset($email) ? $email : ""; ?>" placeholder="ejemplo@google.com">
+        </label>
+        <label>
+            <span>Contraseña<sup>*</sup></span>
+            <input type="password" name="pass" placeholder="********">
+        </label>
 
-        Contraseña
-        <br>
-        <input type="password" name="pass" placeholder="********">
-        <br>
-
-        <input type="submit" name="enviar" value="Enviar">
-        <input type="reset" name="borrar" value="Borrar">
+        <div class="horizontal">
+            <input type="submit" name="enviar" value="Enviar">
+            <input type="reset" name="borrar" value="Borrar">
+        </div>
     </form>
-    <a class="accent" href="index.php?ctl=registro">Si no estás registrado, pulsa aqúi</a>
+    <a class="accent" href="index.php?ctl=registro">Si no estás registrado, pulsa aquí</a>
 </main>

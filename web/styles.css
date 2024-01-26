@@ -161,10 +161,14 @@ sup {
   box-shadow: 5px 5px 15px black;
   padding: 1rem;
 }
-.listaHorizontal {
+
+.horizontal {
   flex-direction: row;
+  flex-wrap: nowrap;
+}
+
+.wrap {
   flex-wrap: wrap;
-  place-items: normal;
 }
 
 form {
@@ -172,6 +176,11 @@ form {
   flex-direction: column;
   gap: 0.5em;
   align-items: start;
+}
+
+label {
+  display: flex;
+  flex-direction: column;
 }
 
 .form_element {

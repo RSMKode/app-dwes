@@ -15,7 +15,7 @@ class Servicio extends Modelo
 
     public function getServicios()
     {
-        $consulta = "SELECT id_serivicio FROM servicio";
+        $consulta = "SELECT id_serivicios FROM servicios";
         $result = $this->conexion->prepare($consulta);
 
         $result->execute();
@@ -27,7 +27,7 @@ class Servicio extends Modelo
     {
         require_once('../app/model/classServicioDisponibilidad.php');
 
-        $consulta = "SELECT * FROM servicio WHERE id_user = :id_user";
+        $consulta = "SELECT * FROM servicios WHERE id_user = :id_user";
         $result = $this->conexion->prepare($consulta);
 
         $result->bindParam(':id_user', $id_user);
@@ -67,7 +67,7 @@ class Servicio extends Modelo
         try {
             $this->conexion->beginTransaction();
 
-            $consulta = "INSERT INTO servicio (titulo, id_user, descripcion, precio, tipo, foto_servicio) 
+            $consulta = "INSERT INTO servicios (titulo, id_user, descripcion, precio, tipo, foto_servicio) 
                         values (:titulo, :id_user, :descripcion, :precio, :tipo, :foto_servicio)";
 
             $result = $this->conexion->prepare($consulta);
@@ -99,7 +99,7 @@ class Servicio extends Modelo
 
     //         $datos_usuario["nivel"] = $nivel_usuario;
 
-    //         $consulta = "UPDATE usuario SET nombre = :nombre, pass = :pass, f_nacimiento = :f_nacimiento, foto_perfil = :foto_perfil, descripcion = :descripcion, nivel = :nivel, activo = :activo WHERE email = :email";
+    //         $consulta = "UPDATE usuario SET nombre = :nombre, pass = :pass, f_nacimiento = :f_nacimiento, foto_perfil = :foto_perfil, descripción = :descripción, nivel = :nivel, activo = :activo WHERE email = :email";
 
     //         $result = $this->conexion->prepare($consulta);
 
@@ -108,7 +108,7 @@ class Servicio extends Modelo
     //         $result->bindParam(':pass', $datos_usuario["pass"]);
     //         $result->bindParam(':f_nacimiento', $datos_usuario["f_nacimiento"]);
     //         $result->bindParam(':foto_perfil', $datos_usuario["foto_perfil"]);
-    //         $result->bindParam(':descripcion', $datos_usuario["descripcion"]);
+    //         $result->bindParam(':descripción', $datos_usuario["descripción"]);
     //         $result->bindParam(':nivel', $datos_usuario["nivel"]);
     //         $result->bindParam(':activo', $datos_usuario["activo"]);
 

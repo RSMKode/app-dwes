@@ -18,7 +18,9 @@ $nivel = $_SESSION["nivel"];
         <p>Nivel: <?= $nivel ?></p>
         <img src="<?= $foto_perfil ?>" alt="Foto de Perfil">
         <p>Fecha de nacimiento: <?= $f_nacimiento ?></p>
-        <p>Descripcion: <?= $descripcion ?></p>
+        <?php if ($descripcion != "") { ?>
+            <p>Descripción: <?= $descripcion ?></p>
+        <?php } ?>
         <a href="index.php?ctl=perfil_editar">Editar perfil</a>
     </article>
 

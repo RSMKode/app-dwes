@@ -55,8 +55,8 @@ class Idioma extends Modelo
         // $datos_usuario["nivel"] = 1;
         // $datos_usuario["activo"] = 0;
 
-        // $consulta = "INSERT INTO usuario (nombre, email, pass, f_nacimiento, foto_perfil, descripcion, nivel, activo) 
-        //                 values (:nombre, :email, :pass, :f_nacimiento, :foto_perfil, :descripcion, :nivel, :activo)";
+        // $consulta = "INSERT INTO usuario (nombre, email, pass, f_nacimiento, foto_perfil, descripción, nivel, activo) 
+        //                 values (:nombre, :email, :pass, :f_nacimiento, :foto_perfil, :descripción, :nivel, :activo)";
         // $result = $this->conexion->prepare($consulta);
 
         // return $result->execute($datos_usuario);

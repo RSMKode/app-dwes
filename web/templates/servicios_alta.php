@@ -22,45 +22,45 @@
 
 
     <form action="" method="post" enctype="multipart/form-data">
-        Datos del Servicio
-        <br>
-        <br>
+        <h2>Datos del Servicio</h2>
+        <label>
+            <span>Titulo o nombre de servicio<sup>*</sup></span>
+            <input type="text" name="titulo" value="<?= isset($datos_servicio["titulo"]) ? $datos_servicio["titulo"] : ""; ?>" placeholder="Servicio">
+        </label>
 
-        Titulo o nombre de servicio<sup>*</sup>
-        <br>
-        <input type="text" name="titulo" value="<?= isset($datos_servicio["titulo"]) ? $datos_servicio["titulo"] : ""; ?>">
-        <br>
+        <label>
+            <span>Descripcion del servicio<sup>*</sup></span>
+            <textarea cols="50" rows="4" name="descripcion" value="<?= isset($datos_servicio["descripcion"]) ? $datos_servicio["descripcion"] : ""; ?> " placeholder="Escribe aquí tu descripción personal"></textarea>
+        </label>
 
-        Descripcion del servicio<sup>*</sup>
-        <br>
-        <textarea cols="50" rows="4" name="descripcion" value="<?= isset($datos_servicio["descripcion"]) ? $datos_servicio["descripcion"] : ""; ?> " placeholder="Escribe aquí tu descripción personal"></textarea>
-        <br>
+        <label>
+            <span>Introduce precio por hora</span>
+            <input type="text" name="precio" value="<?= isset($datos_servicio["precio"]) ? $datos_servicio["precio"] : ""; ?>" placeholder="10">
+        </label>
 
-        Introduce precio por hora
-        <br>
-        <input type="text" name="precio" value="<?= isset($datos_servicio["precio"]) ? $datos_servicio["precio"] : ""; ?>">
-        <br>
+        <label>
+            <span>Selecciona tipo<sup>*</sup></span>
+            <?=
+            pintaSelect($ids_tipos, "tipo", true);
+            ?>
+        </label>
 
-        Selecciona tipo<sup>*</sup>
-        <br>
-        <?=
-        pintaSelect($ids_tipos, "tipo", true);
-        ?>
-        <br>
+        <label>
+            <span>Disponibilidades<sup>*</sup></span>
+            <div class="horizontal">
+                <?=
+                pintaCheck($ids_disponibilidades, "disponibilidades");
+                ?></div>
+        </label>
 
-        Disponibilidades<sup>*</sup>
-        <br>
-        <?=
-        pintaCheck($ids_disponibilidades, "disponibilidades");
-        ?>
-        <br>
+        <label>
+            <span>Foto del servicio</span>
+            <input type="file" name="foto_servicio">
+        </label>
 
-        Foto del servicio
-        <br>
-        <input type="file" name="foto_servicio">
-        <br>
-
-        <input type="submit" name="enviar" value="Enviar">
-        <input type="reset" name="borrar" value="Borrar datos">
+        <div class="horizontal">
+            <input type="submit" name="enviar" value="Enviar">
+            <input type="reset" name="borrar" value="Borrar datos">
+        </div>
     </form>
 </main>

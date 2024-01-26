@@ -34,13 +34,16 @@
                     break;
                 case 2:
                     echo "<li>";
-                    echo pintaEnlace(APP_ROOT . "../index.php", "Perfil de Usuario");
+                    echo pintaEnlace("index.php?ctl=servicios_usuario", "Mis servicios");
                     echo "</li>";
                     echo "<li>";
-                    echo pintaEnlace(APP_ROOT . "../index.php", "Cerrar sesión");
+                    echo pintaEnlace("index.php?ctl=servicios_alta", "Crear servicio");
                     echo "</li>";
                     echo "<li>";
-                    echo pintaEnlace(APP_ROOT . "../index.php", "Cerrar sesión");
+                    echo pintaEnlace("index.php?ctl=perfil_usuario", "Perfil de Usuario");
+                    echo "</li>";
+                    echo "<li>";
+                    echo pintaEnlace("index.php?ctl=cerrar_sesion", "Cerrar sesión");
                     echo "</li>";
                     break;
             }
