@@ -18,6 +18,35 @@ class ControllerService extends Controller
         require self::$ruta_layout;
     }
 
+    public function servicios()
+    {
+        $id_user = $_SESSION['id_user'];
+        $servicio = new Servicio();
+        $servicios = $servicio->getServiciosUser($id_user);
+
+        $params = [
+            'titulo' => 'Servicios',
+            'vista' => 'servicios',
+            'servicios' => $servicios
+        ];
+        require self::$ruta_layout;
+    }
+
+    public function servicio()
+    {
+        $id_user = $_SESSION['id_user'];
+        $id_servicio = recoge('id_servicio');
+        $servicioClass = new Servicio();
+        $servicio = $servicioClass->getServicio($id_servicio);
+
+        $params = [
+            'titulo' => 'Servicio ' . $servicio['titulo'],
+            'vista' => 'servicio',
+            'servicio' => $servicio
+        ];
+        require self::$ruta_layout;
+    }
+
     public function servicios_alta()
     {
         $params = [

@@ -14,10 +14,8 @@ require("../app/controllers/ControllerService.php");
 //Modelos
 require("../app/model/classUsuario.php");
 require("../app/model/classIdioma.php");
-require("../app/model/classUsuarioIdioma.php");
 require("../app/model/classServicio.php");
 require("../app/model/classDisponibilidad.php");
-require("../app/model/classServicioDisponibilidad.php");
 
 $sesion = Sesion::getInstance();
 
@@ -39,7 +37,10 @@ $map = [
     'perfil_editar' => ['controller' => 'ControllerUser', 'action' => 'perfil_editar', 'nivel_usuario' => 1],
     'lista_usuarios' => ['controller' => 'ControllerUser', 'action' => 'lista_usuarios', 'nivel_usuario' => 2],
     'servicios_alta' => ['controller' => 'ControllerService', 'action' => 'servicios_alta', 'nivel_usuario' => 1],
+    'servicios' => ['controller' => 'ControllerService', 'action' => 'servicios', 'nivel_usuario' => 1],
+    'servicio' => ['controller' => 'ControllerService', 'action' => 'servicio', 'nivel_usuario' => 1],
     'servicios_usuario' => ['controller' => 'ControllerService', 'action' => 'servicios_usuario', 'nivel_usuario' => 1],
+    'admin' => ['controller' => 'ControllerUser', 'action' => 'admin', 'nivel_usuario' => 2],
 ];
 // Parseo de la ruta
 if (isset($_GET['ctl'])) {
@@ -67,7 +68,7 @@ if (method_exists($controlador['controller'], $controlador['action'])) {
             $controlador['action']
         ]);
     } else {
-        header('Location:index.php');
+        header('Location:index.php?ctl=inicio_sesion');
     }
 } else {
     header('Status: 404 Not Found');

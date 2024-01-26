@@ -1,5 +1,10 @@
 <main class="container">
     <?php
+    $nombre = $_SESSION["nombre"];
+    $f_nacimiento = $_SESSION["f_nacimiento"];
+    $foto_perfil = $_SESSION["foto_perfil"];
+    $descripcion = $_SESSION["descripcion"];
+
     if (isset($params['mensaje'])) {
     ?>
         <p class="exito"><?= $params['mensaje'] ?></p>
@@ -26,7 +31,7 @@
             <label for="nombre">
                 Nombre completo<sup>*</sup>
             </label>
-            <input type="text" id="nombre" name="nombre" value="<?= isset($_SESSION["nombre"]) ? $_SESSION["nombre"] : ""; ?>" placeholder="Introduce aquí tu nombre">
+            <input type="text" id="nombre" name="nombre" value="<?= isset($nombre) ? $nombre : ""; ?>" placeholder="Introduce aquí tu nombre">
         </div>
 
         <div class="form_element">
@@ -40,14 +45,16 @@
             <label for="fechaNacimiento">
                 Fecha de nacimiento<sup>*</sup>
             </label>
-            <input type="date" id="fechaNacimiento" name="fechaNacimiento" max="<?= $fechaHoy ?> " value="<?= isset($_SESSION["f_nacimiento"]) ? $_SESSION["f_nacimiento"] : date('Y-m-d', time()); ?>">
+            <input type="date" id="fechaNacimiento" name="fechaNacimiento" max="<?= $fechaHoy ?> " value="<?= isset($f_nacimiento) ? $f_nacimiento : date('Y-m-d', time()); ?>">
         </div>
 
         <div class="form_element">
             <label for="foto">
                 Foto de perfil
             </label>
-            <img src="<?= $_SESSION["foto_perfil"] ?>" alt="Foto de perfil">
+            <?php if ($foto_perfil != "") { ?>
+                <img src="<?= $foto_perfil ?>" alt="Foto de Perfil">
+            <?php } ?>
             <input type="file" id="foto" name="foto" id="foto" />
         </div>
 
@@ -66,7 +73,7 @@
             <label for="descripcion">
                 Descripción
             </label>
-            <textarea id="descripcion" name="descripcion" value="<?= isset($_SESSION["descripcion"]) ? $_SESSION["descripcion"] : ""; ?> " placeholder="Escribe aquí tu descripción personal"></textarea>
+            <textarea id="descripcion" name="descripcion" placeholder="Escribe aquí tu descripción personal"><?= isset($descripcion) ? $descripcion : ""; ?></textarea>
         </div>
         <div class="listaHorizontal">
             <input type="submit" name="enviar" value="Enviar">

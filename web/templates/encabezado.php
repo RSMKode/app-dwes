@@ -34,10 +34,7 @@
                     break;
                 case 2:
                     echo "<li>";
-                    echo pintaEnlace("index.php?ctl=servicios_usuario", "Mis servicios");
-                    echo "</li>";
-                    echo "<li>";
-                    echo pintaEnlace("index.php?ctl=servicios_alta", "Crear servicio");
+                    echo pintaEnlace("index.php?ctl=admin", "Panel de Administrador");
                     echo "</li>";
                     echo "<li>";
                     echo pintaEnlace("index.php?ctl=perfil_usuario", "Perfil de Usuario");

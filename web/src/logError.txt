@@ -1,0 +1,2 @@
+SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ''user-idioma' (id_user, id_idioma) 
+                        values ('35', '1')' at line 10.09972100 1706288842
