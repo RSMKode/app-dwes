@@ -1,5 +1,6 @@
 <?php
 require($_SERVER["DOCUMENT_ROOT"] . "/app-dwes/app/libs/config.php");
+require($_SERVER["DOCUMENT_ROOT"] . "/app-dwes/app/libs/utils.php");
 require($_SERVER["DOCUMENT_ROOT"] . "/app-dwes/app/model/classIdioma.php");
 require($_SERVER["DOCUMENT_ROOT"] . "/app-dwes/app/model/classUsuario.php");
 require($_SERVER["DOCUMENT_ROOT"] . "/app-dwes/app/model/classServicio.php");
@@ -49,7 +50,7 @@ print_r($servicio1);
 echo "</pre>";
 echo "<br>";
 
-
+sendEmailToken("dwes@mailinator.com", "a");
 
 // $servicio = new Servicio();
 

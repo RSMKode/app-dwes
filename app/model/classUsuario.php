@@ -32,7 +32,7 @@ class Usuario extends Modelo
 
         $result->execute();
         $usuario = $result->fetch(PDO::FETCH_ASSOC);
-        $usuario["idiomas"] = $this->getUsuarioIdiomas($usuario["id_user"]);
+        if ($usuario) $usuario["idiomas"] = $this->getUsuarioIdiomas($usuario["id_user"]);
 
         return ($usuario) ? $usuario : false;
     }
@@ -76,7 +76,9 @@ class Usuario extends Modelo
             $id_user = $this->conexion->lastInsertId();
             $this->addUsuarioIdiomas($id_user, $datos_usuario["idiomas"]);
 
-            return $this->conexion->commit();
+            $this->conexion->commit();
+
+            return $id_user;
         } catch (PDOException $e) {
             $this->conexion->rollBack();
             return false;

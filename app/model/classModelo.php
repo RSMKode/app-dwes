@@ -26,4 +26,26 @@ class Modelo extends PDO
 
         return self::$instance;
     }
+
+
+    //Borramos primero la relacion para luego borrar el idioma y servicio y asi no usar onCascade
+
+    public function deleteFromTable($tabla, $campo, $id)
+    {
+        try {
+            $consulta = "DELETE FROM `$tabla` WHERE $campo = :id";
+            $result = self::$instance->prepare($consulta);
+
+
+            $result->bindParam(':id', $id);
+
+            $result->execute();
+
+            return true;
+        } catch (Exception $e) {
+            error_log($e->getMessage() . microtime() . PHP_EOL, 3, "src/logError.txt");
+
+            return false;
+        }
+    }
 }

@@ -1,4 +1,5 @@
 <?php
+
 //Variables y constantes comunes
 require("../app/libs/config.php");
 //Libreria de funciones de validación
@@ -13,6 +14,7 @@ require("../app/controllers/ControllerUser.php");
 require("../app/controllers/ControllerService.php");
 //Modelos
 require("../app/model/classUsuario.php");
+require("../app/model/classToken.php");
 require("../app/model/classIdioma.php");
 require("../app/model/classServicio.php");
 require("../app/model/classDisponibilidad.php");

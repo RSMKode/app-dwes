@@ -9,7 +9,7 @@ $descripcion = $_SESSION["descripcion"];
 $nivel = $_SESSION["nivel"];
 $idiomas = $_SESSION["idiomas"];
 
-print_r($_SESSION["idiomas"]);
+// print_r($_SESSION["idiomas"]);
 ?>
 <main class="container">
     <p>Bienvenido</p>
@@ -26,7 +26,7 @@ print_r($_SESSION["idiomas"]);
             <p>Descripción: <?= $descripcion ?></p>
         <?php } ?>
 
-        <div class="horizontal">
+        <div class="lista-idiomas">
             <?php if ($idiomas) {
             ?>
                 <p>Idiomas:</p>

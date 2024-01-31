@@ -73,6 +73,7 @@ body {
 
 .encabezado_contenedor {
   display: flex;
+  gap: 0.5rem;
   width: 100%;
   max-width: 60rem;
   place-items: center;
@@ -230,4 +231,35 @@ img {
 
 .errores > li {
   margin-left: 2rem;
+}
+
+.lista-idiomas {
+  place-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.lista-idiomas span {
+  text-decoration: underline 2px solid var(--accent);
+  border-radius: 0.5rem;
+}
+
+.boton-borrar {
+  width: 2rem;
+  color: transparent;
+  border-radius: 10px;
+  background-color: #cf1c1c;
+}
+
+.borrar label {
+  flex-direction: row;
+  gap: 1rem;
+}
+.borrar button {
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+.borrar button:hover {
+  scale: 1.01;
 }
