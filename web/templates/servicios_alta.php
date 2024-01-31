@@ -39,10 +39,11 @@
         </label>
 
         <label>
-            <span>Selecciona tipo<sup>*</sup></span>
-            <?=
-            pintaSelect($ids_tipos, "tipo", true);
-            ?>
+            <span>Selecciona tipo de servicio:<sup>*</sup></span>
+            <select name="tipo" id="tipo">
+                <option value="0">Servicio de intercambio</option>
+                <option value="1">Servicio de pago</option>
+            </select>
         </label>
 
         <label>
@@ -50,7 +51,8 @@
             <div class="horizontal">
                 <?=
                 pintaCheck($ids_disponibilidades, "disponibilidades");
-                ?></div>
+                ?>
+            </div>
         </label>
 
         <label>

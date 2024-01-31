@@ -52,6 +52,9 @@ class Disponibilidad extends Modelo
 
     public function addDisponibilidad($disponibilidad)
     {
+        $disponibilidades = $this->getDisponibilidadesIds();
+        if (in_array($disponibilidad, $disponibilidades)) return false;
+
         $consulta = "INSERT INTO disponibilidad (disponibilidad) 
                         values (:disponibilidad)";
         $result = $this->conexion->prepare($consulta);

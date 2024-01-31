@@ -74,7 +74,7 @@ class ControllerService extends Controller
             cTexto($datos_servicio["titulo"], "titulo", $errores, "nombre", 40, 1);
             cTexto($datos_servicio["descripcion"], "descripcion", $errores, "descripcion", 300, 0);
             cNum($datos_servicio["precio"], "precio", $errores);
-            cSelect($datos_servicio["tipo"], "tipo", $errores, $ids_tipos);
+            cSelect($datos_servicio["tipo"], "tipo", $errores, [0, 1]);
 
             //El array keys sirve para pasarle un array con las claves (ids) del array de idiomas
             cCheck($datos_servicio["disponibilidades"], "disponibilidades", $errores, array_keys($ids_disponibilidades), false);

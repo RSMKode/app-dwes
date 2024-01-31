@@ -14,6 +14,14 @@
  * @param string $frase
  * @return string
  */
+
+
+require '../vendor/autoload.php';
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
+
 function sinTildes($frase)
 {
     $no_permitidas = array(
@@ -499,5 +507,38 @@ function cColor()
             header('Refresh:0');
         }
         return;
+    }
+}
+
+function sendEmailToken($email, $nombre)
+{
+    // Crea una instancia de PHPMailer
+    $mail = new PHPMailer();
+
+
+    try {
+        // Configura el servidor SMTP
+        $mail->isSMTP();
+        $mail->Host = 'smtp.gmail.com';
+        $mail->SMTPAuth = true;
+        $mail->Username = 'abastospruebajon@gmail.com';
+        $mail->Password = 'jsdg nxpf vuhi xesd';
+        $mail->SMTPSecure = 'tls';
+        $mail->Port = 587;
+
+        // Configura los destinatarios
+        $mail->setFrom('abastospruebajon@gmail.com', 'abastospruebajon');
+        $mail->addAddress('jonathansantos.vae@gmail.com', 'Jonathan');
+
+        // Contenido del correo
+        $mail->isHTML(true);
+        $mail->Subject = 'Asunto del Correo';
+        $mail->Body = 'Este es el cuerpo del correo electrónico.';
+
+        // Enviar el correo
+        $mail->send();
+        echo 'El correo se ha enviado con éxito.';
+    } catch (Exception $e) {
+        echo "El correo no se pudo enviar. Error: {$mail->ErrorInfo}";
     }
 }

@@ -68,7 +68,7 @@ $idiomas = ["Indiferente", "Castellano", "Ingles", "Valenciano",];
 /**
  * Categorias disponibles en los servicios
  */
-const TIPOS_IDS = [1 => "Categoria 1", 2 => "Categoria 2", 3 => "Categoria 3"];
+const TIPOS_IDS = [0 => "Servicio de intercambio", 1 => "Servicio de pago"];
 
 /**
  * Disponibilidades horarias para los servicios
@@ -78,4 +78,3 @@ $disponibilidades = ["Mañanas", "Tardes", "Noches", "Completa", "Fines de seman
 /**
  * Valores para opción de pago en los servicios
  */
-$pagos = ["Si", "No",];

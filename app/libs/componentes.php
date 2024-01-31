@@ -110,3 +110,19 @@ function pintaEnlace(string $url, string $texto, bool $enParrafo = true)
         return '<a href="' . $url . '">' . $texto . '</a>';
     }
 }
+
+/**
+ * Función para crear botones para borrar
+
+ * @param string $url
+ * @param string $texto
+ * @param bool $enParrafo
+ * 
+ * @return void
+ */
+function pintaBotones(array $valores, string $name)
+{
+    foreach ($valores as $key => $valor) {
+        echo "<label >$valor <input class='boton-borrar' type='submit' id='$name' name='$name' value='$key'></label>";
+    }
+};

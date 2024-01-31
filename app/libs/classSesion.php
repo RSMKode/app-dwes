@@ -37,7 +37,7 @@ class Sesion
 
         if (isset($_SESSION['nivel'])) {
             if ($_SESSION['nivel'] > 0) {
-                // $this->comprobarInactividad();
+                $this->comprobarInactividad();
                 // $this->comprobarIP();
             }
         } else {
@@ -72,7 +72,7 @@ class Sesion
             $_SESSION["idiomas"] = $datos_usuario["idiomas"];
             $_SESSION["descripcion"] = $datos_usuario["descripción"];
             $_SESSION["nivel"] = $datos_usuario["nivel"];
-            $_SESSION["ulitma_actividad"] = time();
+            $_SESSION["ultima_actividad"] = time();
             $_SESSION["ip"] = $_SERVER['REMOTE_ADDR'];
             return true;
         } else {
@@ -97,7 +97,7 @@ class Sesion
 
     public function comprobarIP(): void
     {
-        if ($_SESSION['user_ip'] !== $_SERVER['REMOTE_ADDR']) {
+        if ($_SESSION['ip'] !== $_SERVER['REMOTE_ADDR']) {
             $this->cerrarSesion();
         }
     }

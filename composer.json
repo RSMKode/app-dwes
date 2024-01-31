@@ -1,0 +1,7 @@
+{
+    "name": "roger/app-dwes",
+    "description": "Ejemplo de uso de Composer con PHPMailer",
+    "require": {
+        "phpmailer/phpmailer": "^6.0"
+    }
+}

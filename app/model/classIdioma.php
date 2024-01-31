@@ -52,6 +52,9 @@ class Idioma extends Modelo
 
     public function addIdioma($idioma)
     {
+        $idiomas = $this->getIdiomasIds();
+        if (in_array($idioma, $idiomas)) return false;
+
         $consulta = "INSERT INTO idioma (idioma) 
                         values (:idioma)";
         $result = $this->conexion->prepare($consulta);

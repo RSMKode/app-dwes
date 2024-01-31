@@ -1,2 +1,21 @@
 SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ''user-idioma' (id_user, id_idioma) 
                         values ('35', '1')' at line 10.09972100 1706288842
+SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'NULL WHERE 'id_idioma' = '1'' at line 10.32110800 1706722403
+SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'NULL WHERE 'id_idioma' = '1'' at line 10.37012800 1706722406
+SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ''user-idioma' WHERE 'id_idioma' = '1'' at line 10.02137600 1706722454
+SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ''user-idioma' WHERE 'id_idioma' = '1'' at line 10.01568300 1706722459
+SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ''user-idioma' WHERE 'id_idioma' = '1'' at line 10.44873800 1706722460
+SQLSTATE[42S02]: Base table or view not found: 1146 Table 'evaluable_7w.'user-idioma'' doesn't exist0.67246600 1706722546
+SQLSTATE[42S02]: Base table or view not found: 1146 Table 'evaluable_7w.'user-idioma'' doesn't exist0.36760700 1706722549
+SQLSTATE[42S02]: Base table or view not found: 1146 Table 'evaluable_7w.'user-idioma'' doesn't exist0.85085800 1706722667
+SQLSTATE[42S02]: Base table or view not found: 1146 Table 'evaluable_7w.'user-idioma'' doesn't exist0.10622500 1706722672
+SQLSTATE[42S02]: Base table or view not found: 1146 Table 'evaluable_7w.'user-idioma'' doesn't exist0.47379400 1706722681
+SQLSTATE[42S02]: Base table or view not found: 1146 Table 'evaluable_7w.'user-idioma'' doesn't exist0.02091200 1706722785
+SQLSTATE[42S02]: Base table or view not found: 1146 Table 'evaluable_7w.'user-idioma'' doesn't exist0.35570700 1706722787
+SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ''user-idioma' WHERE 'id_idioma' = '1'' at line 10.58188100 1706722867
+SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ''user-idioma' WHERE 'id_idioma' = '1'' at line 10.76960600 1706722869
+SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ''user-idioma' WHERE 'id_idioma' = '1'' at line 10.03008500 1706722924
+SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ''disp_servicio' WHERE 'id_disponibilidad' = '1'' at line 10.66941700 1706722927
+SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '-idioma WHERE id_idioma = '1'' at line 10.12438100 1706723982
+SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '-idioma WHERE id_idioma = '1'' at line 10.13012400 1706723985
+SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'WHERE id_idioma = '1'' at line 10.36843700 1706724096

@@ -10,6 +10,7 @@
         }
         echo "</ul>";
     }
+
     ?>
     <form action="" method="post" enctype="multipart/form-data">
         <label>
@@ -26,19 +27,15 @@
             <input type="reset" name="borrar" value="Borrar">
         </div>
 
-        <div>
-            <form action="" method="post">
-                <label>
-                    <span>Castellano</span>
-                    <input type="submit" name="eliminar_idioma" value="1">
-                </label>
-            </form>
-            <form action="" method="post">
-                <label>
-                    <span>Mañanas</span>
-                    <input style="color: transparent" type="submit" name="eliminar_disponibilidad" value="1">
-                </label>
-            </form>
+        <div class="borrar">
+            <p>Eliminar Idiomas:</p>
+            <?php
+            pintaBotones($params["array_idiomas"], "eliminar_idioma")
+            ?>
+            <p>Eliminar Disponibilidades:</p>
+            <?php
+            pintaBotones($params["array_disponibilidades"], "eliminar_disponibilidad")
+            ?>
         </div>
     </form>
 </section>

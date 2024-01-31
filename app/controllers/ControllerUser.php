@@ -63,7 +63,13 @@ class ControllerUser extends Controller
 
     public function admin()
     {
+        $idioma = new Idioma();
+        $disponibilidad = new Disponibilidad();
+        $array_idiomas = $idioma->getIdiomasIds();
+        $array_disponibilidades = $disponibilidad->getDisponibilidadesIds();
+
         $errores = [];
+
         if (isset($_REQUEST['enviar']) || isset($_REQUEST['eliminar_idioma']) || isset($_REQUEST['eliminar_disponibilidad'])) {
 
             //Sanitizamos
@@ -80,23 +86,42 @@ class ControllerUser extends Controller
             cNum($admin["eliminar_disponibilidad"], "eliminar_disponibilidad", $errores, false);
 
             if (empty($errores)) {
-                $idioma = new Idioma();
-                $disponibilidad = new Disponibilidad();
 
-                if ($admin["idioma"]) $idioma->addIdioma($admin["idioma"]);
+                if ($admin["idioma"]) {
+                    $idioma->addIdioma($admin["idioma"]);
+                }
 
-                if ($admin["disponibilidad"]) $disponibilidad->addDisponibilidad($admin["disponibilidad"]);
+                if ($admin["disponibilidad"]) {
+                    $disponibilidad->addDisponibilidad($admin["disponibilidad"]);
+                    unset($_REQUEST["disponibilidad"]);
+                }
 
-                if ($admin["eliminar_idioma"]) $idioma->deleteIdioma($admin["eliminar_idioma"]);
-                if ($admin["eliminar_disponibilidad"]) $disponibilidad->deleteDisponibilidad($admin["eliminar_disponibilidad"]);
+                if (isset($_REQUEST['eliminar_idioma'])) echo "eliminar_idioma: " . $admin["eliminar_idioma"] . "<br>";
+                if (isset($_REQUEST['eliminar_disponibilidad']))  echo "eliminar_disponibilidad: " . $admin["eliminar_disponibilidad"] . "<br>";
 
-                header("location=index.php?ctl=admin");
+                if ($admin["eliminar_idioma"]) {
+                    if ($idioma->deleteFromTable("user-idioma", "id_idioma", $admin["eliminar_idioma"])) {
+                        $idioma->deleteIdioma($admin["eliminar_idioma"]);
+                    }
+                }
+                if ($admin["eliminar_disponibilidad"]) {
+                    if ($disponibilidad->deleteFromTable("disp_servicio", "id_disponibilidad", $admin["eliminar_disponibilidad"])) {
+                        $disponibilidad->deleteDisponibilidad($admin["eliminar_disponibilidad"]);
+                    }
+                }
+
+                //Evitamos que al recargar la pagina se vuelva a meter el valor metido
+                unset($array_idiomas);
+                unset($array_disponibilidades);
+                header("Location:index.php?ctl=admin");
             }
         }
 
         $params = [
             'titulo' => 'Panel de Administrador',
             'vista' => 'admin',
+            'array_idiomas' => $array_idiomas,
+            'array_disponibilidades' => $array_disponibilidades,
         ];
         require self::$ruta_layout;
     }
@@ -161,7 +186,15 @@ class ControllerUser extends Controller
                         if ($usuario->getUsuario($datos_usuario["email"])) {
                             $errores["email"] = "El email ya está registrado";
                         } else {
-                            if ($usuario->addUsuario($datos_usuario, 1)) {
+                            if ($id_user = $usuario->addUsuario($datos_usuario, 1)) {
+                                //crear token
+                                $token = new Token;
+                                $user_token = uniqid();
+                                $validez = 60 * 60 * 24;
+                                if ($token->addToken($user_token, $validez, $id_user)) {
+
+                                    //mandar email
+                                }
                                 unset($datos_usuario);
                                 $params['mensaje'] = "Usuario registrado correctamente";
                             }
