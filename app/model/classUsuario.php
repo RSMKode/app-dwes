@@ -84,6 +84,7 @@ class Usuario extends Modelo
             return false;
         }
     }
+
     public function updateUsuario($datos_usuario, $nivel_usuario)
     {
         try {
@@ -114,6 +115,20 @@ class Usuario extends Modelo
             $this->conexion->rollBack();
             return false;
         }
+    }
+
+    public function activarUsuario($id_user)
+    {
+        $activo = 1;
+
+        $consulta = "UPDATE usuario SET activo = 1 WHERE id_user = :id_user";
+
+        $result = $this->conexion->prepare($consulta);
+
+        // $result->bindParam(':activo', $id_user["activo"]);
+        $result->bindParam(':id_user', $id_user);
+
+        return $result->execute();
     }
 
     public function getUsuarioIdiomas($id_usuario)

@@ -12,6 +12,7 @@ require("../app/libs/seguridad.php");
 require("../app/controllers/Controller.php");
 require("../app/controllers/ControllerUser.php");
 require("../app/controllers/ControllerService.php");
+require("../app/controllers/ControllerToken.php");
 //Modelos
 require("../app/model/classUsuario.php");
 require("../app/model/classToken.php");
@@ -43,6 +44,9 @@ $map = [
     'servicio' => ['controller' => 'ControllerService', 'action' => 'servicio', 'nivel_usuario' => 1],
     'servicios_usuario' => ['controller' => 'ControllerService', 'action' => 'servicios_usuario', 'nivel_usuario' => 1],
     'admin' => ['controller' => 'ControllerUser', 'action' => 'admin', 'nivel_usuario' => 2],
+    'enviar_token' => ['controller' => 'ControllerToken', 'action' => 'enviar_token', 'nivel_usuario' => 0],
+    'confirmar_token' => ['controller' => 'ControllerToken', 'action' => 'confirmar_token', 'nivel_usuario' => 0]
+
 ];
 // Parseo de la ruta
 if (isset($_GET['ctl'])) {

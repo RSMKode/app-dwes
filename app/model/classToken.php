@@ -25,11 +25,31 @@ class Token extends Modelo
         return $result->fetch(PDO::FETCH_ASSOC);
     }
 
+    public function getTokenUser($token)
+    {
+
+        $consulta = "SELECT * FROM tokens WHERE token = :token";
+        $result = $this->conexion->prepare($consulta);
+
+        $result->bindParam(':token', $token);
+
+        $result->execute();
+
+        $datos_token = $result->fetch(PDO::FETCH_ASSOC);
+
+        if ($datos_token && time() > $datos_token['validez']) {
+            $this->deleteToken($token);
+            return false;
+        }
+
+        if ($datos_token) return $datos_token['id_user'];
+    }
+
 
     public function addToken($token, $validez, $id_user)
     {
         if ($token_prev = $this->getToken($id_user)) {
-            $this->deleteToken($token_prev['token']);
+            $this->deleteToken($token_prev['id_user']);
         }
 
         $consulta = "INSERT INTO tokens (token, validez, id_user) 
@@ -45,12 +65,12 @@ class Token extends Modelo
     }
 
 
-    public function deleteToken($token)
+    public function deleteToken($id_user)
     {
-        $consulta = "DELETE FROM tokens WHERE token = :token";
+        $consulta = "DELETE FROM tokens WHERE id_user = :id_user";
         $result = $this->conexion->prepare($consulta);
 
-        $result->bindParam(':token', $token);
+        $result->bindParam(':id_user', $id_user);
 
         return $result->execute();
     }

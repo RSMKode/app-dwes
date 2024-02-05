@@ -190,13 +190,13 @@ class ControllerUser extends Controller
                                 //crear token
                                 $token = new Token;
                                 $user_token = uniqid();
-                                $validez = 60 * 60 * 24;
+                                $validez = 60 * 60 * 24 + time();
                                 if ($token->addToken($user_token, $validez, $id_user)) {
-
                                     //mandar email
+                                    sendEmailToken($datos_usuario["email"], $user_token);
                                 }
                                 unset($datos_usuario);
-                                $params['mensaje'] = "Usuario registrado correctamente";
+                                $params['mensaje'] = "Usuario registrado correctamente. Revisa tu correo para activar tu cuenta";
                             }
                         }
                     }

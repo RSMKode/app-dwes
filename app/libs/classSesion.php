@@ -38,7 +38,7 @@ class Sesion
         if (isset($_SESSION['nivel'])) {
             if ($_SESSION['nivel'] > 0) {
                 $this->comprobarInactividad();
-                // $this->comprobarIP();
+                $this->comprobarIP();
             }
         } else {
             $_SESSION['nivel'] = 0;
@@ -62,6 +62,10 @@ class Sesion
         $usuario = new Usuario();
         if ($datos_usuario = $usuario->verificarUsuario($correo, $pass)) {
             // Almacenar información relevante
+            if ($datos_usuario['activo'] == 0) {
+                $errores['login'] = "Usuario inactivo <a href='index.php?ctl=enviar_token&email=" . $correo . "'>Reenviar email</a>";
+                return false;
+            }
 
             $_SESSION["id_user"] = $datos_usuario["id_user"];
             $_SESSION["email"] = $datos_usuario["email"];
@@ -76,6 +80,7 @@ class Sesion
             $_SESSION["ip"] = $_SERVER['REMOTE_ADDR'];
             return true;
         } else {
+
             $errores['login'] = "Usuario o contraseña incorrectos";
             return false;
         }

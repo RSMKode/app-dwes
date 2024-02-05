@@ -4,6 +4,7 @@ require($_SERVER["DOCUMENT_ROOT"] . "/app-dwes/app/libs/utils.php");
 require($_SERVER["DOCUMENT_ROOT"] . "/app-dwes/app/model/classIdioma.php");
 require($_SERVER["DOCUMENT_ROOT"] . "/app-dwes/app/model/classUsuario.php");
 require($_SERVER["DOCUMENT_ROOT"] . "/app-dwes/app/model/classServicio.php");
+require($_SERVER["DOCUMENT_ROOT"] . "/app-dwes/app/model/classToken.php");
 
 
 echo "DOCUMENT ROOT: $_SERVER[DOCUMENT_ROOT]";
@@ -50,7 +51,6 @@ print_r($servicio1);
 echo "</pre>";
 echo "<br>";
 
-sendEmailToken("dwes@mailinator.com", "a");
 
 // $servicio = new Servicio();
 
@@ -59,3 +59,16 @@ sendEmailToken("dwes@mailinator.com", "a");
 // print_r($servicios);
 // echo "</pre>";
 // echo "<br>";
+
+// sendEmailToken("dwes@mailinator.com", "aasdsadsa");
+
+$token = new Token();
+
+if ($userid = $token->getTokenUser("65c1163761a8a")) {
+    if ($usuario->activarUsuario($userid)) {
+        echo "Usuario activado";
+        $token->deleteToken($userid);
+    } else {
+        echo "Error al activar usuario";
+    }
+}

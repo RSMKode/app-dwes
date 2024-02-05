@@ -167,6 +167,10 @@ function cTexto(string $text, string $campo, array &$errores, string $tipo, int 
             $regexp = "/^[a-zñÑ$espacios]{" . $min . "," . $max . "}$/u$case";
             break;
 
+        case "token":
+            $regexp = "/^[a-zñÑ0-9-]{" . $min . "," . $max . "}$/u$case";
+            break;
+
         case "email":
             $regexp = "/^[a-zñÑ][a-z0-9_\.]{2,}@[a-zñÑ\.]{3,}[\.][a-zñÑ]{2,}$/ui";
             break;
@@ -192,31 +196,6 @@ function cTexto(string $text, string $campo, array &$errores, string $tipo, int 
     $errores[$campo] = "Error en el campo $campo";
     return false;
 }
-
-/*function cPass(string $text, string $campo, array &$errores, int $max = 30, int $min = 4, bool $espacios = TRUE, bool $case = TRUE)
-{
-    $case = ($case === TRUE) ? "i" : "";
-    $espacios = ($espacios === TRUE) ? " " : "";
-    if ((preg_match("/^[a-zñ0-9-_$espacios]{" . $min . "," . $max . "}$/u$case", sinTildes($text)))) {
-        return true;
-    }
-    $errores[$campo] = "Error en el campo $campo";
-    return false;
-}
-*/
-
-/*function cCorreo(string $text, string $campo, array &$errores)
-{
-
-    $regexCorreo = "/^[a-zñÑ][a-z0-9_\.]{2,}@[a-zñÑ\.]{3,}[\.][a-zñÑ]{2,}$/ui";
-
-    if ((preg_match($regexCorreo, sinTildes($text)))) {
-        return true;
-    }
-    $errores[$campo] = "Error en el campo $campo, por favor, introduce un correo con este formato correo@dominio.com";
-    return false;
-}
-*/
 
 /**
  * Funcion cFecha
@@ -510,11 +489,10 @@ function cColor()
     }
 }
 
-function sendEmailToken($email, $nombre)
+function sendEmailToken($email, $token)
 {
     // Crea una instancia de PHPMailer
     $mail = new PHPMailer();
-
 
     try {
         // Configura el servidor SMTP
@@ -525,20 +503,18 @@ function sendEmailToken($email, $nombre)
         $mail->Password = 'jsdg nxpf vuhi xesd';
         $mail->SMTPSecure = 'tls';
         $mail->Port = 587;
-
         // Configura los destinatarios
-        $mail->setFrom('abastospruebajon@gmail.com', 'abastospruebajon');
-        $mail->addAddress('jonathansantos.vae@gmail.com', 'Jonathan');
+        $mail->setFrom('abastospruebajon@gmail.com', 'APP-DWES');
+        $mail->addAddress($email);
 
         // Contenido del correo
         $mail->isHTML(true);
-        $mail->Subject = 'Asunto del Correo';
-        $mail->Body = 'Este es el cuerpo del correo electrónico.';
-
+        $mail->Subject = 'Verifica tu email';
+        $mail->Body = "<p>Empieza tu experiencia APP-DWES. Haz click en el siguiente enlace para confirmar tu cuenta de correo electrónico:</p>
+                        <a href='http://localhost/app-dwes/web/index.php?ctl=confirmar_token&token=$token'>Confirmar cuenta</a>";
         // Enviar el correo
         $mail->send();
-        echo 'El correo se ha enviado con éxito.';
     } catch (Exception $e) {
-        echo "El correo no se pudo enviar. Error: {$mail->ErrorInfo}";
+        return false;
     }
 }

@@ -1,8 +1,0 @@
-peter@google.com|12345|Pedro|2023-11-08|../src/images/users\Logo_github.png|castellano||
-sandra@google.com|7908790870987|Sandra|2023-11-08|..\src/images/users\Logo_github.png|castellano||gonzalo@hotmail.es|98765|Gonzaol|2000-01-10||castellano|Soy gonzalo|
-gonzalo@hotmail.es|98765|Gonzalo|2000-01-10||castellano|Soy gonzalo|
-willy@gmail.com|1111|Willy|2023-11-10||castellano||
-juan@ejemplo.com|juan|juan|1997-07-20|..\src/images/users\berserk-marca-del-sacrificio.jpg|castellano|Este formulario es genial|
-miau@gmail.com|2222|Miau|2023-11-11||Indiferente|Soy miau|
-alex@hotmail.es|alex123|Alejandro|2000-11-16|..\src\images\users\Logo_x.png|Ingles|Hola soy Alex|
-miau2@hotmail.com|123456|MIAU|1990-12-08|..\src\images\users\Seccion Github.png|Castellano|Holiwi|
