@@ -1,5 +1,10 @@
 <main class="container">
     <?php
+    if (isset($params['mensaje'])) {
+    ?>
+        <p class="exito"><?= $params['mensaje'] ?></p>
+    <?php
+    }
     if (count($errores) != 0) {
         echo "<ul class='accent'>";
         echo "Hay errores en el formulario:<br>";
@@ -12,7 +17,7 @@
     }
     ?>
 
-    <form action="" method="post" enctype="multipart/form-data">
+    <form action="index.php?ctl=inicio_sesion" method="post" enctype="multipart/form-data">
 
         <label>
             <span>Dirección de correo electrónico<sup>*</sup></span>

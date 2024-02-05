@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 31-01-2024 a las 21:49:43
+-- Tiempo de generación: 05-02-2024 a las 20:10:07
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -38,8 +38,7 @@ CREATE TABLE `disponibilidad` (
 
 INSERT INTO `disponibilidad` (`id_disponibilidad`, `disponibilidad`) VALUES
 (4, 'Mañanas'),
-(5, 'Tardes'),
-(9, 'Noches');
+(5, 'Tardes');
 
 -- --------------------------------------------------------
 
@@ -57,7 +56,7 @@ CREATE TABLE `disp_servicio` (
 --
 
 INSERT INTO `disp_servicio` (`id_servicio`, `id_disponibilidad`) VALUES
-(4, 9);
+(5, 5);
 
 -- --------------------------------------------------------
 
@@ -101,8 +100,8 @@ CREATE TABLE `servicios` (
 
 INSERT INTO `servicios` (`id_servicios`, `titulo`, `id_user`, `descripcion`, `precio`, `tipo`, `foto_servicio`) VALUES
 (1, 'Servicio Admin', 1, 'Servicio de prueba de admin', 10, 1, ''),
-(2, 'Servicio MIAU', 31, 'MIAUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU', 1, 0, ''),
-(4, 'Admin II', 1, 'QUIERO DINERO', 100, 1, '');
+(4, 'Admin II', 1, 'QUIERO DINERO', 100, 1, ''),
+(5, 'PianitosSchool', 43, 'Cursos de piano', 15, 0, 'src\\images\\services\\chris evans.webp');
 
 -- --------------------------------------------------------
 
@@ -116,13 +115,6 @@ CREATE TABLE `tokens` (
   `id_user` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
---
--- Volcado de datos para la tabla `tokens`
---
-
-INSERT INTO `tokens` (`token`, `validez`, `id_user`) VALUES
-('65baa470df8e0', 86400, 38);
-
 -- --------------------------------------------------------
 
 --
@@ -133,6 +125,17 @@ CREATE TABLE `user-idioma` (
   `id_user` int(11) NOT NULL,
   `id_idioma` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Volcado de datos para la tabla `user-idioma`
+--
+
+INSERT INTO `user-idioma` (`id_user`, `id_idioma`) VALUES
+(41, 1),
+(41, 2),
+(42, 1),
+(42, 2),
+(42, 3);
 
 -- --------------------------------------------------------
 
@@ -157,10 +160,10 @@ CREATE TABLE `usuario` (
 --
 
 INSERT INTO `usuario` (`id_user`, `nombre`, `email`, `pass`, `f_nacimiento`, `foto_perfil`, `descripción`, `nivel`, `activo`) VALUES
-(1, 'ADMIN', 'admin@admin.com', '$2y$10$AkdyGuiYrBVP5llBbb5PSOTF05F5KAO.R8Ccz7QSOAbYS6EUyNFE2', '1998-01-26', 'src\\images\\users\\1706296786Thor.jpg', 'Admin', 2, 0),
-(31, 'Miau', 'miau@gmail.com', '$2y$10$deC.Fp9rJtXCViaFqHbnROUZ7rCD1ire3q8ekyLOqG2W/r8bpB3bq', '2000-01-26', '', 'Miau', 1, 0),
-(35, 'Guau', 'guau@gmail.com', '$2y$10$xaCCI9d7UF8pXYaEsQeduOtZ86ekqNoSbvN9OVcQ8ttl.0qqAG9ya', '2000-01-26', '', 'GUAU', 1, 0),
-(38, 'prueba', 'prueba@gmail.com', '$2y$10$9fzHUqmMDCOQQ2dFhVbIWeJViYfv3CV9UkClXL8Y5ZznoSUZIu02W', '1999-01-31', '', 'prueba', 1, 0);
+(1, 'ADMIN', 'admin@admin.com', '$2y$10$AkdyGuiYrBVP5llBbb5PSOTF05F5KAO.R8Ccz7QSOAbYS6EUyNFE2', '1998-01-26', 'src\\images\\users\\1706296786Thor.jpg', 'Admin', 2, 1),
+(41, 'miau', 'miau@mailinator.com', '$2y$10$vRlmrckAH8BKUkj0ryls6OR1pxBycKgwqFwveuXCLXZul2TxJphDa', '1998-02-05', 'src\\images\\users\\1707158636Thor.jpg', 'SOY MIAU', 1, 1),
+(42, 'Prueba', 'prueba@mailinator.com', '$2y$10$xSPXkSiQA8hewxaE.tKf8ufTHCyczlTQ7D6Cx/rMFluYfhyytkCPy', '1998-02-05', '', 'prueba', 1, 1),
+(43, 'prueba II', 'prueba2@mailinator.com', '$2y$10$fei6L2ekMKtey8uT/3DDAOnL7GOz5mNzzuhzjCrxak31MuWnSHGVy', '1999-02-05', '', '', 1, 1);
 
 --
 -- Índices para tablas volcadas
@@ -220,25 +223,25 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de la tabla `disponibilidad`
 --
 ALTER TABLE `disponibilidad`
-  MODIFY `id_disponibilidad` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id_disponibilidad` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT de la tabla `idioma`
 --
 ALTER TABLE `idioma`
-  MODIFY `id_idioma` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+  MODIFY `id_idioma` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
 -- AUTO_INCREMENT de la tabla `servicios`
 --
 ALTER TABLE `servicios`
-  MODIFY `id_servicios` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_servicios` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
 
 --
 -- Restricciones para tablas volcadas
@@ -265,6 +268,9 @@ ALTER TABLE `user-idioma`
   ADD CONSTRAINT `fk_iduser` FOREIGN KEY (`id_user`) REFERENCES `usuario` (`id_user`);
 COMMIT;
 
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
