@@ -101,9 +101,8 @@ class ControllerService extends Controller
                     $datos_servicio["id_user"] = $_SESSION["id_user"];
 
                     $servicio = new Servicio();
-                    if ($servicio->addServicio($datos_servicio)) {
-                        unset($datos_servicio);
-                        $params['mensaje'] = "Servicio registrado correctamente";
+                    if ($id_servicio = $servicio->addServicio($datos_servicio)) {
+                        header("Location: index.php?ctl=servicio&id_servicio=$id_servicio");
                     }
                 }
             }
