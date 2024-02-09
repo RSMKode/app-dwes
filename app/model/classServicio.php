@@ -83,8 +83,10 @@ class Servicio extends Modelo
 
             $id_servicio = $this->conexion->lastInsertId();
             $this->addServicioDisponibilidades($id_servicio, $datos_servicio["disponibilidades"]);
-
-            return $this->conexion->commit();
+               
+            $this->conexion->commit();
+            return $id_servicio;
+             
         } catch (PDOException $e) {
             $this->conexion->rollBack();
             return false;
